@@ -17,23 +17,28 @@
         <script type="text/javascript" src="../global/js/jquery-3.6.0.min.js"></script>
         <script type="text/javascript" src="../global/js/scripts.js"></script>
         <script type="text/javascript" src="./static/js/phasmo_tools.js" defer></script>
+        <script type="text/javascript" src="./static/js/evidence_tracker.js" defer></script>
     </head>
     <body>
         
-        <div id="bg-image" style="opacity: 0;">
-            <img class="bg-image" src="./static/img/bg/bg0.jpg" alt="bg0">
-            <img class="bg-image" src="./static/img/bg/bg1.jpg" alt="bg1">
-            <img class="bg-image" src="./static/img/bg/bg2.jpg" alt="bg2">
-            <img class="bg-image" src="./static/img/bg/bg3.jpg" alt="bg3">
-            <img class="bg-image" src="./static/img/bg/bg4.jpg" alt="bg4">
-            <img class="bg-image" src="./static/img/bg/bg5.jpg" alt="bg5">
-            <img class="bg-image" src="./static/img/bg/bg6.jpg" alt="bg6">
-            <img class="bg-image" src="./static/img/bg/bg7.jpg" alt="bg7">
-            <img class="bg-image" src="./static/img/bg/bg8.jpg" alt="bg8">
-            <img class="bg-image" src="./static/img/bg/bg9.jpg" alt="bg9">
-            <img class="bg-image" src="./static/img/bg/bg10.jpg" alt="bg10">
-            <img class="bg-image" src="./static/img/bg/bg11.jpg" alt="bg11">
-        </div>
+        <div id="bg-image" style="opacity: 0;"></div>
+        <script>
+            /* IDK why, but these has to be in the HTML code for it to work properly */
+            function generate_bg_images(){
+                let dest = document.getElementById("bg-image");
+                
+                for (let i = 0; i <= 11; i++) {
+                    let new_image = document.createElement("img");
+                    
+                    new_image.src = `./static/img/bg/bg${i}.jpg`;
+                    new_image.alt = `bg${i}`;
+                    new_image.classList.add("bg-image");
+
+                    dest.appendChild(new_image);
+                }
+            };
+            generate_bg_images();
+        </script>
         
         <div class="main-container" style="opacity: 0;">
 
@@ -47,6 +52,7 @@
                 <br>
 
                 <div class="main-content">
+
                     <div class="ghosts-it-could-be-container"></div>
 
                     <div class="buttons evidence-buttons"></div>
@@ -136,9 +142,8 @@
                         }
                         generate_ghosts_cant_be();
                     </script>
+                    
                 </div>
-
-                <script type="text/javascript" src="./static/js/evidence_tracker.js"></script>
 
             </div>
 
