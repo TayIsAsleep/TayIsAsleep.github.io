@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+/* Code from https://stackoverflow.com/a/2310809 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+.loader {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  background-color: black; }
+
+body {
+  background: black; }
+
+.bg-image {
+  /* Add the blur effect */
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  object-fit: cover;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 80vw;
+  max-height: 80vh;
+  width: 100%;
+  min-width: 100vw;
+  min-height: 100vh; }
+
+.main-container {
+  border: 2px solid #bbb;
+  width: fit-content;
+  padding: 0.5em;
+  margin: 2px;
+  position: absolute;
+  left: 10vw;
+  top: 10vh;
+  max-height: 80vh;
+  max-width: 80vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-family: 'JetBrains Mono', monospace;
+  color: #ddd; }
+
+.button {
+  border: 2px solid #bbb;
+  width: fit-content;
+  padding: 0.5em;
+  margin: 2px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-align: center;
+  transition: all 0.2s ease-out;
+  float: left;
+  background: black; }
+  .button p {
+    transition: all 0.2s ease-out;
+    display: inline; }
+
+.button:hover {
+  border-color: #eee; }
+  .button:hover p {
+    color: #eee; }
+
+.button-off {
+  border: 2px solid #2f2f2f; }
+  .button-off p {
+    color: #2f2f2f; }
+
+.title {
+  color: #ddd; }
+  .title h5 {
+    color: #aaa;
+    display: inline; }
+
+a:link, a:visited, a:active {
+  color: #c4c4c4; }
+
+a:hover {
+  color: #ddd; }
+
+.fields .selection-field, .fields .output-field {
+  border: 2px solid #bbb;
+  width: fit-content;
+  padding: 0.5em;
+  margin: 2px;
+  float: left;
+  width: calc(50% - 4px);
+  height: 500px;
+  overflow-y: auto; }
+
+.buttons {
+  margin: auto;
+  width: max-content; }
+
+br {
+  clear: both;
+  float: none; }
+
+.button-evidence-found {
+  width: 230px; }
+
+.ghosts-it-could-be-container {
+  border: 2px solid #bbb;
+  width: fit-content;
+  padding: 0.5em;
+  margin: 2px;
+  float: left;
+  height: calc(calc(53px * 5) + 1px);
+  width: 319px; }
+  .ghosts-it-could-be-container p {
+    display: block; }

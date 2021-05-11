@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+
+$textColor: #dddddd;
+
+$buttonColor: #bbbbbb;
+$buttonColorHover: lighten($buttonColor, 20%);
+$buttonColorOff: darken($buttonColor, 55%);
+$animation: all .2s ease-out;
+
+@mixin border {
+    border: 2px solid $buttonColor;
+    width: fit-content;
+    padding: 0.5em;
+    margin: 2px;
+}
+
+/* Code from https://stackoverflow.com/a/2310809 */
+@mixin unselectable {
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+.loader{
+    position:fixed;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999;
+    background-color: black;
+}
+
+body{
+    background: black;
+}
+
+.bg-image{
+    /* Add the blur effect */
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+
+    object-fit: cover;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 80vw;
+    max-height: 80vh;
+    width: 100%;
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+.main-container{
+    @include border;
+
+    // overflow-y: auto;
+    position: absolute;
+    left: 10vw;
+    top: 10vh;
+
+    max-height: 80vh;
+    max-width: 80vw;
+
+    background-color: rgba(0, 0, 0, 0.5);
+
+    font-family: 'JetBrains Mono', monospace;
+    color: $textColor;
+}
+
+.button{
+    @include border;
+    @include unselectable;
+
+    text-align: center;
+
+    transition: $animation;
+    float: left;    
+    background: black;
+
+    p{
+        transition: $animation;
+        display: inline;
+    }
+}
+.button:hover{
+    border-color: $buttonColorHover;
+    p{
+        color: $buttonColorHover;
+    }
+    
+}
+.button-off{
+    border: 2px solid $buttonColorOff;
+    p{
+        color: $buttonColorOff;
+    }
+}
+
+.title{
+    color: $textColor;
+    h5{
+        color: darken($textColor, 20%); 
+        display: inline;
+    }
+}
+
+a:link, a:visited,  a:active{
+    color: darken($textColor, 10%);
+}
+a:hover{
+    color: $textColor;
+}
+
+.fields{
+    .selection-field, .output-field{
+        @include border;
+        float: left;
+        width: calc(50% - 4px);
+        height: 500px;
+        overflow-y: auto;
+    }
+}
+
+.buttons{
+    margin: auto;
+    width: max-content;
+}
+
+br{
+    clear: both;
+    float: none;
+}
+
+.button-evidence-found{
+    width: 230px;
+}
+.ghosts-it-could-be-container{
+    @include border;
+    float: left;
+    height: calc(calc(53px * 5) + 1px);
+    width: 319px;
+    p{
+        display: block;
+    }
+}
+
+// /* Code from https://stackoverflow.com/a/30680994 */
+// ::-webkit-scrollbar {
+//     width: 0;  /* Remove scrollbar space */
+//     background: transparent;  /* Optional: just make scrollbar invisible */
+// }
