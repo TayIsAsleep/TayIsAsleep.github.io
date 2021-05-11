@@ -66,9 +66,9 @@ body {
     transition: all 0.2s ease-out;
     display: inline; }
 
-.button:hover {
+.button:hover:not(.button-off) {
   border-color: #eee; }
-  .button:hover p {
+  .button:hover:not(.button-off) p {
     color: #eee; }
 
 .button-off {

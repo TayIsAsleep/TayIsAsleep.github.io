@@ -91,7 +91,15 @@ function update_ghosts(){
     $(".ghosts-it-could-be-container").text(""); /* Reset all text */
 
     let thereIsSomeGhost = false;
-
+    let should_we_make_these_unavable = {
+        "EMF Level 5":true,
+        "Ghost Orbs":true,
+        "Ghost Writing":true,
+        "Freezing Temperatures":true,
+        "Spirit Box":true,
+        "Fingerprints":true
+    };
+    
     Object.keys(ghosts_evidence).forEach(current_ghost => {
         let i_should_show_up = true;
         let evidence_left = [];
@@ -114,6 +122,12 @@ function update_ghosts(){
 
         if (i_should_show_up){
             thereIsSomeGhost = true;
+
+            evidence_left.forEach(i => {
+                should_we_make_these_unavable[i] = false
+            });
+            
+
             let evidenceNeeded = evidence_left.join(", ");
 
             if (evidenceNeeded == ""){
@@ -128,6 +142,29 @@ function update_ghosts(){
     if (!thereIsSomeGhost){
         appendText(".ghosts-it-could-be-container","No ghost with that configuration")
     }
+
+    let lookuptablepoopp = {
+        "EMF Level 5":"#button-evidence-emf5",
+        "Ghost Orbs":"#button-evidence-ghost-orbs",
+        "Ghost Writing":"#button-evidence-ghost-writing",
+        "Freezing Temperatures":"#button-evidence-freezing-temps",
+        "Spirit Box":"#button-evidence-spirit-box",
+        "Fingerprints":"#button-evidence-fingerprints"
+    };
+
+    $(".evidence-button").removeClass("button-off");
+    Object.keys(should_we_make_these_unavable).forEach(i => {
+        if (should_we_make_these_unavable[i] == true){
+            let classList = $(lookuptablepoopp[i]).attr('class').split(/\s+/);
+
+            if (!(Array.from(classList).includes("button-found") || Array.from(classList).includes("button-cantbe"))){
+                $(lookuptablepoopp[i]).addClass("button-off");
+            }
+        }
+
+        
+        
+    });
 }
 
 function button_evidence_handler(id){
@@ -141,23 +178,25 @@ function button_evidence_handler(id){
         "#button-evidence-fingerprints":"evidence_found_fingerprints",
     }[myID];
 
-    $(myID).removeClass("button-off");
-    $(myID).removeClass("button-found");
-    $(myID).removeClass("button-cantbe");
-
-    if (eval(myVariableName) == "0"){
-        $(myID).addClass("button-found");
-        eval(`${myVariableName} = "1"`);
+    if (!Array.from(document.getElementById(id).classList).includes("button-off")){
+        $(myID).removeClass("button-off");
+        $(myID).removeClass("button-found");
+        $(myID).removeClass("button-cantbe");
+    
+        if (eval(myVariableName) == "0"){
+            $(myID).addClass("button-found");
+            eval(`${myVariableName} = "1"`);
+        }
+        else if (eval(myVariableName) == "1"){
+            $(myID).addClass("button-cantbe");
+            eval(`${myVariableName} = "2"`);
+        }
+        else{
+            eval(`${myVariableName} = "0"`);
+        }
+    
+        update_ghosts();
     }
-    else if (eval(myVariableName) == "1"){
-        $(myID).addClass("button-cantbe");
-        eval(`${myVariableName} = "2"`);
-    }
-    else{
-        eval(`${myVariableName} = "0"`);
-    }
-
-    update_ghosts();
 }
 
 $("#button-evidence-emf5").on("click", function(){

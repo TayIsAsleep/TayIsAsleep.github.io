@@ -92,7 +92,7 @@ body{
         display: inline;
     }
 }
-.button:hover{
+.button:hover:not(.button-off){
     border-color: $buttonColorHover;
     p{
         color: $buttonColorHover;
