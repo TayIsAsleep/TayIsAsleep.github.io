@@ -42,7 +42,6 @@
 
                 <div class="main-content">
                     <div class="ghosts-it-could-be-container">
-                        <p>nobody</p>
                     </div>
 
                     <div class="buttons evidence-buttons">
@@ -57,14 +56,18 @@
                         <div id="button-evidence-spirit-box" class="button evidence-button"><p>Spirit Box</p></div>
                         <br>
                         <div id="button-evidence-fingerprints" class="button evidence-button"><p>Fingerprints</p></div>
+                        <br><br>
+                        <div id="button-evidence-reset" class="button"><p>Reset</p></div>
+
                         <script>
+                            /* Sets the size of the buttons to be the same. I dont know how to code websites :) */
                             let buttonSizes = "max(";
-                            Array.from($(".evidence-button")).forEach(element => {
+                            Array.from($(".button")).forEach(element => {
                                 buttonSizes += element.clientWidth + "px,";
                             });
                             buttonSizes += "0px)";
     
-                            Array.from($(".evidence-button")).forEach(element => {
+                            Array.from($(".button")).forEach(element => {
                                 element.style.minWidth = buttonSizes;
                             });
                             console.log(buttonSizes)

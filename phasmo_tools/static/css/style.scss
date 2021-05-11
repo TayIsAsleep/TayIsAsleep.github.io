@@ -5,6 +5,8 @@ $textColor: #dddddd;
 $buttonColor: #bbbbbb;
 $buttonColorHover: lighten($buttonColor, 20%);
 $buttonColorOff: darken($buttonColor, 55%);
+$buttonColor_found: lime;
+$buttonColor_cantbe: red;
 $animation: all .2s ease-out;
 
 @mixin border {
@@ -103,6 +105,18 @@ body{
         color: $buttonColorOff;
     }
 }
+.button-found{
+    border: 2px solid $buttonColor_found !important;
+    p{
+        color: $buttonColor_found !important;
+    }
+}
+.button-cantbe{
+    border: 2px solid $buttonColor_cantbe !important;
+    p{
+        color: $buttonColor_cantbe !important;
+    }
+}
 
 .title{
     color: $textColor;
@@ -145,8 +159,10 @@ br{
 .ghosts-it-could-be-container{
     @include border;
     float: left;
-    height: calc(calc(53px * 5) + 1px);
-    width: 319px;
+    // height: calc(calc(53px * 5) + 1px);
+    min-height: calc(calc(53px * 5) + 7px);
+    // width: 319px;
+    // min-width: 327px;
     p{
         display: block;
     }

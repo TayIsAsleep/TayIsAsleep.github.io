@@ -76,6 +76,16 @@ body {
   .button-off p {
     color: #2f2f2f; }
 
+.button-found {
+  border: 2px solid lime !important; }
+  .button-found p {
+    color: lime !important; }
+
+.button-cantbe {
+  border: 2px solid red !important; }
+  .button-cantbe p {
+    color: red !important; }
+
 .title {
   color: #ddd; }
   .title h5 {
@@ -115,8 +125,7 @@ br {
   padding: 0.5em;
   margin: 2px;
   float: left;
-  height: calc(calc(53px * 5) + 1px);
-  width: 319px; }
+  min-height: calc(calc(53px * 5) + 7px); }
   .ghosts-it-could-be-container p {
     display: block; }
 
