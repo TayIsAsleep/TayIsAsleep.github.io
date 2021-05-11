@@ -31,7 +31,9 @@ function loading_done(){
 
     /* Fades out the loader (loading screen) */
     setInterval(function(){
-        $(".loader").fadeOut(600)
+        $(".loader").fadeOut(600);
+        $(".main-container").css("opacity","100");
+        $("#bg-image").css("opacity","100")
     }, 0);
 
     /* Starts going through all the background images */
