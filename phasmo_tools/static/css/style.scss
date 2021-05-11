@@ -83,6 +83,7 @@ body{
     transition: $animation;
     float: left;    
     background: black;
+    box-sizing: content-box;
 
     p{
         transition: $animation;
@@ -149,6 +150,9 @@ br{
     p{
         display: block;
     }
+}
+.evidence-buttons{
+    float: left;
 }
 
 // /* Code from https://stackoverflow.com/a/30680994 */

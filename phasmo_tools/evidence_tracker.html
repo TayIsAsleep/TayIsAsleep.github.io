@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Evidence Tracker</title>
+        
+        <link rel="icon" type="image/png" href="./static/favicon.jpg">
+        <link rel="apple-touch-icon" sizes="180x180" href="./static/apple-touch-icon.png">
+        
+        <link rel="stylesheet" href="./static/css/style.css">
+
+        <script type="text/javascript" src="../global/js/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" src="../global/js/scripts.js"></script>
+        <script type="text/javascript" src="./static/js/phasmo_tools.js" defer></script>
+    </head>
+    <body>
+        
+        <div id="bg-image">
+            <img class="bg-image" src="./static/bg/bg0.jpg" alt="bg0">
+            <img class="bg-image" src="./static/bg/bg1.jpg" alt="bg1">
+            <img class="bg-image" src="./static/bg/bg2.jpg" alt="bg2">
+            <img class="bg-image" src="./static/bg/bg3.jpg" alt="bg3">
+            <img class="bg-image" src="./static/bg/bg4.jpg" alt="bg4">
+            <img class="bg-image" src="./static/bg/bg5.jpg" alt="bg5">
+            <img class="bg-image" src="./static/bg/bg6.jpg" alt="bg6">
+            <img class="bg-image" src="./static/bg/bg7.jpg" alt="bg7">
+            <img class="bg-image" src="./static/bg/bg8.jpg" alt="bg8">
+            <img class="bg-image" src="./static/bg/bg9.jpg" alt="bg9">
+            <img class="bg-image" src="./static/bg/bg10.jpg" alt="bg10">
+            <img class="bg-image" src="./static/bg/bg11.jpg" alt="bg11">
+        </div>
+        
+        <div class="main-container">
+
+            <div class="tool-evidence-tracker">
+
+                <div class="title">
+                    <h1>Phasmophobia Evidence Tracker</h1>
+                    <h5>Made by <a target="_blank" href="https://github.com/TayIsAsleep">TayIsAsleep</a></h5>
+                </div>
+                
+                <br>
+
+                <div class="main-content">
+                    <div class="ghosts-it-could-be-container">
+                        <p>nobody</p>
+                    </div>
+
+                    <div class="buttons evidence-buttons">
+                        <div id="button-evidence-emf5" class="button evidence-button"><p>EMF Level 5</p></div>
+                        <br>
+                        <div id="button-evidence-ghost-orbs" class="button evidence-button"><p>Ghost Orbs</p></div>
+                        <br>
+                        <div id="button-evidence-ghost-writing" class="button evidence-button"><p>Ghost Writing</p></div>
+                        <br>
+                        <div id="button-evidence-freezing-temps" class="button evidence-button"><p>Freezing Temperatures</p></div>
+                        <br>
+                        <div id="button-evidence-spirit-box" class="button evidence-button"><p>Spirit Box</p></div>
+                        <br>
+                        <div id="button-evidence-fingerprints" class="button evidence-button"><p>Fingerprints</p></div>
+                        <script>
+                            let buttonSizes = "max(";
+                            Array.from($(".evidence-button")).forEach(element => {
+                                buttonSizes += element.clientWidth + "px,";
+                            });
+                            buttonSizes += "0px)";
+    
+                            Array.from($(".evidence-button")).forEach(element => {
+                                element.style.minWidth = buttonSizes;
+                            });
+                            console.log(buttonSizes)
+                        </script>
+                    </div>
+                </div>
+
+                <script type="text/javascript" src="./static/js/evidence_tracker.js"></script>
+
+            </div>
+
+        </div>
+
+        <div class="loader"></div>
+
+    </body>
+</html>

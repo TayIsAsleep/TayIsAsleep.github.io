@@ -1,55 +1,5 @@
-function shuffle(array){
-    //Code from https://stackoverflow.com/a/2450976
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-
-        // And swap it with the current element.
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-}
-function sleep(ms){
-    //Code from https://stackoverflow.com/a/39914235
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 var inPool = [];
-var current_bg_image = 1;
-var bg_images = $("#bg-image").children();
 
-function next_bg_image(){
-    if (!bg_images[current_bg_image]){
-        $(bg_images[current_bg_image-1]).fadeOut(3000);
-        current_bg_image = 0;
-        shuffle(bg_images);
-    }
-    else{
-        $(bg_images[current_bg_image-1]).fadeOut(3000);
-    }
-    $(bg_images[current_bg_image]).fadeIn(3000);
-    current_bg_image += 1;
-}      
-async function run_bg_updater(){
-    while (true){
-        await sleep(10000);
-        next_bg_image();
-    }
-}
-function fix_output_field_height(){
-    // $(".output-field").height($(".selection-field").height());
-
-    let a = ($(window).width() - $(".main-container").width()) / 2
-    $(".main-container").css({"left":a,"right":a})
-};
 function make_all_options(a){
     inPool = [];
     $(".output-field-text").html("");
@@ -168,11 +118,11 @@ $(".item-option").on("click", function(){
 });
 
 $(window).resize(function() {
-    fix_output_field_height();
+    update_size();
 });
 $(window).on("load", function(){
     // $("#bg-image").css("background-image",'radial-gradient(transparent, rgba(0,0,0,30%)),url("/static/bg0.jpg")')
-    fix_output_field_height();
+    update_size();
     
     if (readCookie("checked") != undefined){
         let a = [];
@@ -190,20 +140,9 @@ $(window).on("load", function(){
         reset();
     }
     
-    
-
-    shuffle(bg_images);
-    for (let i=1;i<bg_images.length;i++) {
-        $(bg_images[i]).fadeOut(0);
-    }
-    
     checkCheckBoxes();
 
     $("#reset-button").addClass("button-off");
 
-    setInterval(function(){
-        $(".loader").fadeOut(600)
-    }, 0);
-
-    run_bg_updater();
+    loading_done();
 });

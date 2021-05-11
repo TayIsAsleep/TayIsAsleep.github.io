@@ -60,7 +60,8 @@ body {
   text-align: center;
   transition: all 0.2s ease-out;
   float: left;
-  background: black; }
+  background: black;
+  box-sizing: content-box; }
   .button p {
     transition: all 0.2s ease-out;
     display: inline; }
@@ -118,3 +119,6 @@ br {
   width: 319px; }
   .ghosts-it-could-be-container p {
     display: block; }
+
+.evidence-buttons {
+  float: left; }
