@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+/* GENERATE THESE AT https://codepen.io/sosuke/pen/Pjoqqp */
 /* Code from https://stackoverflow.com/a/2310809 */
 * {
   margin: 0;
@@ -65,6 +66,8 @@ body {
   .button p {
     transition: all 0.2s ease-out;
     display: inline; }
+  .button img {
+    display: none; }
 
 .button:hover:not(.button-off) {
   border-color: #eee; }
@@ -75,16 +78,32 @@ body {
   border: 2px solid #2f2f2f; }
   .button-off p {
     color: #2f2f2f; }
+  .button-off.icon-button img {
+    filter: brightness(0%) invert(16%) sepia(0%) saturate(0%) hue-rotate(347deg) brightness(97%) contrast(92%); }
 
 .button-found {
   border: 2px solid lime !important; }
   .button-found p {
     color: lime !important; }
+  .button-found.icon-button img {
+    filter: brightness(0%) invert(58%) sepia(83%) saturate(2771%) hue-rotate(82deg) brightness(113%) contrast(130%); }
 
 .button-cantbe {
   border: 2px solid red !important; }
   .button-cantbe p {
     color: red !important; }
+  .button-cantbe.icon-button img {
+    filter: brightness(0%) invert(14%) sepia(94%) saturate(7483%) hue-rotate(3deg) brightness(103%) contrast(113%); }
+
+.icon-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; }
+  .icon-button img {
+    display: inline;
+    transition: all 0.2s ease-out;
+    margin-left: 10px; }
 
 .title {
   color: #ddd; }
@@ -133,7 +152,8 @@ br {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  flex-wrap: wrap; }
+  flex-wrap: wrap;
+  margin: auto; }
 
 .evidence-buttons {
   float: left; }

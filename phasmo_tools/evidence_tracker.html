@@ -43,56 +43,95 @@
                 <br>
 
                 <div class="main-content">
-                    <div class="ghosts-it-could-be-container">
-                    </div>
+                    <div class="ghosts-it-could-be-container"></div>
 
-                    <div class="buttons evidence-buttons">
-                        <div id="button-evidence-emf5" class="button evidence-button"><p>EMF Level 5</p></div>
-                        <br>
-                        <div id="button-evidence-ghost-orbs" class="button evidence-button"><p>Ghost Orbs</p></div>
-                        <br>
-                        <div id="button-evidence-ghost-writing" class="button evidence-button"><p>Ghost Writing</p></div>
-                        <br>
-                        <div id="button-evidence-freezing-temps" class="button evidence-button"><p>Freezing Temperatures</p></div>
-                        <br>
-                        <div id="button-evidence-spirit-box" class="button evidence-button"><p>Spirit Box</p></div>
-                        <br>
-                        <div id="button-evidence-fingerprints" class="button evidence-button"><p>Fingerprints</p></div>
-                        <br><br>
-                        <div id="button-evidence-reset" class="button"><p>Reset</p></div>
+                    <div class="buttons evidence-buttons"></div>
+                    <script>
+                        /* IDK why, but these has to be in the HTML code for it to work properly */
+                        function generate_evidence_buttons(){
+                            let dest = document.getElementsByClassName("evidence-buttons")[0];
+                            [
+                                ["emf5","EMF Level 5"],
+                                ["ghost-orbs","Ghost Orbs"],
+                                ["ghost-writing","Ghost Writing"],
+                                ["freezing-temps","Freezing Temperatures"],
+                                ["spirit-box","Spirit Box"],
+                                ["fingerprints","Fingerprints"]   
+                            ].forEach(current => {
+                                let new_button = document.createElement("div");
+                                let new_button_text = document.createElement("p");
+                                let new_button_icon = document.createElement("img");
+                                
+                                new_button_text.innerHTML = current[1];
 
-                        <script>
-                            /* Sets the size of the buttons to be the same. I dont know how to code websites :) */
-                            let buttonSizes = "max(";
-                            Array.from($(".button")).forEach(element => {
-                                buttonSizes += element.clientWidth + "px,";
+                                new_button_icon.src = `./static/img/icon-evidence-${current[0]}.svg`;
+                                new_button_icon.alt = `${current[0]} icon`; 
+
+                                new_button.appendChild(new_button_text);
+                                new_button.appendChild(new_button_icon);
+                                new_button.classList.add("button", "evidence-button");
+
+                                /*ICONS*/
+                                if (false){
+                                    new_button.classList.add("icon-button");
+                                }
+
+                                new_button.id = `button-evidence-${current[0]}`;
+
+                                dest.appendChild(new_button);
+                                dest.appendChild(document.createElement("br"));
                             });
-                            buttonSizes += "0px)";
-    
-                            Array.from($(".button")).forEach(element => {
-                                element.style.minWidth = buttonSizes;
-                            });
-                            console.log(buttonSizes)
-                        </script>
-                    </div>
+
+                            dest.appendChild(document.createElement("br")); //Add the extra BR
+
+                            let new_button = document.createElement("div");
+                            let new_button_text = document.createElement("p");
+                            new_button.id = "button-evidence-reset";
+                            new_button.classList.add("button", "evidence-button")
+                            new_button_text.innerHTML = "Reset";
+                            new_button.appendChild(new_button_text);
+                            dest.appendChild(new_button);
+                        }
+                        generate_evidence_buttons();
+                    </script>
 
                     <br><br>
-                    <p style="text-align: center;">It can't be...</p>
 
-                    <div class="ghosts-cant-be">
-                        <div id="button-ghost-shade" class="button button-ghost-cant-be" value="0"><p>Shade</p></div>
-                        <div id="button-ghost-phantom" class="button button-ghost-cant-be" value="0"><p>Phantom</p></div>
-                        <div id="button-ghost-jinn" class="button button-ghost-cant-be" value="0"><p>Jinn</p></div>
-                        <div id="button-ghost-yurei" class="button button-ghost-cant-be" value="0"><p>Yurei</p></div>
-                        <div id="button-ghost-mare" class="button button-ghost-cant-be" value="0"><p>Mare</p></div>
-                        <div id="button-ghost-demon" class="button button-ghost-cant-be" value="0"><p>Demon</p></div>
-                        <div id="button-ghost-banshee" class="button button-ghost-cant-be" value="0"><p>Banshee</p></div>
-                        <div id="button-ghost-revenant" class="button button-ghost-cant-be" value="0"><p>Revenant</p></div>
-                        <div id="button-ghost-oni" class="button button-ghost-cant-be" value="0"><p>Oni</p></div>
-                        <div id="button-ghost-poltergeist" class="button button-ghost-cant-be" value="0"><p>Poltergeist</p></div>
-                        <div id="button-ghost-spirit" class="button button-ghost-cant-be" value="0"><p>Spirit</p></div>
-                        <div id="button-ghost-wraith" class="button button-ghost-cant-be" value="0"><p>Wraith</p></div>
-                    </div>
+                    <p style="text-align: center;">It can't be...</p>
+                    <div class="ghosts-cant-be"></div>
+                    <script>
+                        /* IDK why, but these has to be in the HTML code for it to work properly */
+                        function generate_ghosts_cant_be(){
+                            let dest = document.getElementsByClassName("ghosts-cant-be")[0];
+                            [
+                                "Shade",
+                                "Phantom",
+                                "Jinn",
+                                "Yurei",
+                                "Mare",
+                                "Demon",
+                                "Banshee",
+                                "Revenant",
+                                "Oni",
+                                "Poltergeist",
+                                "Spirit",
+                                "Wraith"
+                            ].forEach(current => {
+                                let new_button = document.createElement("div");
+                                let new_button_text = document.createElement("p");
+
+                                new_button_text.innerHTML = current;
+
+                                new_button.appendChild(new_button_text);
+                                new_button.classList.add("button", "button-ghost-cant-be");
+                                new_button.id = `button-ghost-${current.toLowerCase()}`;
+                                new_button.setAttribute('value', '0');
+
+                                dest.appendChild(new_button);
+                            });
+                        }
+                        generate_ghosts_cant_be();
+                    </script>
                 </div>
 
                 <script type="text/javascript" src="./static/js/evidence_tracker.js"></script>

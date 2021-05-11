@@ -85,8 +85,6 @@ function appendText(location,text) {
     a.fadeIn(200)
     return a;
 }
-
-
 function update_ghosts(){
     $(".ghosts-it-could-be-container").text(""); /* Reset all text */
 
@@ -166,7 +164,6 @@ function update_ghosts(){
         }
     });
 }
-
 function button_evidence_handler(id){
     let myID = "#" + id;
     let myVariableName = {
@@ -182,7 +179,7 @@ function button_evidence_handler(id){
         $(myID).removeClass("button-off");
         $(myID).removeClass("button-found");
         $(myID).removeClass("button-cantbe");
-    
+
         if (eval(myVariableName) == "0"){
             $(myID).addClass("button-found");
             eval(`${myVariableName} = "1"`);
@@ -198,8 +195,6 @@ function button_evidence_handler(id){
         update_ghosts();
     }
 }
-
-
 $(".evidence-button").on("click", function(){
     button_evidence_handler(this.id);
 });
@@ -234,18 +229,28 @@ $(".button-ghost-cant-be").on("click", function(){
     update_ghosts();
 });
 
-
 $(window).resize(function() {
     update_size();
 });
 $(window).on("load", function(){
     update_ghosts();
+
+    /* Sets the size of the buttons to be the same. I dont know how to code websites :) */
+    let buttonSizes = "max(";
+    Array.from($(".evidence-button")).forEach(element => {
+        buttonSizes += element.clientWidth + "px,";
+    });
+    buttonSizes += "0px)";
+
+    Array.from($(".evidence-button")).forEach(element => {
+        element.style.minWidth = buttonSizes;
+    });
+    console.log(buttonSizes);
     
     $(".ghosts-it-could-be-container").width($(".ghosts-it-could-be-container").width());
 
     $(".ghosts-it-could-be-container").height($(".evidence-buttons").height() - 23);
 
-    
     $(".ghosts-cant-be").width($(".ghosts-it-could-be-container").width() + $(".evidence-buttons").width())
 
     update_size();

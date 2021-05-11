@@ -7,6 +7,12 @@ $buttonColorHover: lighten($buttonColor, 20%);
 $buttonColorOff: darken($buttonColor, 55%);
 $buttonColor_found: lime;
 $buttonColor_cantbe: red;
+
+/* GENERATE THESE AT https://codepen.io/sosuke/pen/Pjoqqp */
+$buttonIconColor_green: brightness(0%) invert(58%) sepia(83%) saturate(2771%) hue-rotate(82deg) brightness(113%) contrast(130%);
+$buttonIconColor_red: brightness(0%) invert(14%) sepia(94%) saturate(7483%) hue-rotate(3deg) brightness(103%) contrast(113%);
+$buttonIconColor_off: brightness(0%) invert(16%) sepia(0%) saturate(0%) hue-rotate(347deg) brightness(97%) contrast(92%);
+
 $animation: all .2s ease-out;
 
 @mixin border {
@@ -91,6 +97,9 @@ body{
         transition: $animation;
         display: inline;
     }
+    img{
+        display: none;
+    }
 }
 .button:hover:not(.button-off){
     border-color: $buttonColorHover;
@@ -104,17 +113,44 @@ body{
     p{
         color: $buttonColorOff;
     }
+    &.icon-button{
+        img{
+            filter: $buttonIconColor_off;
+        }
+    }
 }
 .button-found{
     border: 2px solid $buttonColor_found !important;
     p{
         color: $buttonColor_found !important;
     }
+    &.icon-button{
+        img{
+            filter: $buttonIconColor_green;
+        }
+    }
 }
 .button-cantbe{
     border: 2px solid $buttonColor_cantbe !important;
     p{
         color: $buttonColor_cantbe !important;
+    }
+    &.icon-button{
+        img{
+            filter: $buttonIconColor_red;
+        }
+    }
+}
+
+.icon-button{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    img{
+        display: inline;
+        transition: $animation;
+        margin-left: 10px;
     }
 }
 
@@ -173,6 +209,7 @@ br{
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
+    margin: auto;
 }
 
 .evidence-buttons{
