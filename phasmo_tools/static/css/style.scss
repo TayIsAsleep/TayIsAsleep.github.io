@@ -167,6 +167,14 @@ br{
         display: block;
     }
 }
+
+.ghosts-cant-be{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 .evidence-buttons{
     float: left;
 }

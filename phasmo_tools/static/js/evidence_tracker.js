@@ -105,6 +105,10 @@ function update_ghosts(){
         let evidence_left = [];
         let my_evidence = ghosts_evidence[current_ghost];
 
+        if ($("#button-ghost-" + current_ghost.toLowerCase()).attr("value") == "1"){
+            i_should_show_up = false;
+        }
+
         Object.keys(evidence_lookup).forEach(evidence_variable_name => {
             if (!my_evidence.includes(evidence_variable_name) && eval(evidence_variable_name) == "1"){
                 i_should_show_up = false;
@@ -127,7 +131,6 @@ function update_ghosts(){
                 should_we_make_these_unavable[i] = false
             });
             
-
             let evidenceNeeded = evidence_left.join(", ");
 
             if (evidenceNeeded == ""){
@@ -161,9 +164,6 @@ function update_ghosts(){
                 $(lookuptablepoopp[i]).addClass("button-off");
             }
         }
-
-        
-        
     });
 }
 
@@ -199,25 +199,10 @@ function button_evidence_handler(id){
     }
 }
 
-$("#button-evidence-emf5").on("click", function(){
-    button_evidence_handler(this.id);
-});
-$("#button-evidence-ghost-orbs").on("click", function(){
-    button_evidence_handler(this.id);
-});
-$("#button-evidence-ghost-writing").on("click", function(){
-    button_evidence_handler(this.id);
-});
-$("#button-evidence-freezing-temps").on("click", function(){
-    button_evidence_handler(this.id);
-});
-$("#button-evidence-spirit-box").on("click", function(){
-    button_evidence_handler(this.id);
-});
-$("#button-evidence-fingerprints").on("click", function(){
-    button_evidence_handler(this.id);
-});
 
+$(".evidence-button").on("click", function(){
+    button_evidence_handler(this.id);
+});
 $("#button-evidence-reset").on("click", function(){
     evidence_found_emf5 = "0";
     evidence_found_orbs = "0";
@@ -225,13 +210,30 @@ $("#button-evidence-reset").on("click", function(){
     evidence_found_freezing_temps = "0";
     evidence_found_spirit_box = "0";
     evidence_found_fingerprints = "0";
+
+    $(".button").removeClass("button-off");
+    $(".button").removeClass("button-found");
+    $(".button").removeClass("button-cantbe");
+    $(".button-ghost-cant-be").attr("value","0");
+
     update_ghosts();
-
-    $(".evidence-button").removeClass("button-off");
-    $(".evidence-button").removeClass("button-found");
-    $(".evidence-button").removeClass("button-cantbe");
-
 });
+
+$(".button-ghost-cant-be").on("click", function(){
+    let me = $(`#${this.id}`);
+
+    if (me.attr("value") == "1"){
+        me.attr("value","0");
+        me.removeClass("button-cantbe")
+    }
+    else{
+        me.attr("value","1");
+        me.addClass("button-cantbe")
+    }
+
+    update_ghosts();
+});
+
 
 $(window).resize(function() {
     update_size();
@@ -239,10 +241,12 @@ $(window).resize(function() {
 $(window).on("load", function(){
     update_ghosts();
     
-    $(".ghosts-it-could-be-container").width($(".ghosts-it-could-be-container").width())
+    $(".ghosts-it-could-be-container").width($(".ghosts-it-could-be-container").width());
 
-    $(".ghosts-it-could-be-container").height($(".evidence-buttons").height() - 23)
+    $(".ghosts-it-could-be-container").height($(".evidence-buttons").height() - 23);
+
     
+    $(".ghosts-cant-be").width($(".ghosts-it-could-be-container").width() + $(".evidence-buttons").width())
 
     update_size();
     loading_done();
