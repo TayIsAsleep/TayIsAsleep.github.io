@@ -16,6 +16,7 @@ $animation: all .2s ease-out;
 
 @mixin border{
     border: 2px solid $buttonColor;
+    width: -moz-fit-content;
     width: fit-content;
     padding: 0.5em;
     margin: 2px;
@@ -47,9 +48,9 @@ body{
 .bg-image{
     @include unselectable;
     /* Add the blur effect */
-    filter: blur(8px);
     -webkit-filter: blur(8px);
-
+    filter: blur(8px);
+    
     object-fit: cover;
     position: fixed;
     top: 50%;
