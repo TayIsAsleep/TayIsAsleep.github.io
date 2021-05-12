@@ -18,7 +18,7 @@ with open("./static/css/style.scss", "r", encoding="utf-8") as in_file, \
     minimized_css_data = post(
         url='https://cssminifier.com/raw',
         data={'input':css_data}
-        ).text
+    ).text
     
     print("Writing to output file...")
     out_file.write(minimized_css_data)
