@@ -211,6 +211,10 @@ br{
     float: left;
 }
 
+.border{
+    @include border;
+}
+
 /* Maybe can delete: */
 .button-evidence-found{
     width: 230px;

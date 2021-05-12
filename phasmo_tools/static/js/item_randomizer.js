@@ -116,33 +116,3 @@ $(".item-option").on("click", function(){
     reset();
     checkCheckBoxes();
 });
-
-$(window).resize(function() {
-    update_size();
-});
-$(window).on("load", function(){
-    // $("#bg-image").css("background-image",'radial-gradient(transparent, rgba(0,0,0,30%)),url("/static/bg0.jpg")')
-    update_size();
-    
-    if (readCookie("checked") != undefined){
-        let a = [];
-        readCookie("checked").split(",").forEach(element => {
-            a.push(element == "1" ? true : false);
-        });
-
-        $(".item-option").each(function(i,elem){
-            elem.checked = a[i];
-        });
-
-        generatePool()
-    }
-    else{
-        reset();
-    }
-    
-    checkCheckBoxes();
-
-    $("#reset-button").addClass("button-off");
-
-    loading_done();
-});

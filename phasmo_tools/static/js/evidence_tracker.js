@@ -228,31 +228,3 @@ $(".button-ghost-cant-be").on("click", function(){
 
     update_ghosts();
 });
-
-$(window).resize(function() {
-    update_size();
-});
-$(window).on("load", function(){
-    update_ghosts();
-
-    /* Sets the size of the buttons to be the same. I dont know how to code websites :) */
-    let buttonSizes = "max(";
-    Array.from($(".evidence-button")).forEach(element => {
-        buttonSizes += element.clientWidth + "px,";
-    });
-    buttonSizes += "0px)";
-
-    Array.from($(".evidence-button")).forEach(element => {
-        element.style.minWidth = buttonSizes;
-    });
-    console.log(buttonSizes);
-    
-    $(".ghosts-it-could-be-container").width($(".ghosts-it-could-be-container").width());
-
-    $(".ghosts-it-could-be-container").height($(".evidence-buttons").height() - 23);
-
-    $(".ghosts-cant-be").width($(".ghosts-it-could-be-container").width() + $(".evidence-buttons").width())
-
-    update_size();
-    loading_done();
-});
