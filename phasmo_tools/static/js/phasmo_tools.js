@@ -259,7 +259,6 @@ function appendText(location,text) {
 function update_ghosts(){
     $(".ghosts-it-could-be-container").text(""); /* Reset all text */
 
-    let thereIsSomeGhost = false;
     let should_we_make_these_unavable = {
         "EMF Level 5":true,
         "Ghost Orbs":true,
@@ -268,6 +267,9 @@ function update_ghosts(){
         "Spirit Box":true,
         "Fingerprints":true
     };
+
+    let ghosts_it_can_be = [];
+    let toAdd = [];
     
     Object.keys(ghosts_evidence).forEach(current_ghost => {
         let i_should_show_up = true;
@@ -294,27 +296,37 @@ function update_ghosts(){
         });
 
         if (i_should_show_up){
-            thereIsSomeGhost = true;
-
             evidence_left.forEach(i => {
                 should_we_make_these_unavable[i] = false
             });
             
             let evidenceNeeded = evidence_left.join(", ");
 
-            if (evidenceNeeded == ""){
-                appendText(".ghosts-it-could-be-container", `It is a ${current_ghost}!`);
-            }
-            else{
-                appendText(".ghosts-it-could-be-container", `${current_ghost} - ${evidenceNeeded}`);
-            }
+            toAdd.push([current_ghost, evidenceNeeded]);
+            ghosts_it_can_be.push(current_ghost);
         }
     });
 
-    if (!thereIsSomeGhost){
-        appendText(".ghosts-it-could-be-container","No ghost with that configuration")
+    if (toAdd.length == 1){
+        if (toAdd[0][1] == ""){
+            appendText(".ghosts-it-could-be-container", `It is a ${toAdd[0][0]}!`);
+        }
+        else{
+            appendText(".ghosts-it-could-be-container", `It should be a ${toAdd[0][0]}!`);
+            appendText(".ghosts-it-could-be-container", `Evidence not confirmed yet:`);
+            appendText(".ghosts-it-could-be-container", toAdd[0][1]);
+        }
+    }
+    else if (toAdd.length == 0){
+        appendText(".ghosts-it-could-be-container", "No ghost with that configuration");
+    }
+    else{
+        toAdd.forEach(current => {
+            appendText(".ghosts-it-could-be-container", `${current[0]} - ${current[1]}`);
+        });
     }
 
+    /* Update buttons (so that the ones that cant be clicked becomes off) */
     let lookuptablepoopp = {
         "EMF Level 5":"#button-evidence-emf5",
         "Ghost Orbs":"#button-evidence-ghost-orbs",
@@ -323,7 +335,6 @@ function update_ghosts(){
         "Spirit Box":"#button-evidence-spirit-box",
         "Fingerprints":"#button-evidence-fingerprints"
     };
-
     $(".evidence-button").removeClass("button-off");
     Object.keys(should_we_make_these_unavable).forEach(i => {
         if (should_we_make_these_unavable[i] == true){
@@ -331,6 +342,20 @@ function update_ghosts(){
 
             if (!(Array.from(classList).includes("button-found") || Array.from(classList).includes("button-cantbe"))){
                 $(lookuptablepoopp[i]).addClass("button-off");
+            }
+        }
+    });
+
+    /* Update buttons (GHOSTS IT CAN NOT BE SELECTOR) (so that the ones that cant be clicked becomes off) */
+    $(".button-ghost-cant-be").removeClass("button-off");
+    Object.keys(ghosts_evidence).forEach(i => {
+        if (!ghosts_it_can_be.includes(i)){
+            let this_button = $(`#button-ghost-${i.toLowerCase()}`);
+
+            let classList = this_button.attr('class').split(/\s+/);
+            
+            if (!(Array.from(classList).includes("button-found") || Array.from(classList).includes("button-cantbe"))){
+                this_button.addClass("button-off");
             }
         }
     });

@@ -133,7 +133,6 @@ body{
         }   
     }
 
-
     /* Learned from https://sass-lang.com/documentation/at-rules/control/each#destructuring */
     $a:
         "found" $buttonColor_found $buttonIconColor_green,
@@ -173,10 +172,11 @@ body{
 
 /* Text related stuff: */
 .title{
+    text-align: center;
     color: $textColor;
     h5{
         color: darken($textColor, 20%); 
-        display: inline;
+        text-align: center;
     }
 }
 a{
