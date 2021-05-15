@@ -42,6 +42,7 @@ function loading_done(){
 };
 
 function update_size(){
+    return;
     // $(".output-field").height($(".selection-field").height());
 
     let a = ($(window).width() - $(".main-container").width()) / 2
@@ -175,7 +176,6 @@ var evidence_found_emf5 = "0",
     evidence_found_freezing_temps = "0",
     evidence_found_spirit_box = "0",
     evidence_found_fingerprints = "0";
-
 var ghosts_evidence = {
     "Shade":[
         "evidence_found_emf5",
@@ -238,7 +238,6 @@ var ghosts_evidence = {
         "evidence_found_fingerprints"
     ],
 };
-
 var evidence_lookup = {
     "evidence_found_emf5":"EMF Level 5",
     "evidence_found_orbs":"Ghost Orbs",
@@ -455,23 +454,25 @@ $(window).on("load", function(){
 
     //#region Evidence Tracker
     update_ghosts();
-    /* Sets the size of the buttons to be the same. I dont know how to code websites :) */
-    let buttonSizes = "max(";
-    Array.from($(".evidence-button")).forEach(element => {
-        buttonSizes += element.clientWidth + "px,";
-    });
-    buttonSizes += "0px)";
-
-    Array.from($(".evidence-button")).forEach(element => {
-        element.style.minWidth = buttonSizes;
-    });
-    // console.log(buttonSizes);
+    if (false){
+        /* Sets the size of the buttons to be the same. I dont know how to code websites :) */
+        let buttonSizes = "max(";
+        Array.from($(".evidence-button")).forEach(element => {
+            buttonSizes += element.clientWidth + "px,";
+        });
+        buttonSizes += "0px)";
     
+        Array.from($(".evidence-button")).forEach(element => {
+            element.style.minWidth = buttonSizes;
+        });
+    }
+
     $(".ghosts-it-could-be-container").width($(".ghosts-it-could-be-container").width());
 
-    $(".ghosts-it-could-be-container").height($(".evidence-buttons").height() - 23);
+    $(".ghosts-it-could-be-container").height($(".ghosts-it-could-be-container").height());
 
-    $(".ghosts-cant-be").width($(".ghosts-it-could-be-container").width() + $(".evidence-buttons").width())
+    $(".main-content").width($(".ghosts-cant-be").width());
+    // $(".ghosts-cant-be").width($(".ghosts-it-could-be-container").width() + $(".evidence-buttons").width())
 
     update_size();
     //#endregion

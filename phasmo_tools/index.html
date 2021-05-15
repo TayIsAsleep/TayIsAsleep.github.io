@@ -15,11 +15,11 @@
         <link rel="icon" type="image/png" href="./static/img/favicon.jpg">
         <link rel="apple-touch-icon" sizes="180x180" href="./static/img/apple-touch-icon.png">
         
-        <link rel="stylesheet" href="./static/css/style.css?HASH_1_237869_HASH_2">
+        <link rel="stylesheet" href="./static/css/style.css?HASH_1_805261_HASH_2">
 
         <script type="text/javascript" src="../global/js/jquery-3.6.0.min.js"></script>
-        <script type="text/javascript" src="../global/js/scripts.js?HASH_1_237869_HASH_2"></script>
-        <script type="text/javascript" src="./static/js/phasmo_tools.js?HASH_1_237869_HASH_2" defer></script>
+        <script type="text/javascript" src="../global/js/scripts.js?HASH_1_805261_HASH_2"></script>
+        <script type="text/javascript" src="./static/js/phasmo_tools.js?HASH_1_805261_HASH_2" defer></script>
     </head>
     <body>
         
@@ -75,7 +75,18 @@
                     <div class="ghosts-it-could-be-container"></div>
 
                     <div class="buttons evidence-buttons"></div>
-                    <script>
+                    
+                    <div class="break"></div>
+                    
+                    <div class="ghosts-cant-be-container">
+                        <p style="text-align: center;">It can't be...</p>
+                        <div class="ghosts-cant-be"></div>
+                    </div>
+                    
+                    
+                </div>
+
+                <script>
                         /* IDK why, but these has to be in the HTML code for it to work properly */
                         function generate_evidence_buttons(){
                             let dest = document.getElementsByClassName("evidence-buttons")[0];
@@ -106,10 +117,10 @@
                                 new_button.id = `button-evidence-${current[0]}`;
 
                                 dest.appendChild(new_button);
-                                dest.appendChild(document.createElement("br"));
+                                // dest.appendChild(document.createElement("br"));
                             });
 
-                            dest.appendChild(document.createElement("br")); //Add the extra BR
+                            // dest.appendChild(document.createElement("br")); //Add the extra BR
 
                             let new_button = document.createElement("div");
                             let new_button_text = document.createElement("p");
@@ -119,15 +130,6 @@
                             new_button.appendChild(new_button_text);
                             dest.appendChild(new_button);
                         }
-                        generate_evidence_buttons();
-                    </script>
-
-                    <br><br>
-
-                    <p style="text-align: center;">It can't be...</p>
-                    <div class="ghosts-cant-be"></div>
-                    <script>
-                        /* IDK why, but these has to be in the HTML code for it to work properly */
                         function generate_ghosts_cant_be(){
                             let dest = document.getElementsByClassName("ghosts-cant-be")[0];
                             [
@@ -157,10 +159,10 @@
                                 dest.appendChild(new_button);
                             });
                         }
+
+                        generate_evidence_buttons();
                         generate_ghosts_cant_be();
-                    </script>
-                    
-                </div>
+                </script>
 
             </div>
             <!-- #endregion -->
