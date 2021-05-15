@@ -15,11 +15,11 @@
         <link rel="icon" type="image/png" href="./static/img/favicon.jpg">
         <link rel="apple-touch-icon" sizes="180x180" href="./static/img/apple-touch-icon.png">
         
-        <link rel="stylesheet" href="./static/css/style.css?HASHSTART_809382_HASHSTOP">
+        <link rel="stylesheet" href="./static/css/style.css?HASH_1_651982_HASH_2">
 
         <script type="text/javascript" src="../global/js/jquery-3.6.0.min.js"></script>
-        <script type="text/javascript" src="../global/js/scripts.js?HASHSTART_809382_HASHSTOP"></script>
-        <script type="text/javascript" src="./static/js/phasmo_tools.js?HASHSTART_809382_HASHSTOP" defer></script>
+        <script type="text/javascript" src="../global/js/scripts.js?HASH_1_651982_HASH_2"></script>
+        <script type="text/javascript" src="./static/js/phasmo_tools.js?HASH_1_651982_HASH_2" defer></script>
     </head>
     <body>
         
@@ -29,8 +29,10 @@
             /* IDK why, but these has to be in the HTML code for it to work properly */
             function generate_bg_images(){
                 let dest = document.getElementById("bg-image");
-                
-                for (let i = 0; i <= 11; i++) {
+                let image_count_string = "image_count_string_1_12_image_count_string_2";
+                let image_count = parseInt(image_count_string.split("string_1_")[1].split("_image")[0])
+
+                for (let i = 1; i < image_count; i++) {
                     let new_image = document.createElement("img");
                     
                     new_image.src = `./static/img/bg/bg${i}.jpg`;
@@ -45,7 +47,19 @@
         <!-- #endregion -->
         
         <div class="main-container" style="opacity: 0;">
+            <!-- #region Tool Selector -->
+            <div class="tool tool-selector">
+                <div class="title">
+                    <h1>Phasmophobia Tools</h1>
+                    <h5>Made by <a target="_blank" href="https://github.com/TayIsAsleep">TayIsAsleep</a></h5>
+                </div>
 
+                <br>
+                
+                <p>Press <a href="?app=evidence_tracker">here</a> to go to the Phasmophobia Evidence Tracker</p>
+                <p>Press <a href="?app=item_randomizer">here</a> to go to the Phasmophobia Item Randomizer</p>
+            </div>
+            <!-- #endregion -->
             <!-- #region Evidence Tracker -->
             <div class="tool tool-evidence-tracker">
 
@@ -86,10 +100,8 @@
                                 new_button.appendChild(new_button_icon);
                                 new_button.classList.add("button", "evidence-button");
 
-                                /*ICONS*/
-                                if (false){
-                                    new_button.classList.add("icon-button");
-                                }
+                                /* ICONS */
+                                // new_button.classList.add("icon-button");
 
                                 new_button.id = `button-evidence-${current[0]}`;
 
@@ -235,19 +247,6 @@
 
             </div>
             <!-- #endregion -->
-            <!-- #region Tool Selector -->
-            <div class="tool tool-selector">
-                <div class="title">
-                    <h1>Phasmophobia Tools</h1>
-                    <h5>Made by <a target="_blank" href="https://github.com/TayIsAsleep">TayIsAsleep</a></h5>
-                </div>
-
-                <br>
-
-                <p>Press <a href="?app=evidence_tracker">here</a> to go to the Phasmophobia Evidence Tracker</p>
-                <p>Press <a href="?app=item_randomizer">here</a> to go to the Phasmophobia Item Randomizer</p>
-            </div>
-            <!-- #endregion -->
 
             <script>
                 $(".tool").css("display","none"); // Hides all tools by default
@@ -271,7 +270,6 @@
         </div>
 
         <div class="loader"></div>
-
 
         <!-- <script>
             // Code from https://stackoverflow.com/a/10338754/13921835

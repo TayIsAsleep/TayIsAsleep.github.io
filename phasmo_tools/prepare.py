@@ -3,20 +3,49 @@ import re
 import random
 from requests import post
 from time import sleep
+from os import listdir
 
+def replace_within(surround_string, new_value, old_string):
+    return re.sub(
+            f"(?<={surround_string}_1_)(.*)(?=_{surround_string}_2)",
+            str(new_value),
+            old_string
+        )
 def hashme():
+    """
+        Updates the index.html file so that the browser will always request
+        the newest version of all files (css, js and so on)
+    """
     with open("index.html", "r+", encoding="utf-8") as f:
         print("Reading index.html")
-        d = f.read()
+        data = f.read()
 
         print("Updating file hash")
-        d2 = re.sub("(?<=HASHSTART_)(.*)(?=_HASHSTOP)",str(random.randint(100000,999999)),d)
+        data2 = replace_within(
+            "HASH",
+            random.randint(100000,999999),
+            data
+        )
+
+        print(data == data2)
+
+
+        data3 = replace_within(
+            "image_count_string",
+            len(listdir("static\\img\\bg")),
+            data2
+        )
 
         print("Updating textfile")
         f.seek(0)
-        f.write(d2)
+        f.write(data3)
+        print("Done.")
     return 0
-def scss():
+def scss(minimize=True):
+    """
+        Converts the scss file to a css file.
+        Needs to be ran before updating the website on GitHub.
+    """
     with open("./static/css/style.scss", "r", encoding="utf-8") as in_file, \
          open("./static/css/style.css", "w", encoding="utf-8") as out_file:
         
@@ -28,12 +57,21 @@ def scss():
             url='https://jsonformatter.org/service/scssTocss',
             data={'css':scss_data}
         ).text
-        
-        print("Minimizing css...")
-        minimized_css_data = post(
-            url='https://cssminifier.com/raw',
-            data={'input':css_data}
-        ).text
+
+        if css_data.startswith("fatal error"):
+            print("ERROR! Could not convert scss to css! \
+                   Here is the error message:")
+            print(css_data)
+            return -1
+
+        if minimize:
+            print("Minimizing css...")
+            minimized_css_data = post(
+                url='https://cssminifier.com/raw',
+                data={'input':css_data}
+            ).text
+        else:
+            minimized_css_data = css_data
         
         print("Writing to output file...")
         out_file.write(minimized_css_data)
@@ -43,5 +81,5 @@ hashme()
 scss()
 
 print("\nDone. Quiting in 3 secounds.")
-sleep(3)
+# sleep(3)
 exit()
