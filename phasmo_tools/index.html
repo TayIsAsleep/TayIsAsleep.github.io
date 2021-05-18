@@ -166,69 +166,69 @@
                 </div>
 
                 <script>
-                        /* IDK why, but these has to be in the HTML code for it to work properly */
-                        function generate_evidence_buttons(){
-                            let dest = document.getElementsByClassName("evidence-buttons")[0];
-                            [
-                                ["emf5","EMF Level 5"],
-                                ["ghost-orbs","Ghost Orbs"],
-                                ["ghost-writing","Ghost Writing"],
-                                ["freezing-temps","Freezing Temperatures"],
-                                ["spirit-box","Spirit Box"],
-                                ["fingerprints","Fingerprints"]   
-                            ].forEach(current => {
-                                let new_button = document.createElement("div");
-                                let new_button_text = document.createElement("p");
-                                let new_button_icon = document.createElement("img");
-                                
-                                new_button_text.innerHTML = current[1];
-
-                                new_button_icon.src = `./static/img/icon-evidence-${current[0]}.svg`;
-                                new_button_icon.alt = `${current[0]} icon`; 
-
-                                new_button.appendChild(new_button_text);
-                                new_button.appendChild(new_button_icon);
-                                new_button.classList.add("button", "evidence-button");
-
-                                /* ICONS */
-                                // new_button.classList.add("icon-button");
-
-                                new_button.id = `button-evidence-${current[0]}`;
-
-                                dest.appendChild(new_button);
-                                // dest.appendChild(document.createElement("br"));
-                            });
-
-                            // dest.appendChild(document.createElement("br")); //Add the extra BR
-
+                    /* IDK why, but these has to be in the HTML code for it to work properly */
+                    function generate_evidence_buttons(){
+                        let dest = document.getElementsByClassName("evidence-buttons")[0];
+                        [
+                            ["emf5","EMF Level 5"],
+                            ["ghost-orbs","Ghost Orbs"],
+                            ["ghost-writing","Ghost Writing"],
+                            ["freezing-temps","Freezing Temperatures"],
+                            ["spirit-box","Spirit Box"],
+                            ["fingerprints","Fingerprints"]   
+                        ].forEach(current => {
                             let new_button = document.createElement("div");
                             let new_button_text = document.createElement("p");
-                            new_button.id = "button-evidence-reset";
-                            new_button.classList.add("button", "evidence-button")
-                            new_button_text.innerHTML = "Reset";
-                            new_button.appendChild(new_button_text);
-                            dest.appendChild(new_button);
-                        }
-                        function generate_ghosts_cant_be(){
-                            let dest = document.getElementsByClassName("ghosts-cant-be")[0];
+                            let new_button_icon = document.createElement("img");
                             
-                            Object.keys(ghosts_evidence).forEach(current => {
-                                let new_button = document.createElement("div");
-                                let new_button_text = document.createElement("p");
+                            new_button_text.innerHTML = current[1];
 
-                                new_button_text.innerHTML = current;
+                            new_button_icon.src = `./static/img/icon-evidence-${current[0]}.svg`;
+                            new_button_icon.alt = `${current[0]} icon`; 
 
-                                new_button.appendChild(new_button_text);
-                                new_button.classList.add("button", "button-ghost-cant-be");
-                                new_button.id = `button-ghost-${current.toLowerCase()}`;
-                                new_button.setAttribute('value', '0');
+                            new_button.appendChild(new_button_text);
+                            new_button.appendChild(new_button_icon);
+                            new_button.classList.add("button", "evidence-button");
 
-                                dest.appendChild(new_button);
-                            });
-                        }
+                            /* ICONS */
+                            // new_button.classList.add("icon-button");
 
-                        generate_evidence_buttons();
-                        generate_ghosts_cant_be();
+                            new_button.id = `button-evidence-${current[0]}`;
+
+                            dest.appendChild(new_button);
+                            // dest.appendChild(document.createElement("br"));
+                        });
+
+                        // dest.appendChild(document.createElement("br")); //Add the extra BR
+
+                        let new_button = document.createElement("div");
+                        let new_button_text = document.createElement("p");
+                        new_button.id = "button-evidence-reset";
+                        new_button.classList.add("button", "evidence-button")
+                        new_button_text.innerHTML = "Reset";
+                        new_button.appendChild(new_button_text);
+                        dest.appendChild(new_button);
+                    }
+                    function generate_ghosts_cant_be(){
+                        let dest = document.getElementsByClassName("ghosts-cant-be")[0];
+                        
+                        Object.keys(ghosts_evidence).forEach(current => {
+                            let new_button = document.createElement("div");
+                            let new_button_text = document.createElement("p");
+
+                            new_button_text.innerHTML = current;
+
+                            new_button.appendChild(new_button_text);
+                            new_button.classList.add("button", "button-ghost-cant-be");
+                            new_button.id = `button-ghost-${current.toLowerCase()}`;
+                            new_button.setAttribute('value', '0');
+
+                            dest.appendChild(new_button);
+                        });
+                    }
+
+                    generate_evidence_buttons();
+                    generate_ghosts_cant_be();
                 </script>
 
             </div>
@@ -278,7 +278,6 @@
                                 let new_div = document.createElement("div");
                                 let new_input = document.createElement("input");
                                 let new_label = document.createElement("label");
-
 
                                 new_input.id = current.toLowerCase().replaceAll(" ","-");
                                 new_input.classList.add("item-option");

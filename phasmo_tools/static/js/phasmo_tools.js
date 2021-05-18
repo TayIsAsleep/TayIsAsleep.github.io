@@ -314,7 +314,14 @@ function button_evidence_handler(id,rightClick=false){
         $(myID).removeClass("button-cantbe");
 
         if (rightClick){
-            eval(`${myVariableName} = "0"`);
+            if (eval(`${myVariableName}`) == 0){
+                $(myID).addClass("button-cantbe");
+                eval(`${myVariableName} = "2"`);
+                // return;
+            }
+            else{
+                eval(`${myVariableName} = "0"`);
+            }
         }
         else{
             if (eval(myVariableName) == "0"){
