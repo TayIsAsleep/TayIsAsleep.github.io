@@ -297,7 +297,7 @@ function update_ghosts(){
         }
     });
 }
-function button_evidence_handler(id){
+function button_evidence_handler(id,rightClick=false){
     let myID = "#" + id;
     let myVariableName = {
         "#button-evidence-emf5":"evidence_found_emf5",
@@ -313,24 +313,33 @@ function button_evidence_handler(id){
         $(myID).removeClass("button-found");
         $(myID).removeClass("button-cantbe");
 
-        if (eval(myVariableName) == "0"){
-            $(myID).addClass("button-found");
-            eval(`${myVariableName} = "1"`);
-        }
-        else if (eval(myVariableName) == "1"){
-            $(myID).addClass("button-cantbe");
-            eval(`${myVariableName} = "2"`);
-        }
-        else{
+        if (rightClick){
             eval(`${myVariableName} = "0"`);
         }
-    
+        else{
+            if (eval(myVariableName) == "0"){
+                $(myID).addClass("button-found");
+                eval(`${myVariableName} = "1"`);
+            }
+            else if (eval(myVariableName) == "1"){
+                $(myID).addClass("button-cantbe");
+                eval(`${myVariableName} = "2"`);
+            }
+            else{
+                eval(`${myVariableName} = "0"`);
+            }
+        }
+
         update_ghosts();
     }
 }
 $(".evidence-button").on("click", function(){
-    button_evidence_handler(this.id);
+    
 });
+$(".evidence-button").mousedown(function(ev){
+    button_evidence_handler(this.id, ev.which == 3);
+});
+
 $("#button-evidence-reset").on("click", function(){
     evidence_found_emf5 = "0";
     evidence_found_orbs = "0";
@@ -414,6 +423,21 @@ $(window).on("load", function(){
 
     update_size();
     //#endregion
+
+    //Disables rightclicking on evidence buttons
+    window.oncontextmenu = function (ev)
+    {
+        let a = $(".evidence-buttons").children();
+        let b = ev['path'];
+        let c = false;
+
+        Array.from(a).forEach(i => {
+            if (b.includes(i)){
+                c = true;
+            }
+        })
+        return !c;
+    }
 
     loading_done();
 });
