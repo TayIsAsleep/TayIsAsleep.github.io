@@ -11,13 +11,13 @@ def replace_within(surround_string, new_value, old_string):
             str(new_value),
             old_string
         )
-def hashme():
+def hashme(path):
     """
         Updates the index.html file so that the browser will always request
         the newest version of all files (css, js and so on)
     """
-    with open("index.html", "r+", encoding="utf-8") as f:
-        print("Reading index.html")
+    with open(path, "r+", encoding="utf-8") as f:
+        print(f"Reading {path}")
         data = f.read()
 
         print("Updating file hash")
@@ -27,12 +27,9 @@ def hashme():
             data
         )
 
-        print(data == data2)
-
-
         data3 = replace_within(
             "image_count_string",
-            len(listdir("static\\img\\bg")),
+            len(listdir("phasmo_tools\\static\\img\\bg")),
             data2
         )
 
@@ -41,13 +38,13 @@ def hashme():
         f.write(data3)
         print("Done.")
     return 0
-def scss(minimize=True):
+def scss(path, minimize=True):
     """
         Converts the scss file to a css file.
         Needs to be ran before updating the website on GitHub.
     """
-    with open("./static/css/style.scss", "r", encoding="utf-8") as in_file, \
-         open("./static/css/style.css", "w", encoding="utf-8") as out_file:
+    with open(f"{path}/style.scss", "r", encoding="utf-8") as in_file, \
+         open(f"{path}/style.css", "w", encoding="utf-8") as out_file:
         
         print("Reading from .scss file...")
         scss_data = in_file.read()
@@ -77,8 +74,9 @@ def scss(minimize=True):
         out_file.write(minimized_css_data)
     return 0
 
-hashme()
-scss()
+hashme("phasmo_tools\\index.html")
+scss("phasmo_tools\\static\\css")
+scss("tools\\wikipedia_cleaner\\static\\css")
 
 print("\nDone. Quiting in 3 secounds.")
 # sleep(3)
