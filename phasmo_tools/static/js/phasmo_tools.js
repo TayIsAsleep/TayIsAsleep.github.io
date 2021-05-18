@@ -176,68 +176,6 @@ var evidence_found_emf5 = "0",
     evidence_found_freezing_temps = "0",
     evidence_found_spirit_box = "0",
     evidence_found_fingerprints = "0";
-var ghosts_evidence = {
-    "Shade":[
-        "evidence_found_emf5",
-        "evidence_found_orbs",
-        "evidence_found_writing"
-    ],
-    "Phantom":[
-        "evidence_found_emf5",
-        "evidence_found_orbs",
-        "evidence_found_freezing_temps"
-    ],
-    "Jinn":[
-        "evidence_found_emf5",
-        "evidence_found_orbs",
-        "evidence_found_spirit_box"
-    ],
-    "Yurei":[
-        "evidence_found_freezing_temps",
-        "evidence_found_orbs",
-        "evidence_found_writing"
-    ],
-    "Mare":[
-        "evidence_found_freezing_temps",
-        "evidence_found_orbs",
-        "evidence_found_spirit_box"
-    ],
-    "Demon":[
-        "evidence_found_freezing_temps",
-        "evidence_found_spirit_box",
-        "evidence_found_writing"
-    ],
-    "Banshee":[
-        "evidence_found_emf5",
-        "evidence_found_freezing_temps",
-        "evidence_found_fingerprints"
-    ],
-    "Revenant":[
-        "evidence_found_emf5",
-        "evidence_found_fingerprints",
-        "evidence_found_writing"
-    ],
-    "Oni":[
-        "evidence_found_emf5",
-        "evidence_found_spirit_box",
-        "evidence_found_writing"
-    ],
-    "Poltergeist":[
-        "evidence_found_fingerprints",
-        "evidence_found_orbs",
-        "evidence_found_spirit_box"
-    ],
-    "Spirit":[
-        "evidence_found_spirit_box",
-        "evidence_found_fingerprints",
-        "evidence_found_writing"
-    ],
-    "Wraith":[
-        "evidence_found_freezing_temps",
-        "evidence_found_spirit_box",
-        "evidence_found_fingerprints"
-    ],
-};
 var evidence_lookup = {
     "evidence_found_emf5":"EMF Level 5",
     "evidence_found_orbs":"Ghost Orbs",

@@ -15,11 +15,11 @@
         <link rel="icon" type="image/png" href="./static/img/favicon.jpg">
         <link rel="apple-touch-icon" sizes="180x180" href="./static/img/apple-touch-icon.png">
         
-        <link rel="stylesheet" href="./static/css/style.css?HASH_1_933127_HASH_2">
+        <link rel="stylesheet" href="./static/css/style.css?HASH_1_833786_HASH_2">
 
         <script type="text/javascript" src="../global/js/jquery-3.6.0.min.js"></script>
-        <script type="text/javascript" src="../global/js/scripts.js?HASH_1_933127_HASH_2"></script>
-        <script type="text/javascript" src="./static/js/phasmo_tools.js?HASH_1_933127_HASH_2" defer></script>
+        <script type="text/javascript" src="../global/js/scripts.js?HASH_1_833786_HASH_2"></script>
+        <script type="text/javascript" src="./static/js/phasmo_tools.js?HASH_1_833786_HASH_2" defer></script>
     </head>
     <body>
         
@@ -62,7 +62,87 @@
             <!-- #endregion -->
             <!-- #region Evidence Tracker -->
             <div class="tool tool-evidence-tracker">
+                <script>
+                    var ghosts_evidence = {
+                        "Shade":[
+                            "evidence_found_emf5",
+                            "evidence_found_orbs",
+                            "evidence_found_writing"
+                        ],
+                        "Phantom":[
+                            "evidence_found_emf5",
+                            "evidence_found_orbs",
+                            "evidence_found_freezing_temps"
+                        ],
+                        "Jinn":[
+                            "evidence_found_emf5",
+                            "evidence_found_orbs",
+                            "evidence_found_spirit_box"
+                        ],
+                        "Yurei":[
+                            "evidence_found_freezing_temps",
+                            "evidence_found_orbs",
+                            "evidence_found_writing"
+                        ],
+                        "Mare":[
+                            "evidence_found_freezing_temps",
+                            "evidence_found_orbs",
+                            "evidence_found_spirit_box"
+                        ],
+                        "Demon":[
+                            "evidence_found_freezing_temps",
+                            "evidence_found_spirit_box",
+                            "evidence_found_writing"
+                        ],
+                        "Banshee":[
+                            "evidence_found_emf5",
+                            "evidence_found_freezing_temps",
+                            "evidence_found_fingerprints"
+                        ],
+                        "Revenant":[
+                            "evidence_found_emf5",
+                            "evidence_found_fingerprints",
+                            "evidence_found_writing"
+                        ],
+                        "Oni":[
+                            "evidence_found_emf5",
+                            "evidence_found_spirit_box",
+                            "evidence_found_writing"
+                        ],
+                        "Poltergeist":[
+                            "evidence_found_fingerprints",
+                            "evidence_found_orbs",
+                            "evidence_found_spirit_box"
+                        ],
+                        "Spirit":[
+                            "evidence_found_spirit_box",
+                            "evidence_found_fingerprints",
+                            "evidence_found_writing"
+                        ],
+                        "Wraith":[
+                            "evidence_found_freezing_temps",
+                            "evidence_found_spirit_box",
+                            "evidence_found_fingerprints"
+                        ]
+                    };
 
+                    if (new URLSearchParams(window.location.search).get("beta") == "1"){
+                        console.log(ghosts_evidence)
+                        ghosts_evidence["Yokai"] = [
+                                "evidence_found_spirit_box",
+                                "evidence_found_orbs",
+                                "evidence_found_writing"
+                        ]
+                        ghosts_evidence["Hantu"] = [
+                        "evidence_found_fingerprints",
+                                "evidence_found_orbs",
+                                "evidence_found_writing"
+                        ]
+                    }
+
+                    ghosts_evidence = sortObjectByKeys(ghosts_evidence)
+
+                </script>
                 <div class="title">
                     <h1>Phasmophobia Evidence Tracker</h1>
                     <h5>Made by <a target="_blank" href="https://github.com/TayIsAsleep">TayIsAsleep</a></h5>
@@ -132,20 +212,8 @@
                         }
                         function generate_ghosts_cant_be(){
                             let dest = document.getElementsByClassName("ghosts-cant-be")[0];
-                            [
-                                "Shade",
-                                "Phantom",
-                                "Jinn",
-                                "Yurei",
-                                "Mare",
-                                "Demon",
-                                "Banshee",
-                                "Revenant",
-                                "Oni",
-                                "Poltergeist",
-                                "Spirit",
-                                "Wraith"
-                            ].forEach(current => {
+                            
+                            Object.keys(ghosts_evidence).forEach(current => {
                                 let new_button = document.createElement("div");
                                 let new_button_text = document.createElement("p");
 

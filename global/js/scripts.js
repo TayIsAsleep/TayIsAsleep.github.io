@@ -1,3 +1,8 @@
+function sortObjectByKeys(o){
+	//Code from https://www.codegrepper.com/code-examples/python/sort+dict+by+key+js
+    return Object.keys(o).sort().reduce((r, k) => (r[k] = o[k], r), {});
+}
+
 function shuffle(array){
     //Code from https://stackoverflow.com/a/2450976
     var currentIndex = array.length, temporaryValue, randomIndex;
