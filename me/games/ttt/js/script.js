@@ -19,6 +19,21 @@ function sleep(ms){
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+async function zoom_out(){
+    obj_game_board.style.transform = "scale(1)";
+    await sleep(1); // Make sure scale is set
+    obj_game_board.style.transition = "transform 0.75s cubic-bezier(1, -0.25, 0.75, 0.75)";
+    obj_game_board.style.transform = "scale(0)";
+    await sleep(750 - 1); // Wait for animation
+};
+async function zoom_in(){
+    obj_game_board.style.transform = "scale(0)";
+    await sleep(1); // Make sure scale is set
+    obj_game_board.style.transition = "transform 1s cubic-bezier(0.5, 0.01, 0.11, 1) 0s";
+    obj_game_board.style.transform = "scale(1)";
+    await sleep(1000 - 1); // Wait for animation
+};
+
 async function block_onclick(){
     if (this.getAttribute("state") != null){return;};
     if (winner != 0){return winner;};
@@ -47,10 +62,7 @@ async function block_onclick(){
 
         await sleep(500); // Dramatic pause 2
         
-        obj_game_board.style.transition = "transform 0.75s cubic-bezier(1, -0.25, 0.75, 0.75)";
-        obj_game_board.style.transform = "scale(0)";
-
-        await sleep(750); // Wait for animation
+        await zoom_out();
 
         await sleep(300); // "Load" a new game
 
@@ -58,13 +70,11 @@ async function block_onclick(){
             e.removeAttribute("state");
         });
 
-        obj_game_board.style.transition = "transform 1s cubic-bezier(0.5, 0.01, 0.11, 1) 0s";
-        obj_game_board.style.transform = "scale(1)";
         current_player = 1;
         winner = 0;
         winner_blocks = null;
-
-        await sleep(1000); // Wait for animation
+        
+        await zoom_in();
     };
 };
 
@@ -136,5 +146,7 @@ for (let i = 0; i < 9; i++){
 // Set width of game board to the height
 obj_game_board.style.width = obj_game_board.offsetHeight + "px";
 obj_game_board.style.height = obj_game_board.style.width;
+
+zoom_in();
 
 // #endregion INIT
