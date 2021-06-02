@@ -9,7 +9,7 @@ const obj_main_container = document.querySelector(".main-container");
 const obj_game_board = document.querySelector(".game-board");
 const obj_current_turn = document.querySelector(".current-turn");
 const obj_score_board = document.querySelector(".score-board");
-const bottom_row = document.querySelector(".bottom-row");
+const obj_bottom_row = document.querySelector(".bottom-row");
 
 var current_player = 1;
 var can_click = true;
@@ -87,13 +87,14 @@ async function block_onclick(){
     this.setAttribute("state", current_player);
 
     if (await check_win() == 0){
-        update_current_player()
+        update_current_player();
     }
     else{
         let old_bg_color = winner_blocks[0].style.backgroundColor;
 
         await sleep(250); // Dramatic pause
 
+        // TODO make filter yess beacause it work better no need for stupid code
         // Do flashing animation
         for (let i = 0; i < 2; i++){
             await sleep(100);
@@ -107,12 +108,10 @@ async function block_onclick(){
             });
         };
 
-        await sleep(250)
-        eval(`p${winner}_wins += 1`)
-        update_scoreboard()
-        await sleep(250)
-
-        // await sleep(500); // Dramatic pause 2
+        await sleep(250);
+        eval(`p${winner}_wins += 1;`);
+        update_scoreboard();
+        await sleep(250);
 
         await new_game();
     };
@@ -124,7 +123,7 @@ async function check_win(){
     
     let all_blocks = Array.from(document.querySelectorAll(".block"));
 
-    let to_check = [
+    [
         [0,1,2],
         [3,4,5],
         [6,7,8],
@@ -135,9 +134,7 @@ async function check_win(){
 
         [0,4,8],
         [2,4,6]
-    ];
-
-    to_check.forEach(pattern => {
+    ].forEach(pattern => {
         if (winner != 0){return winner;};
 
         let this_pattern = pattern.map(x => all_blocks[x].getAttribute("state"));
@@ -164,6 +161,7 @@ async function check_win(){
     if (winner == 0 && !all_blocks.map(x => x.getAttribute("state")).includes(null)){
         await sleep(800); // Dramatic pause
         await new_game();
+        current_player = 2; // TODO do better fix for this shit man
     };
 
     return winner;
@@ -176,7 +174,7 @@ function on_resize(){
     obj_game_board.style.width = obj_game_board.offsetHeight + "px";
     obj_game_board.style.height = obj_game_board.style.width;
   
-    let a = bottom_row.clientWidth / bottom_row.children.length;
+    let a = obj_bottom_row.clientWidth / obj_bottom_row.children.length;
 
     Array.from(document.querySelectorAll(".bottom-row div.button")).forEach(e => {
         e.style.maxWidth = (a - 10) + "px";
