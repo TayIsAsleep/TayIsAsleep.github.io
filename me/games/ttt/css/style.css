@@ -56,11 +56,6 @@ div.main-container div.score-board div.score-counter.p2 p {
   color: blue;
 }
 
-div.main-container div.score-board div.current-turn {
-  -webkit-transform: translateY(-0.8ch);
-          transform: translateY(-0.8ch);
-}
-
 div.main-container div.score-board div.current-turn p {
   -webkit-transition: -webkit-transform 0.3s ease-in-out;
   transition: -webkit-transform 0.3s ease-in-out;
@@ -70,14 +65,14 @@ div.main-container div.score-board div.current-turn p {
 
 div.main-container div.score-board div.current-turn p.p1-turn {
   color: red;
-  -webkit-transform: rotate(0) translateY(0);
-          transform: rotate(0) translateY(0);
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
 }
 
 div.main-container div.score-board div.current-turn p.p2-turn {
   color: blue;
-  -webkit-transform: rotate(180deg) translateY(-0.25ch);
-          transform: rotate(180deg) translateY(-0.25ch);
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
 }
 
 div.main-container div.game-board {

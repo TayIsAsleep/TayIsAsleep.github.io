@@ -45,18 +45,16 @@ div.main-container{
         }
 
         div.current-turn{
-            transform: translateY(-0.8ch);
-
             p{
                 transition: transform 0.3s ease-in-out;
 
                 &.p1-turn{
                     color: $player_1_color;
-                    transform: rotate(0) translateY(0);
+                    transform: rotate(90deg);
                 }
                 &.p2-turn{
                     color: $player_2_color;
-                    transform: rotate(180deg) translateY(-0.25ch);
+                    transform: rotate(-90deg);
                 }
             }
         }

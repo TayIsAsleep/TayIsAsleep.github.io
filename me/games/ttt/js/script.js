@@ -67,9 +67,7 @@ function update_scoreboard(){
 
 function update_current_player(override=0){
     if (override != 0){current_player = override}
-    else{
-        current_player = (current_player == 1 ? 2 : 1);
-    }
+    else{current_player = (current_player == 1 ? 2 : 1);};
 
     obj_current_turn.getElementsByTagName("p")[0].classList.add(`p${current_player}-turn`)
     obj_current_turn.getElementsByTagName("p")[0].classList.remove(`p${(current_player == 1 ? 2 : 1)}-turn`)
