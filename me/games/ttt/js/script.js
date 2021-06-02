@@ -168,23 +168,26 @@ async function check_win(){
 // #endregion FUNCTIONS
 // #region INIT (Needs to be finished before site is displayed to user)
 
-// Create the block elements
-for (let i = 0; i < 9; i++){
-    let new_div = document.createElement("div");
+async function init(){
 
-    new_div.classList.add("block");
-    new_div.onclick = block_onclick;
+    // Create the block elements
+    for (let i = 0; i < 9; i++){
+        let new_div = document.createElement("div");
 
-    obj_game_board.appendChild(new_div);
+        new_div.classList.add("block");
+        new_div.onclick = block_onclick;
+
+        obj_game_board.appendChild(new_div);
+    };
+
+    // Set width of game board to the height
+    await sleep(1);
+    obj_game_board.style.width = obj_game_board.offsetHeight + "px";
+    obj_game_board.style.height = obj_game_board.style.width;
+
+    update_current_player(1);
 };
-
-
-// Set width of game board to the height
-obj_game_board.style.width = obj_game_board.offsetHeight + "px";
-obj_game_board.style.height = obj_game_board.style.width;
-
-
-update_current_player(1);
+init();
 
 // #endregion INIT
 
