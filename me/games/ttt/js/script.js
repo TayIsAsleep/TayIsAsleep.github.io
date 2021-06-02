@@ -17,7 +17,8 @@ var winner_blocks = null;
 
 function sleep(ms){
     return new Promise(resolve => setTimeout(resolve, ms));
-}
+};
+
 
 async function zoom_out(){
     obj_game_board.style.transform = "scale(1)";
@@ -33,6 +34,22 @@ async function zoom_in(){
     obj_game_board.style.transform = "scale(1)";
     await sleep(1000 - 1); // Wait for animation
 };
+async function new_game(){
+    await zoom_out();
+
+    await sleep(300); // "Load" a new game
+
+    Array.from(document.querySelectorAll(".block")).forEach(e => {
+        e.removeAttribute("state");
+    });
+
+    current_player = 1;
+    winner = 0;
+    winner_blocks = null;
+    
+    await zoom_in();
+};
+
 
 async function block_onclick(){
     if (this.getAttribute("state") != null){return;};
@@ -40,7 +57,7 @@ async function block_onclick(){
 
     this.setAttribute("state", current_player);
 
-    if (check_win() == 0){
+    if (await check_win() == 0){
         current_player = (current_player == 1 ? 2 : 1);
     }
     else{
@@ -48,6 +65,7 @@ async function block_onclick(){
 
         await sleep(250); // Dramatic pause
 
+        // Do flashing animation
         for (let i = 0; i < 2; i++){
             await sleep(100);
             winner_blocks.forEach(e => {
@@ -61,24 +79,13 @@ async function block_onclick(){
         };
 
         await sleep(500); // Dramatic pause 2
-        
-        await zoom_out();
 
-        await sleep(300); // "Load" a new game
-
-        Array.from(document.querySelectorAll(".block")).forEach(e => {
-            e.removeAttribute("state");
-        });
-
-        current_player = 1;
-        winner = 0;
-        winner_blocks = null;
-        
-        await zoom_in();
+        await new_game();
     };
 };
 
-function check_win(){
+
+async function check_win(){
     if (winner != 0){return winner;};
     
     let all_blocks = Array.from(document.querySelectorAll(".block"));
@@ -98,17 +105,10 @@ function check_win(){
 
     to_check.forEach(pattern => {
         if (winner != 0){return winner;};
-        let this_pattern = [
-            all_blocks[pattern[0]].getAttribute("state"),
-            all_blocks[pattern[1]].getAttribute("state"),
-            all_blocks[pattern[2]].getAttribute("state")
-        ];
 
-        winner_blocks = [
-            all_blocks[pattern[0]],
-            all_blocks[pattern[1]],
-            all_blocks[pattern[2]]
-        ]
+        let this_pattern = pattern.map(x => all_blocks[x].getAttribute("state"));
+        
+        winner_blocks = pattern.map(x => all_blocks[x]);
 
         if (this_pattern.includes(null)){
             winner_blocks = null;
@@ -125,6 +125,12 @@ function check_win(){
             };  
         };
     });
+
+    // If there are no more empty spaces
+    if (winner == 0 && !all_blocks.map(x => x.getAttribute("state")).includes(null)){
+        await sleep(800); // Dramatic pause
+        await new_game();
+    };
 
     return winner;
 };
