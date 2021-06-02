@@ -8,8 +8,7 @@
     </head>
     <body>
         <script>
-            let params = new URLSearchParams(window.location.search);
-            let app = params.get('app');
+            let app = new URLSearchParams(window.location.search).get('app');
             let all_apps = {
                 "evidence_tracker":"me/phasmophobia/phasmo_tools/evidence_tracker.html",
                 "item_randomizer":"me/phasmophobia/phasmo_tools/item_randomizer.html",
@@ -20,13 +19,11 @@
             
             let toload = `${window.location.origin}/${app}`;
 
-            if (params.get("wait") == null){
+            if (new URLSearchParams(window.location.search).get("wait") == null){
                 window.location.replace(toload);
             }
 
             console.log(toload)
-            
-
         </script>
     </body>
 </html>

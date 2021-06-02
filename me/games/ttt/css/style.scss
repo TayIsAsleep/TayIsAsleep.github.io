@@ -1,0 +1,81 @@
+$player_1_color: red;
+$player_2_color: blue;
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+div.main-container{
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    div.game-board{
+        $grid_block_size: calc(100% / 3);
+        $block_size: 90%;
+        $border_radius_size: calc(100% / 2); /* 100% is full circle */
+
+        height: 40%;
+        background-color: black;
+        border-radius: calc(#{$border_radius_size} / 3);
+
+        display: grid;
+        grid-template-columns: $grid_block_size $grid_block_size $grid_block_size;
+        grid-template-rows: $grid_block_size $grid_block_size $grid_block_size;
+
+        // transition: transform 0.5s cubic-bezier(1, -0.25, 0.75, 0.75);
+
+        > div.block{
+            width: $block_size;
+            height: $block_size;
+            margin: calc(calc(100% - #{$block_size}) / 4);
+            background-color: white;
+            border-radius: $border_radius_size;
+
+            transition: background-color 0.2s ease;
+
+            &[state="1"]{
+                background-color: $player_1_color;
+            }
+            &[state="2"]{
+                background-color: $player_2_color;
+            }
+        }
+
+        :nth-child(1){
+            place-self: end;
+        }
+        :nth-child(2){
+            place-self: end center;
+        }
+        :nth-child(3){
+            place-self: end start;
+        }
+
+        :nth-child(4){
+            place-self: center end;
+        }
+        :nth-child(5){
+            place-self: center;
+        }
+        :nth-child(6){
+            place-self: center start;
+        }
+
+        :nth-child(7){
+            place-self: start end;
+        }
+        :nth-child(8){
+            place-self: start center;
+        }
+        :nth-child(9){
+            place-self: start;
+        }
+    }
+}

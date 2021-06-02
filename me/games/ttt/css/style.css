@@ -1,0 +1,89 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+div.main-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+div.main-container div.game-board {
+  /* 100% is full circle */
+  height: 40%;
+  background-color: black;
+  border-radius: calc(calc(100% / 2) / 3);
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: calc(100% / 3) calc(100% / 3) calc(100% / 3);
+      grid-template-columns: calc(100% / 3) calc(100% / 3) calc(100% / 3);
+  -ms-grid-rows: calc(100% / 3) calc(100% / 3) calc(100% / 3);
+      grid-template-rows: calc(100% / 3) calc(100% / 3) calc(100% / 3);
+}
+
+div.main-container div.game-board > div.block {
+  width: 90%;
+  height: 90%;
+  margin: calc(calc(100% - 90%) / 4);
+  background-color: white;
+  border-radius: calc(100% / 2);
+  -webkit-transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease;
+}
+
+div.main-container div.game-board > div.block[state="1"] {
+  background-color: red;
+}
+
+div.main-container div.game-board > div.block[state="2"] {
+  background-color: blue;
+}
+
+div.main-container div.game-board :nth-child(1) {
+  place-self: end;
+}
+
+div.main-container div.game-board :nth-child(2) {
+  place-self: end center;
+}
+
+div.main-container div.game-board :nth-child(3) {
+  place-self: end start;
+}
+
+div.main-container div.game-board :nth-child(4) {
+  place-self: center end;
+}
+
+div.main-container div.game-board :nth-child(5) {
+  place-self: center;
+}
+
+div.main-container div.game-board :nth-child(6) {
+  place-self: center start;
+}
+
+div.main-container div.game-board :nth-child(7) {
+  place-self: start end;
+}
+
+div.main-container div.game-board :nth-child(8) {
+  place-self: start center;
+}
+
+div.main-container div.game-board :nth-child(9) {
+  place-self: start;
+}
+/*# sourceMappingURL=style.css.map */
