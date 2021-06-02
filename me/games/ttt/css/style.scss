@@ -3,6 +3,17 @@
 $player_1_color: red;
 $player_2_color: blue;
 
+$theme_color_1: white;
+$theme_color_2: black;
+
+/* Code from https://stackoverflow.com/a/6900392 */
+@mixin unselectable{
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -10,10 +21,16 @@ $player_2_color: blue;
     font-family: 'JetBrains Mono', monospace;
 }
 
+body{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
 div.main-container{
     width: 100vw;
     height: 100vh;
-    background-color: white;
+    background-color: $theme_color_1;
 
     display: flex;
     flex-direction: column;
@@ -21,8 +38,9 @@ div.main-container{
     justify-content: center;
     gap: 10%;
 
-    div.score-board{
-        width: 60ch;
+    div.score-board, div.bottom-row{
+        width: 100%;
+        max-width: 100ch;
 
         display: flex;
         flex-direction: row;
@@ -36,6 +54,8 @@ div.main-container{
         }
 
         div.score-counter{
+            @include unselectable;
+
             &.p1 :first-child{
                 color: $player_1_color;
             }
@@ -58,6 +78,33 @@ div.main-container{
                 }
             }
         }
+
+        div.button{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10%;
+            background-color: $theme_color_2;
+            padding: 3%;
+
+            text-align: center;
+            color: $theme_color_1;
+
+            i{
+                font-size: 200%;
+            }
+            p{
+                @include unselectable;
+                font-size: 120%;
+                padding-top: 1ch;
+            }
+
+            &:active{
+                background-color: lighten($theme_color_2, 40%);
+            }
+        }
     }
 
     div.game-board{
@@ -66,7 +113,7 @@ div.main-container{
         $border_radius_size: calc(100% / 2); /* 100% is full circle */
 
         height: 40%;
-        background-color: black;
+        background-color: $theme_color_2;
         border-radius: calc(#{$border_radius_size} / 3);
 
         display: grid;
@@ -79,7 +126,7 @@ div.main-container{
             width: $block_size;
             height: $block_size;
             margin: calc(calc(100% - #{$block_size}) / 4);
-            background-color: white;
+            background-color: $theme_color_1;
             border-radius: $border_radius_size;
 
             transition: background-color 0.2s ease;
@@ -121,11 +168,5 @@ div.main-container{
         :nth-child(9){
             place-self: start;
         }
-    }
-}
-
-@media only screen and (max-width: 600px){
-    div.score-board{
-        width: 100% !important;
     }
 }

@@ -9,8 +9,10 @@ const obj_main_container = document.querySelector(".main-container");
 const obj_game_board = document.querySelector(".game-board");
 const obj_current_turn = document.querySelector(".current-turn");
 const obj_score_board = document.querySelector(".score-board");
+const bottom_row = document.querySelector(".bottom-row");
 
 var current_player = 1;
+var can_click = true;
 var winner = 0;
 var winner_blocks = null;
 var p1_wins = 0;
@@ -39,6 +41,8 @@ async function zoom_in(){
     await sleep(1000 - 1); // Wait for animation
 };
 async function new_game(){
+    can_click = false;
+
     await zoom_out();
 
     await sleep(300); // "Load" a new game
@@ -50,6 +54,7 @@ async function new_game(){
     current_player = 1;
     winner = 0;
     winner_blocks = null;
+    can_click = true;
     
     zoom_in(); // USED TO BE AWAITED
 
@@ -76,6 +81,7 @@ function update_current_player(override=0){
 
 async function block_onclick(){
     if (this.getAttribute("state") != null){return;};
+    if (!can_click){return;};
     if (winner != 0){return winner;};
 
     this.setAttribute("state", current_player);
@@ -163,6 +169,20 @@ async function check_win(){
     return winner;
 };
 
+
+function on_resize(){
+    obj_game_board.style.height = "";
+
+    obj_game_board.style.width = obj_game_board.offsetHeight + "px";
+    obj_game_board.style.height = obj_game_board.style.width;
+  
+    let a = bottom_row.clientWidth / bottom_row.children.length;
+
+    Array.from(document.querySelectorAll(".bottom-row div.button")).forEach(e => {
+        e.style.maxWidth = (a - 10) + "px";
+    });
+}
+
 // #endregion FUNCTIONS
 // #region INIT (Needs to be finished before site is displayed to user)
 
@@ -183,6 +203,8 @@ async function init(){
     obj_game_board.style.width = obj_game_board.offsetHeight + "px";
     obj_game_board.style.height = obj_game_board.style.width;
 
+    on_resize();
+
     update_current_player(1);
 };
 init();
@@ -192,13 +214,14 @@ init();
 // Show board to player
 zoom_in();
 
+window.onresize = on_resize;
 
-
-
-window.onresize = function(){
-    obj_game_board.style.height = "";
-
-    obj_game_board.style.width = obj_game_board.offsetHeight + "px";
-    obj_game_board.style.height = obj_game_board.style.width;
+document.querySelector(".button-share").onclick = function(){
+    console.log(window.location.href);
 }
-
+document.querySelector(".button-retry").onclick = function(){
+    new_game();
+}
+document.querySelector(".button-donate").onclick = function(){
+    window.location.href = "https://paypal.me/pools/c/8zZcBDOLZJ";
+}

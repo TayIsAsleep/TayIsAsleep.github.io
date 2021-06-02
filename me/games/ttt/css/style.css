@@ -1,10 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap%27");
+/* Code from https://stackoverflow.com/a/6900392 */
 * {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   font-family: 'JetBrains Mono', monospace;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
 div.main-container {
@@ -27,8 +34,9 @@ div.main-container {
   gap: 10%;
 }
 
-div.main-container div.score-board {
-  width: 60ch;
+div.main-container div.score-board, div.main-container div.bottom-row {
+  width: 100%;
+  max-width: 100ch;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -44,35 +52,88 @@ div.main-container div.score-board {
           justify-content: space-evenly;
 }
 
-div.main-container div.score-board > div :first-child {
+div.main-container div.score-board > div :first-child, div.main-container div.bottom-row > div :first-child {
   font-size: 500%;
 }
 
-div.main-container div.score-board div.score-counter.p1 :first-child {
+div.main-container div.score-board div.score-counter, div.main-container div.bottom-row div.score-counter {
+  -webkit-user-select: none;
+  /* Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+/Edge */
+  user-select: none;
+  /* Standard */
+}
+
+div.main-container div.score-board div.score-counter.p1 :first-child, div.main-container div.bottom-row div.score-counter.p1 :first-child {
   color: red;
 }
 
-div.main-container div.score-board div.score-counter.p2 :first-child {
+div.main-container div.score-board div.score-counter.p2 :first-child, div.main-container div.bottom-row div.score-counter.p2 :first-child {
   color: blue;
 }
 
-div.main-container div.score-board div.current-turn :first-child {
+div.main-container div.score-board div.current-turn :first-child, div.main-container div.bottom-row div.current-turn :first-child {
   -webkit-transition: -webkit-transform 0.3s ease-in-out;
   transition: -webkit-transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
 }
 
-div.main-container div.score-board div.current-turn :first-child.p1-turn {
+div.main-container div.score-board div.current-turn :first-child.p1-turn, div.main-container div.bottom-row div.current-turn :first-child.p1-turn {
   color: red;
   -webkit-transform: rotate(0deg);
           transform: rotate(0deg);
 }
 
-div.main-container div.score-board div.current-turn :first-child.p2-turn {
+div.main-container div.score-board div.current-turn :first-child.p2-turn, div.main-container div.bottom-row div.current-turn :first-child.p2-turn {
   color: blue;
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
+}
+
+div.main-container div.score-board div.button, div.main-container div.bottom-row div.button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 10%;
+  background-color: black;
+  padding: 3%;
+  text-align: center;
+  color: white;
+}
+
+div.main-container div.score-board div.button i, div.main-container div.bottom-row div.button i {
+  font-size: 200%;
+}
+
+div.main-container div.score-board div.button p, div.main-container div.bottom-row div.button p {
+  -webkit-user-select: none;
+  /* Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+/Edge */
+  user-select: none;
+  /* Standard */
+  font-size: 120%;
+  padding-top: 1ch;
+}
+
+div.main-container div.score-board div.button:active, div.main-container div.bottom-row div.button:active {
+  background-color: #666666;
 }
 
 div.main-container div.game-board {
@@ -140,11 +201,5 @@ div.main-container div.game-board :nth-child(8) {
 
 div.main-container div.game-board :nth-child(9) {
   place-self: start;
-}
-
-@media only screen and (max-width: 600px) {
-  div.score-board {
-    width: 100% !important;
-  }
 }
 /*# sourceMappingURL=style.css.map */
