@@ -77,6 +77,8 @@ def scss(path, minimize=True):
 hashme("phasmo_tools\\index.html")
 scss("phasmo_tools\\static\\css")
 scss("tools\\wikipedia_cleaner\\static\\css")
+hashme("PhasmoRPGM\\index.html")
+scss("PhasmoRPGM\\static\\css")
 
 print("\nDone. Quiting in 3 secounds.")
 # sleep(3)
