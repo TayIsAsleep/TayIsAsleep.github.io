@@ -15,12 +15,14 @@
                 "ttt":"me/games/ttt/index.html"
             }
 
-            app = (Object.keys(all_apps).includes(app)) ? all_apps[app] : false;
+            if (app != null){
+                app = (Object.keys(all_apps).includes(app)) ? all_apps[app] : false;
             
-            if (app){
-                window.location.replace(`${window.location.origin}/${app}`);
+                if (app){
+                    window.location.replace(`${window.location.origin}/${app}`);
+                }
             }
-
+            
             Object.keys(all_apps).forEach(key => {
                 let this_link = document.createElement("a");
                 
