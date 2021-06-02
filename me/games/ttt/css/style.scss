@@ -30,31 +30,31 @@ div.main-container{
         justify-content: space-evenly;
 
         > div{
-            p{
+            :first-child{
                 font-size: 500%;
             }
         }
 
         div.score-counter{
-            &.p1 p{
+            &.p1 :first-child{
                 color: $player_1_color;
             }
-            &.p2 p{
+            &.p2 :first-child{
                 color: $player_2_color;
             }
         }
 
         div.current-turn{
-            p{
+            :first-child{
                 transition: transform 0.3s ease-in-out;
 
                 &.p1-turn{
                     color: $player_1_color;
-                    transform: rotate(90deg);
+                    transform: rotate(0deg);
                 }
                 &.p2-turn{
                     color: $player_2_color;
-                    transform: rotate(-90deg);
+                    transform: rotate(180deg);
                 }
             }
         }
