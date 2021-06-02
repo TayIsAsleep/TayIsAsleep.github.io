@@ -15,13 +15,12 @@
                 "ttt":"me/games/ttt/index.html"
             }
 
-            app = (Object.keys(all_apps).includes(app)) ? all_apps[app] : "index.html";
+            app = (Object.keys(all_apps).includes(app)) ? all_apps[app] : false;
             
-            let toload = `${window.location.origin}/${app}`;
-
-            if (new URLSearchParams(window.location.search).get("wait") == null){
-                window.location.replace(toload);
+            if (app){
+                window.location.replace(`${window.location.origin}/${app}`);
             }
+
             Object.keys(all_apps).forEach(key => {
                 let this_link = document.createElement("a");
                 
@@ -32,7 +31,6 @@
                 document.body.appendChild(this_link);
             });
 
-            console.log(toload)
         </script>
     </body>
 </html>
