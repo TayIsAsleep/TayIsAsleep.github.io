@@ -4,12 +4,26 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>TayIsAsleep</title>
+        <title>Document</title>
     </head>
     <body>
-        <h1>Choose tool:</h1>
-        <a href="./me/phasmophobia/phasmo_tools/item_randomizer.html">Item Randomizer</a>
-        <br>
-        <a href="./me/phasmophobia/phasmo_tools/evidence_tracker.html">Evidence Tracker</a>
+        <script>
+            let app = new URLSearchParams(window.location.search).get('app');
+            let all_apps = {
+                "evidence_tracker":"me/phasmophobia/phasmo_tools/evidence_tracker.html",
+                "item_randomizer":"me/phasmophobia/phasmo_tools/item_randomizer.html",
+                "ttt":"me/games/ttt/index.html"
+            }
+
+            app = (Object.keys(all_apps).includes(app)) ? all_apps[app] : "index.html";
+            
+            let toload = `${window.location.origin}/${app}`;
+
+            if (new URLSearchParams(window.location.search).get("wait") == null){
+                window.location.replace(toload);
+            }
+
+            console.log(toload)
+        </script>
     </body>
 </html>
