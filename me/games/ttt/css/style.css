@@ -1,8 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap%27");
 * {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  font-family: 'JetBrains Mono', monospace;
 }
 
 div.main-container {
@@ -12,12 +14,70 @@ div.main-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  gap: 10%;
+}
+
+div.main-container div.score-board {
+  width: 60ch;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+div.main-container div.score-board > div p {
+  font-size: 500%;
+}
+
+div.main-container div.score-board div.score-counter.p1 p {
+  color: red;
+}
+
+div.main-container div.score-board div.score-counter.p2 p {
+  color: blue;
+}
+
+div.main-container div.score-board div.current-turn {
+  -webkit-transform: translateY(-0.8ch);
+          transform: translateY(-0.8ch);
+}
+
+div.main-container div.score-board div.current-turn p {
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  transition: -webkit-transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+}
+
+div.main-container div.score-board div.current-turn p.p1-turn {
+  color: red;
+  -webkit-transform: rotate(0) translateY(0);
+          transform: rotate(0) translateY(0);
+}
+
+div.main-container div.score-board div.current-turn p.p2-turn {
+  color: blue;
+  -webkit-transform: rotate(180deg) translateY(-0.25ch);
+          transform: rotate(180deg) translateY(-0.25ch);
 }
 
 div.main-container div.game-board {
@@ -85,5 +145,11 @@ div.main-container div.game-board :nth-child(8) {
 
 div.main-container div.game-board :nth-child(9) {
   place-self: start;
+}
+
+@media only screen and (max-width: 600px) {
+  div.score-board {
+    width: 100% !important;
+  }
 }
 /*# sourceMappingURL=style.css.map */

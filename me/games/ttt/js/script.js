@@ -7,10 +7,14 @@
 
 const obj_main_container = document.querySelector(".main-container");
 const obj_game_board = document.querySelector(".game-board");
+const obj_current_turn = document.querySelector(".current-turn");
+const obj_score_board = document.querySelector(".score-board");
 
 var current_player = 1;
 var winner = 0;
 var winner_blocks = null;
+var p1_wins = 0;
+var p2_wins = 0;
 
 // #endregion GLOBAL VARIABLES
 // #region FUNCTIONS
@@ -47,7 +51,28 @@ async function new_game(){
     winner = 0;
     winner_blocks = null;
     
-    await zoom_in();
+    zoom_in(); // USED TO BE AWAITED
+
+    // await sleep(100);
+
+    update_current_player(1);
+};
+
+
+function update_scoreboard(){
+    obj_score_board.querySelector(".score-counter.p1 p").innerText = p1_wins;
+    obj_score_board.querySelector(".score-counter.p2 p").innerText = p2_wins;
+};
+
+
+function update_current_player(override=0){
+    if (override != 0){current_player = override}
+    else{
+        current_player = (current_player == 1 ? 2 : 1);
+    }
+
+    obj_current_turn.getElementsByTagName("p")[0].classList.add(`p${current_player}-turn`)
+    obj_current_turn.getElementsByTagName("p")[0].classList.remove(`p${(current_player == 1 ? 2 : 1)}-turn`)
 };
 
 
@@ -58,7 +83,7 @@ async function block_onclick(){
     this.setAttribute("state", current_player);
 
     if (await check_win() == 0){
-        current_player = (current_player == 1 ? 2 : 1);
+        update_current_player()
     }
     else{
         let old_bg_color = winner_blocks[0].style.backgroundColor;
@@ -78,7 +103,12 @@ async function block_onclick(){
             });
         };
 
-        await sleep(500); // Dramatic pause 2
+        await sleep(250)
+        eval(`p${winner}_wins += 1`)
+        update_scoreboard()
+        await sleep(250)
+
+        // await sleep(500); // Dramatic pause 2
 
         await new_game();
     };
@@ -153,6 +183,21 @@ for (let i = 0; i < 9; i++){
 obj_game_board.style.width = obj_game_board.offsetHeight + "px";
 obj_game_board.style.height = obj_game_board.style.width;
 
-zoom_in();
+
+update_current_player(1);
 
 // #endregion INIT
+
+// Show board to player
+zoom_in();
+
+
+
+
+window.onresize = function(){
+    obj_game_board.style.height = "";
+
+    obj_game_board.style.width = obj_game_board.offsetHeight + "px";
+    obj_game_board.style.height = obj_game_board.style.width;
+}
+
