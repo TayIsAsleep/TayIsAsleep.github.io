@@ -1,55 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
+
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- These will be replaced later with JS -->
         <title>TayIsAsleep</title>
+        <link rel="icon" href="" type="image/x-icon">
 
         <script src="./global/js/fix_url.js"></script>
 
         <style>
-            a{
-                margin-bottom: 2ch;
-                display: block;
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            body{
+                overflow: hidden;
+            }
+            iframe{
+                width: 100vw;
+                height: 100vh;
             }
         </style>
+
     </head>
 
     <body>
+        <iframe id="iframe" src="" frameborder="0"></iframe>
+
         <script>
-            var all_apps = {};
-
-
-
-            //usage:
-            readTextFile("./apps.json", function(text){
-                all_apps = JSON.parse(text);
-
-                let app = new URLSearchParams(window.location.search).get('app');
-
-                if (app != null){
-                    app = (Object.keys(all_apps).includes(app)) ? all_apps[app] : false;
-
-                    if (app){
-                        window.location.replace(`${window.location.origin}/${app}`);
+            function readTextFile(file, callback){
+                var rawFile = new XMLHttpRequest();
+                rawFile.overrideMimeType("application/json");
+                rawFile.open("GET", file, true);
+                rawFile.onreadystatechange = function() {
+                    if (rawFile.readyState === 4 && rawFile.status == "200") {
+                        callback(rawFile.responseText);
                     }
                 }
-                else{
-                    Object.keys(all_apps).forEach(key => {
-                        let this_link = document.createElement("a");
+                rawFile.send(null);
+            }
+
+            const iframe = document.getElementById("iframe");
+
+            // Open the apps.json file and fetch all the app list
+            readTextFile("./apps.json", function(text){
+                let all_apps = JSON.parse(text);
+                let specified_app = new URLSearchParams(window.location.search).get('app');
+
+                // If app is specified in the url:
+                if (specified_app != null){
+
+                    // If the app specified is actually in the list of apps:
+                    if (Object.keys(all_apps).includes(specified_app)){
                         
-                        let the_link = `${window.location.origin}/${all_apps[key]}`;
-                        this_link.text = key + ` (${the_link})`;
-                        this_link.href = the_link;
+                        // let url_parameters_in_applist = Array.from(new URLSearchParams(new URL(`${window.location.origin}/${all_apps[specified_app]}`).search).entries());
 
-                        document.body.appendChild(this_link);
-                    });
-                }
+                        // Takes all the URI parameters from the real URL and passes them to the iframe
+                        let url_parameters_to_add = "";
+                        Array.from(new URLSearchParams(window.location.search).entries()).forEach(i => {
+                            
+                            url_parameters_to_add += (url_parameters_to_add == "" ? "?" : "&")
+                            url_parameters_to_add += `${i[0]}=${encodeURIComponent(i[1])}`;
+                        });
+
+                        // Updates the iframe
+                        iframe.src = `${window.location.origin}/${all_apps[specified_app]}${url_parameters_to_add}`
+                        iframe.onload = function(){
+                            let new_favicon_src = iframe.contentDocument.querySelector('head > link[rel="icon"]').href;
+                            let new_title = iframe.contentDocument.querySelector('head > title').innerHTML;
+                            
+                            document.querySelector('head > link[rel="icon"]').href = new_favicon_src;
+                            document.querySelector('head > title').innerHTML = new_title;
+                        };
+                    };
+                };
             });
-
-
-
         </script>
+
     </body>
+
 </html>

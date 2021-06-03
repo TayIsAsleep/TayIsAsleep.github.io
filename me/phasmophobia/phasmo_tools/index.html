@@ -20,9 +20,8 @@
         <script type="text/javascript" src="../../../global/js/jquery-3.6.0.min.js"></script>
         <script type="text/javascript" src="../../../global/js/scripts.js?HASH_1_349950_HASH_2"></script>
         <script type="text/javascript" src="./static/js/phasmo_tools.js?HASH_1_349950_HASH_2" defer></script>
-        <script src="../../../global/js/fix_url.js"></script>
     </head>
-    <body onload="fix_url()">
+    <body>
         
         <!-- #region Background images -->
         <div id="bg-image" style="opacity: 0;"></div>
@@ -126,7 +125,6 @@
                             "evidence_found_fingerprints"
                         ]
                     };
-
                     if (new URLSearchParams(window.location.search).get("beta") == "1"){
                         console.log(ghosts_evidence)
                         ghosts_evidence["Yokai"] = [
