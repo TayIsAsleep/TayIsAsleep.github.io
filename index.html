@@ -6,6 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>TayIsAsleep</title>
 
+        <script src="./global/js/fix_url.js"></script>
+
         <style>
             a{
                 margin-bottom: 2ch;
@@ -16,32 +18,38 @@
 
     <body>
         <script>
-            let app = new URLSearchParams(window.location.search).get('app');
-            let all_apps = {
-                "evidence_tracker":"me/phasmophobia/phasmo_tools/evidence_tracker.html",
-                "item_randomizer":"me/phasmophobia/phasmo_tools/item_randomizer.html",
-                "ttt":"me/games/ttt/index.html",
-                "chess":"me/games/chess/index.html"
-            }
+            var all_apps = {};
 
-            if (app != null){
-                app = (Object.keys(all_apps).includes(app)) ? all_apps[app] : false;
-            
-                if (app){
-                    window.location.replace(`${window.location.origin}/${app}`);
+
+
+            //usage:
+            readTextFile("./apps.json", function(text){
+                all_apps = JSON.parse(text);
+
+                let app = new URLSearchParams(window.location.search).get('app');
+
+                if (app != null){
+                    app = (Object.keys(all_apps).includes(app)) ? all_apps[app] : false;
+
+                    if (app){
+                        window.location.replace(`${window.location.origin}/${app}`);
+                    }
                 }
-            }
-            else{
-                Object.keys(all_apps).forEach(key => {
-                    let this_link = document.createElement("a");
-                    
-                    let the_link = `${window.location.origin}/${all_apps[key]}`;
-                    this_link.text = key + ` (${the_link})`;
-                    this_link.href = the_link;
+                else{
+                    Object.keys(all_apps).forEach(key => {
+                        let this_link = document.createElement("a");
+                        
+                        let the_link = `${window.location.origin}/${all_apps[key]}`;
+                        this_link.text = key + ` (${the_link})`;
+                        this_link.href = the_link;
 
-                    document.body.appendChild(this_link);
-                });
-            }
+                        document.body.appendChild(this_link);
+                    });
+                }
+            });
+
+
+
         </script>
     </body>
 </html>
