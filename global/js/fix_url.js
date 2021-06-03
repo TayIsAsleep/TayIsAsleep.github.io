@@ -13,6 +13,6 @@ function readTextFile(file, callback) {
 function fix_url(){
     readTextFile(window.location.origin + "/apps.json", function(text){
         all_apps = JSON.parse(text);
-        history.pushState({}, null, `/?app=${Object.keys(all_apps)[Object.values(all_apps).indexOf(window.location.pathname.slice(1))]}`);
+        history.pushState({}, null,`/?app=${Object.keys(all_apps)[Object.values(all_apps).indexOf(window.location.href.slice(window.location.origin.length).slice(1))]}`);
     });   
 }
