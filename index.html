@@ -17,13 +17,15 @@
             *{
                 margin: 0;
                 padding: 0;
+                box-sizing: border-box;
             }
             body{
-                overflow: hidden;
-            }
-            iframe{
                 width: 100vw;
                 height: 100vh;
+            }
+            iframe{
+                width: 100%;
+                height: 100%;
             }
         </style>
 
@@ -52,30 +54,31 @@
                 let all_apps = JSON.parse(text);
                 let specified_app = new URLSearchParams(window.location.search).get('app');
 
-                // If app is specified in the url:
-                if (specified_app != null){
+                if (specified_app == null){specified_app = "error"};
 
-                    // If the app specified is actually in the list of apps:
-                    if (Object.keys(all_apps).includes(specified_app)){
+                // If the app specified is actually in the list of apps:
+                if (Object.keys(all_apps).includes(specified_app)){
+                    
+                    // let url_parameters_in_applist = Array.from(new URLSearchParams(new URL(`${window.location.origin}/${all_apps[specified_app]}`).search).entries());
+
+                    // Takes all the URI parameters from the real URL and passes them to the iframe
+                    let url_parameters_to_add = "";
+                    Array.from(new URLSearchParams(window.location.search).entries()).forEach(i => {
+                        url_parameters_to_add += (url_parameters_to_add == "" ? "?" : "&");
+                        url_parameters_to_add += `${i[0]}=${encodeURIComponent(i[1])}`;
+                    });
+
+                    // Updates the iframe
+                    iframe.src = `${window.location.origin}/${all_apps[specified_app]}${url_parameters_to_add}`
+                    iframe.onload = function(){
+                        let new_favicon = iframe.contentDocument.querySelector('head > link[rel="icon"]');
+                        let new_title = iframe.contentDocument.querySelector('head > title');
                         
-                        // let url_parameters_in_applist = Array.from(new URLSearchParams(new URL(`${window.location.origin}/${all_apps[specified_app]}`).search).entries());
-
-                        // Takes all the URI parameters from the real URL and passes them to the iframe
-                        let url_parameters_to_add = "";
-                        Array.from(new URLSearchParams(window.location.search).entries()).forEach(i => {
-                            
-                            url_parameters_to_add += (url_parameters_to_add == "" ? "?" : "&")
-                            url_parameters_to_add += `${i[0]}=${encodeURIComponent(i[1])}`;
-                        });
-
-                        // Updates the iframe
-                        iframe.src = `${window.location.origin}/${all_apps[specified_app]}${url_parameters_to_add}`
-                        iframe.onload = function(){
-                            let new_favicon_src = iframe.contentDocument.querySelector('head > link[rel="icon"]').href;
-                            let new_title = iframe.contentDocument.querySelector('head > title').innerHTML;
-                            
-                            document.querySelector('head > link[rel="icon"]').href = new_favicon_src;
-                            document.querySelector('head > title').innerHTML = new_title;
+                        if (new_favicon != undefined){
+                            document.querySelector('head > link[rel="icon"]').href = new_favicon.href;
+                        };
+                        if (new_title != undefined){
+                            document.querySelector('head > title').innerHTML = new_title.innerHTML;
                         };
                     };
                 };
