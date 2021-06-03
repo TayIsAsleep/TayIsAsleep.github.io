@@ -205,7 +205,9 @@ async function init(){
 
     update_current_player(1);
 };
-init();
+document.onreadystatechange = function(){
+    init();
+};
 
 // #endregion INIT
 
