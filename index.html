@@ -9,7 +9,7 @@
         
         <!-- These will be replaced later with JS -->
         <title>TayIsAsleep</title>
-        <link rel="icon" href="" type="image/x-icon">
+        <link rel="icon" href="./global/img/icon.png" type="image/x-icon">
 
         <style>
             *{
@@ -73,7 +73,9 @@
                         let new_title = iframe.contentDocument.querySelector('head > title');
                         
                         if (new_favicon != undefined){
-                            document.querySelector('head > link[rel="icon"]').href = new_favicon.href;
+                            let og_favicon = document.querySelector('head > link[rel="icon"]');
+                            og_favicon.href = new_favicon.href;
+                            og_favicon.type = new_favicon.type;
                         };
                         if (new_title != undefined){
                             document.querySelector('head > title').innerHTML = new_title.innerHTML;
