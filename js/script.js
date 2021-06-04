@@ -24,10 +24,6 @@ function combine_iframe_and_window_params(){
 
     return window.location.href.replace(window.location.search,"") + url_parameters_to_add;
 };
-  
-window.frames.iframe.window.addEventListener('hashchange', function(){
-    console.log(combine_iframe_and_window_params());
-}, false);
 
 function run_app_manager(){
     // Open the apps.json file and fetch all the app list
@@ -94,6 +90,10 @@ function run_app_manager(){
             };
 
             document.body.appendChild(iframe);
+
+            window.frames.iframe.window.addEventListener('hashchange', function(){
+                console.log(combine_iframe_and_window_params());
+            }, false);
 
             // var t=setInterval(function(){
             //     window.history.replaceState(null, "", combine_iframe_and_window_params());
