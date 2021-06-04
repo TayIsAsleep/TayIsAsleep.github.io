@@ -18,9 +18,15 @@ body{
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        // justify-content: center;
 
         background-color: black;
+
+        div.top-padding{
+            width: 1px;
+            height: 20vh;
+        }
+
         p, a, h1, h2, h3, h4, h5, h6{
             color: white;
             text-decoration: none;

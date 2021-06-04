@@ -8,7 +8,7 @@ function readTextFile(file, callback){
         }
     }
     rawFile.send(null);
-}
+};
 
 function combine_iframe_and_window_params(){
     let params = Object.assign({},
@@ -26,7 +26,7 @@ function combine_iframe_and_window_params(){
 };
 
 function update_hash(){
-    location.hash = ((location.hash == "#update1") ? "#update2" : "#update1")
+    location.hash = ((location.hash == "#update1") ? "#update2" : "#update1");
 };
 
 function run_app_manager(){
@@ -48,7 +48,7 @@ function run_app_manager(){
                         ).search
                     )
                 );
-
+                
                 if (specified_app == url_parameters.app){
                     specified_app == "error"
                 }

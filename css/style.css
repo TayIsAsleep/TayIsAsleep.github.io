@@ -25,10 +25,12 @@ body div.main-container {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   background-color: black;
+}
+
+body div.main-container div.top-padding {
+  width: 1px;
+  height: 20vh;
 }
 
 body div.main-container p, body div.main-container a, body div.main-container h1, body div.main-container h2, body div.main-container h3, body div.main-container h4, body div.main-container h5, body div.main-container h6 {
