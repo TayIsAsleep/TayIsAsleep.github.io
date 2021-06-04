@@ -92,7 +92,7 @@ function run_app_manager(){
             document.body.appendChild(iframe);
 
             window.frames.iframe.window.addEventListener('hashchange', function(){
-                window.history.pushState({},null,combine_iframe_and_window_params());
+                window.history.pushState({}, null, combine_iframe_and_window_params());
             }, false);
 
             // var t=setInterval(function(){
