@@ -1,7 +1,14 @@
 {
     "error":"error.html",
+
     "phasmo_evidence_tracker":"me/phasmophobia/phasmo_tools/index.html?app=evidence_tracker",
+    "evidence_tracker":"redirect?app=phasmo_evidence_tracker",
+    
     "phasmo_item_randomizer":"me/phasmophobia/phasmo_tools/index.html?app=item_randomizer",
+    "item_randomizer":"redirect?app=phasmo_item_randomizer",
+    
     "ttt":"me/games/ttt/index.html",
+    "tic_tac_toe":"redirect?app=ttt",
+    
     "chess":"me/games/chess/index.html"
 }

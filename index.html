@@ -3,7 +3,6 @@
     <head>
 
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
             body, iframe{
@@ -40,6 +39,24 @@
                 let url_parameters = Object.fromEntries(new URLSearchParams(window.location.search).entries());
                 let specified_app = (url_parameters.app ? url_parameters.app : "error");
 
+                // Checks if its a redirect or not
+                while (app_list[specified_app].startsWith("redirect")){
+                    url_parameters = Object.fromEntries(
+                        new URLSearchParams(
+                            new URL(
+                                `${window.location.origin}/${app_list[specified_app]}`
+                            ).search
+                        )
+                    );
+
+                    if (specified_app == url_parameters.app){
+                        specified_app == "error"
+                    }
+                    else{
+                        specified_app = (url_parameters.app ? url_parameters.app : "error");
+                    }
+                }
+
                 // If the app specified is actually in the list of apps:
                 if (Object.keys(app_list).includes(specified_app)){
                     let app_url = new URL(`${window.location.origin}/${app_list[specified_app]}`);
@@ -56,8 +73,9 @@
                             `${key}=${encodeURIComponent(params[key])}`;
                     });
 
-                    // Makes IFRAME
+                    // Make iframe
                     let iframe = document.createElement("iframe");
+                    iframe.title = specified_app;
                     iframe.src = app_url.href.replace(app_url.search,"") + url_parameters_to_add;
                     iframe.onload = function(){
                         let new_favicon = iframe.contentDocument.querySelector('head > link[rel="icon"]');
