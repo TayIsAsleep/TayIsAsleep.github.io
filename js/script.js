@@ -10,6 +10,20 @@ function readTextFile(file, callback){
     rawFile.send(null);
 }
 
+function combine_iframe_and_window_params(){
+    let params = Object.assign({},
+        Object.fromEntries(new URLSearchParams(window.location.search).entries()),
+        Object.fromEntries(new URLSearchParams(document.getElementsByTagName("iframe")[0].contentWindow.location.search).entries())
+    )
+    let url_parameters_to_add = "";
+    Object.keys(params).forEach(key => {
+        url_parameters_to_add += (url_parameters_to_add == "" ? "?" : "&") + 
+            `${key}=${encodeURIComponent(params[key])}`;
+    });
+
+    return window.location.href.replace(window.location.search,"") + url_parameters_to_add
+}
+
 // Open the apps.json file and fetch all the app list
 readTextFile("./apps.json", function(text){
     let app_list = JSON.parse(text);
