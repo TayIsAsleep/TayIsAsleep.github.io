@@ -1,16 +1,58 @@
 {
-    "error":"error.html",
+    "error": {
+        "include": false,
+        "url": "error.html"
+    },
 
-    "phasmo_evidence_tracker":"me/phasmophobia/phasmo_tools/index.html?app=evidence_tracker",
-    "evidence_tracker":"redirect?app=phasmo_evidence_tracker",
-    
-    "phasmo_item_randomizer":"me/phasmophobia/phasmo_tools/index.html?app=item_randomizer",
-    "item_randomizer":"redirect?app=phasmo_item_randomizer",
-    
-    "ttt":"me/games/ttt/index.html",
-    "tic_tac_toe":"redirect?app=ttt",
-    
-    "chess":"me/games/chess/index.html",
 
-    "hangman":"me/games/hangman/index.html"
+    "phasmo_evidence_tracker": {
+        "include": true,
+        "url": "me/phasmophobia/phasmo_tools/index.html?app=evidence_tracker",
+        "title":"Phasmophobia Evidence Tracker",
+        "description":"Evidence tracker for Phasmophobia"
+    },
+    "evidence_tracker": {
+        "include": false,
+        "url": "redirect?app=phasmo_evidence_tracker"
+    },
+
+
+    "phasmo_item_randomizer": {
+        "include": true,
+        "url": "me/phasmophobia/phasmo_tools/index.html?app=item_randomizer",
+        "title":"Phasmophobia Item Randomizer",
+        "description":"A Item randomizer for the game Phasmophobia"
+    },
+    "item_randomizer": {
+        "include": false,
+        "url": "redirect?app=phasmo_item_randomizer"
+    },
+
+
+    "ttt": {
+        "include": true,
+        "url": "me/games/ttt/index.html",
+        "title":"Tic Tac Toe",
+        "description":"Simple Tic Tac Toe game"
+    },
+    "tic_tac_toe": {
+        "include": false,
+        "url": "redirect?app=ttt"
+    },
+
+
+    "chess": {
+        "include": true,
+        "url": "me/games/chess/index.html",
+        "title":"Chess",
+        "description":"Its Chess!"
+    },
+
+
+    "hangman": {
+        "include": true,
+        "url": "me/games/hangman/index.html",
+        "title":"Hangman",
+        "description":"Hangman game"
+    }
 }

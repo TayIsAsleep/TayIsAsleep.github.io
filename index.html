@@ -4,15 +4,9 @@
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-            body, iframe{
-                margin: 0;padding: 0;box-sizing: border-box;
-
-                width: 100vw;
-                height: 100vh;
-                border: 0;
-            }
-        </style>
+        
+        <link rel="stylesheet" href="./css/style.css">
+        <script src="./js/script.js" defer></script>
 
         <!-- These will be replaced later with JS -->
         <title>TayIsAsleep</title>
@@ -20,84 +14,24 @@
         
     </head>
     <body>
-        <script>
-            function readTextFile(file, callback){
-                var rawFile = new XMLHttpRequest();
-                rawFile.overrideMimeType("application/json");
-                rawFile.open("GET", file, true);
-                rawFile.onreadystatechange = function() {
-                    if (rawFile.readyState === 4 && rawFile.status == "200") {
-                        callback(rawFile.responseText);
-                    }
-                }
-                rawFile.send(null);
-            }
 
-            // Open the apps.json file and fetch all the app list
-            readTextFile("./apps.json", function(text){
-                let app_list = JSON.parse(text);
-                let url_parameters = Object.fromEntries(new URLSearchParams(window.location.search).entries());
-                let specified_app = (url_parameters.app ? url_parameters.app : "error");
+        <div class="main-container" style="display: none;">
 
-                // Checks if its a redirect or not
-                while (app_list[specified_app].startsWith("redirect")){
-                    url_parameters = Object.fromEntries(
-                        new URLSearchParams(
-                            new URL(
-                                `${window.location.origin}/${app_list[specified_app]}`
-                            ).search
-                        )
-                    );
+            <div>
 
-                    if (specified_app == url_parameters.app){
-                        specified_app == "error"
-                    }
-                    else{
-                        specified_app = (url_parameters.app ? url_parameters.app : "error");
-                    }
-                }
+                <h1>Welcome to TayIsAsleep's landing page! ❤</h1>
 
-                // If the app specified is actually in the list of apps:
-                if (Object.keys(app_list).includes(specified_app)){
-                    let app_url = new URL(`${window.location.origin}/${app_list[specified_app]}`);
-                    
-                    let params = Object.assign({},
-                        url_parameters,
-                        Object.fromEntries(new URLSearchParams(app_url.search).entries())
-                    );
+                <br>
 
-                    // Takes all the URI parameters from the real URL and passes them to the iframe
-                    let url_parameters_to_add = "";
-                    Object.keys(params).forEach(key => {
-                        url_parameters_to_add += (url_parameters_to_add == "" ? "?" : "&") + 
-                            `${key}=${encodeURIComponent(params[key])}`;
-                    });
+                <p>* This is where i put all my random projects!</p>
 
-                    // Make iframe
-                    let iframe = document.createElement("iframe");
-                    iframe.title = specified_app;
-                    iframe.src = app_url.href.replace(app_url.search,"") + url_parameters_to_add;
-                    iframe.onload = function(){
-                        let new_favicon = iframe.contentDocument.querySelector('head > link[rel="icon"]');
-                        let new_title = iframe.contentDocument.querySelector('head > title');
-                        
-                        // If the app has a favicon:
-                        if (new_favicon != undefined){
-                            let og_favicon = document.querySelector('head > link[rel="icon"]');
-                            og_favicon.href = new_favicon.href;
-                            og_favicon.type = new_favicon.type;
-                        };
+                <br><br>
 
-                        // If the app has a title:
-                        if (new_title != undefined){
-                            document.querySelector('head > title').innerHTML = new_title.innerHTML;
-                        };
-                    };
+                <div class="app-list"></div>
 
-                    document.body.appendChild(iframe);
-                };
-            });
-        </script>
+            </div>
 
+        </div>
+        
     </body>
 </html>
