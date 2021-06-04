@@ -25,6 +25,10 @@ function combine_iframe_and_window_params(){
     return window.location.href.replace(window.location.search,"") + url_parameters_to_add;
 };
 
+function update_hash(){
+    location.hash = ((location.hash == "#update1") ? "#update2" : "#update1")
+};
+
 function run_app_manager(){
     // Open the apps.json file and fetch all the app list
     readTextFile("./apps.json", function(text){
@@ -92,12 +96,10 @@ function run_app_manager(){
             document.body.appendChild(iframe);
 
             window.frames.iframe.window.addEventListener('hashchange', function(){
-                window.history.pushState({}, null, combine_iframe_and_window_params());
+                if (window.frames.iframe.window.location.hash.startsWith("#update")){
+                    window.history.pushState({}, null, combine_iframe_and_window_params());
+                }
             }, false);
-
-            // var t=setInterval(function(){
-            //     window.history.replaceState(null, "", combine_iframe_and_window_params());
-            // }, 100);
         }
         else{
             document.querySelector(".main-container").style.display = "";
