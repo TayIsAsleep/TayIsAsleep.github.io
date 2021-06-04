@@ -10,5 +10,7 @@
     "ttt":"me/games/ttt/index.html",
     "tic_tac_toe":"redirect?app=ttt",
     
-    "chess":"me/games/chess/index.html"
+    "chess":"me/games/chess/index.html",
+
+    "hangman":"me/games/hangman/index.html"
 }

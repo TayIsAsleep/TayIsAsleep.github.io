@@ -1,0 +1,171 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap%27");
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+:root {
+  --current-font-size:70px;
+  --theme-color-1:black;
+  --theme-color-2:white;
+  --correct-color:lime;
+  --incorrect-color:red;
+}
+
+div.game-area {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  /* establish flex container */
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  /* make main axis vertical */
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  /* center items vertically, in this case */
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  /* center items horizontally, in this case */
+  height: 100vh;
+}
+
+div.game-area div.box {
+  padding: 0px 10vh;
+  margin: 5px;
+}
+
+div.game-area div.box.splash-text .splash-text-text {
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+div.game-area div.box.hang-man svg.hang-man-svg {
+  width: 30vw;
+  height: 30vh;
+}
+
+div.game-area div.box.hang-man svg.hang-man-svg g * {
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+div.game-area div.box.word-display {
+  font-size: var(--current-font-size);
+  /* width: fit-content;
+            margin: auto; */
+  padding: 10px;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+div.game-area div.box.word-display .word-display-character {
+  display: inline;
+  margin: 0px 0.25em;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+div.game-area div.box.letters {
+  /* width: fit-content; */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+div.game-area div.box.letters .button {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0.5em;
+  margin: 2px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-align: center;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  float: left;
+}
+
+div.game-area div.box.letters .button.letter {
+  display: inline;
+}
+
+div.game-area div.box.letters .button.border {
+  border: 4px solid var(--theme-color-1);
+  background: var(--theme-color-2);
+}
+
+div.game-area div.box.letters .button p {
+  color: black;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  display: inline;
+  font-weight: bolder;
+}
+
+div.game-area div.box.letters .button.button-correct {
+  border-color: var(--correct-color);
+}
+
+div.game-area div.box.letters .button.button-correct p {
+  color: var(--correct-color);
+}
+
+div.game-area div.box.letters .button.button-wrong {
+  border-color: var(--incorrect-color);
+}
+
+div.game-area div.box.letters .button.button-wrong p {
+  color: var(--incorrect-color);
+}
+
+div.game-area div.loading-screen {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: black;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  /* establish flex container */
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  /* make main axis vertical */
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  /* center items vertically, in this case */
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  /* center items horizontally, in this case */
+}
+
+div.game-area div.loading-screen p {
+  color: white;
+  font-size: 10vw;
+}
+/*# sourceMappingURL=style.css.map */
