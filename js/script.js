@@ -76,7 +76,7 @@ function run_app_manager(bypass=null){
             iframe.id = specified_app;
             iframe.name = "iframe";
             iframe.title = specified_app;
-            iframe.src = app_url.href.replace(app_url.search,"") + url_parameters_to_add;
+            iframe.src = app_url.href.replace(app_url.search,"") + url_parameters_to_add + "&t=" + Math.round(Date.now() / 1000);
             iframe.onload = function(){
                 let new_favicon = iframe.contentDocument.querySelector('head > link[rel="icon"]');
                 let new_title = iframe.contentDocument.querySelector('head > title');
