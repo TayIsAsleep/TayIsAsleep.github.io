@@ -29,12 +29,12 @@ function update_hash(){
     location.hash = ((location.hash == "#update1") ? "#update2" : "#update1");
 };
 
-function run_app_manager(){
+function run_app_manager(bypass=null){
     // Open the apps.json file and fetch all the app list
     readTextFile("./apps.json", function(text){
         let app_list = JSON.parse(text);
         let url_parameters = Object.fromEntries(new URLSearchParams(window.location.search).entries());
-        let specified_app = url_parameters.app;
+        let specified_app = (bypass ? bypass : url_parameters.app);
 
         // If the app specified is actually in the list of apps:
         if (Object.keys(app_list).includes(specified_app)){
@@ -73,6 +73,7 @@ function run_app_manager(){
 
             // Make iframe
             let iframe = document.createElement("iframe");
+            iframe.id = specified_app;
             iframe.name = "iframe";
             iframe.title = specified_app;
             iframe.src = app_url.href.replace(app_url.search,"") + url_parameters_to_add;
@@ -101,7 +102,7 @@ function run_app_manager(){
                 }
             }, false);
         }
-        else{
+        else if (bypass == null){
             document.querySelector(".main-container").style.display = "";
             
             let dest = document.querySelector(".app-list");
@@ -116,8 +117,9 @@ function run_app_manager(){
                 
                 new_a.href = window.location.href.replace(window.location.search,"") + `?app=${i}`;
                 new_h2_title.innerHTML = app_list[i].title;
+                // new_h2_title.setAttribute("onclick",`run_app_manager('${i}');document.getElementById('${i}').scrollIntoView();`);
                 new_p_description.innerHTML = app_list[i].description;
-
+                
                 new_a.appendChild(new_h2_title);
                 new_div_container.appendChild(new_a);
                 new_div_container.appendChild(new_p_description);
