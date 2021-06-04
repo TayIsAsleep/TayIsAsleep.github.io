@@ -1,0 +1,19 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+
+    div.main-container{
+        img.dvd-logo{
+            width: 15vw;
+            position: absolute;
+        }
+    }
+}
+

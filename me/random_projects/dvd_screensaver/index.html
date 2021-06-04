@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./css/style.css">
+        <title>DVD</title>
+
+    </head>
+    <body>
+
+        <div class="main-container">
+            <img class="dvd-logo" src="./img/dvd_icon.png" alt="dvd_icon">
+        </div>
+
+        <script>
+            class dvd_logo_class{
+                constructor(obj, x, y, dir) {
+                    this.obj = obj;
+                    this.x = x;
+                    this.y = y;
+                    this.dir = dir;
+                }
+            }
+
+            const dvd_logo = new dvd_logo_class(
+                document.querySelector(".dvd-logo"),
+                10,10,
+                // 45 * 5
+                Math.floor(Math.random() * 3600) /  10
+            );
+
+            var randomness = 0;
+            var speed = 1;
+
+            var intervalID = window.setInterval(myCallback, 1);
+            function myCallback(){
+                let this_randomness = (Math.floor(Math.random() * randomness * 2) - randomness) / 10
+                let a = (Math.PI / 180) * (dvd_logo.dir)
+                let new_x = Math.cos(a) * speed
+                let new_y = Math.sin(a) * speed
+
+                let bottom_y = document.body.clientHeight - (dvd_logo.y + dvd_logo.obj.height);
+                let right_x = document.body.clientWidth - (dvd_logo.x + dvd_logo.obj.width);
+
+                // console.log(dvd_logo.dir, dvd_logo.x, dvd_logo.y, right_x, bottom_y);
+                if (
+                    (dvd_logo.x < 0 && dvd_logo.y < 0) ||
+                    (dvd_logo.x < 0 && bottom_y < 0) ||
+
+                    (right_x < 0 && dvd_logo.y < 0) ||
+                    (right_x < 0 && bottom_y < 0)
+                ){
+                    console.log("corner");
+
+                    dvd_logo.dir += 180
+                    dvd_logo.x -= new_x * 2
+                    dvd_logo.y -= new_y * 2
+                }
+                else{
+                    let hit = false;
+
+                    if (!hit && dvd_logo.x < 0){
+                        hit = true;
+                        dvd_logo.dir = 2 * 0 - dvd_logo.dir - 180;
+                    }
+                    if (!hit && right_x < 0){
+                        hit = true;
+                        dvd_logo.dir = 2 * 180 - dvd_logo.dir - 180;
+                    }
+                    if (!hit && dvd_logo.y < 0){
+                        hit = true;
+                        dvd_logo.dir = 2 * 270 - dvd_logo.dir - 180;
+                    }
+                    if (!hit && bottom_y < 0){
+                        hit = true;
+                        dvd_logo.dir = 2 * 90 - dvd_logo.dir - 180;
+                    }
+
+                    if (hit){
+                        dvd_logo.dir += this_randomness
+                        a = (Math.PI / 180) * (dvd_logo.dir)
+                        new_x = Math.cos(a) * speed
+                        new_y = Math.sin(a) * speed
+                    }
+                }
+
+                dvd_logo.x += new_x
+                dvd_logo.y += new_y
+                dvd_logo.obj.style.transform = `translate(${dvd_logo.x}px, ${dvd_logo.y}px)`;
+            }
+        </script>
+
+    </body>
+</html>
