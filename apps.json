@@ -54,5 +54,13 @@
         "url": "me/games/hangman/index.html",
         "title":"Hangman",
         "description":"Hangman game"
+    },
+
+
+    "dvd": {
+        "include": true,
+        "url": "me/random_projects/dvd_screensaver/index.html",
+        "title":"DVD Screensaver",
+        "description":"Will it hit the corner? 👀"
     }
 }

@@ -32,65 +32,51 @@
                 Math.floor(Math.random() * 3600) /  10
             );
 
-            var randomness = 0;
+            var randomness = 50;
             var speed = 1;
-
             var intervalID = window.setInterval(myCallback, 1);
             function myCallback(){
-                let this_randomness = (Math.floor(Math.random() * randomness * 2) - randomness) / 10
-                let a = (Math.PI / 180) * (dvd_logo.dir)
-                let new_x = Math.cos(a) * speed
-                let new_y = Math.sin(a) * speed
+                let // Do some math:
+                    a = (Math.PI / 180) * (dvd_logo.dir),
+                    new_x = Math.cos(a) * speed,
+                    new_y = Math.sin(a) * speed,
 
-                let bottom_y = document.body.clientHeight - (dvd_logo.y + dvd_logo.obj.height);
-                let right_x = document.body.clientWidth - (dvd_logo.x + dvd_logo.obj.width);
+                    // Check for the other sides:
+                    bottom_y = document.body.clientHeight - (dvd_logo.y + dvd_logo.obj.height),
+                    right_x = document.body.clientWidth - (dvd_logo.x + dvd_logo.obj.width),
 
-                // console.log(dvd_logo.dir, dvd_logo.x, dvd_logo.y, right_x, bottom_y);
+                    // Save the different corner hits:
+                    xL_hit = dvd_logo.x < 0, 
+                    xR_hit = right_x < 0,
+                    yT_hit = dvd_logo.y < 0,
+                    yB_hit = bottom_y < 0;
+                
                 if (
-                    (dvd_logo.x < 0 && dvd_logo.y < 0) ||
-                    (dvd_logo.x < 0 && bottom_y < 0) ||
+                    (xL_hit && yT_hit) || (xL_hit && yB_hit) ||
+                    (xR_hit && yT_hit) || (xR_hit && yB_hit)
+                    ){
 
-                    (right_x < 0 && dvd_logo.y < 0) ||
-                    (right_x < 0 && bottom_y < 0)
-                ){
-                    console.log("corner");
-
-                    dvd_logo.dir += 180
-                    dvd_logo.x -= new_x * 2
-                    dvd_logo.y -= new_y * 2
+                    // IT HIT A CORNER!
+                    dvd_logo.dir += 180;
+                    new_x = new_x * -1;
+                    new_y = new_y * -1;
                 }
                 else{
-                    let hit = false;
+                    let hit = (xL_hit ? 0 : (xR_hit ? 180 : (yT_hit ? 270 : (yB_hit ? 90 : null))));
+                    if (typeof hit == 'number'){
+                        dvd_logo.dir = (2 * hit) - dvd_logo.dir - 180;
+                        dvd_logo.dir += (Math.floor(Math.random() * randomness * 2) - randomness) / 10;
+                        
+                        a = (Math.PI / 180) * (dvd_logo.dir);
+                        new_x = Math.cos(a) * speed;
+                        new_y = Math.sin(a) * speed;
+                    };
+                };
 
-                    if (!hit && dvd_logo.x < 0){
-                        hit = true;
-                        dvd_logo.dir = 2 * 0 - dvd_logo.dir - 180;
-                    }
-                    if (!hit && right_x < 0){
-                        hit = true;
-                        dvd_logo.dir = 2 * 180 - dvd_logo.dir - 180;
-                    }
-                    if (!hit && dvd_logo.y < 0){
-                        hit = true;
-                        dvd_logo.dir = 2 * 270 - dvd_logo.dir - 180;
-                    }
-                    if (!hit && bottom_y < 0){
-                        hit = true;
-                        dvd_logo.dir = 2 * 90 - dvd_logo.dir - 180;
-                    }
-
-                    if (hit){
-                        dvd_logo.dir += this_randomness
-                        a = (Math.PI / 180) * (dvd_logo.dir)
-                        new_x = Math.cos(a) * speed
-                        new_y = Math.sin(a) * speed
-                    }
-                }
-
-                dvd_logo.x += new_x
-                dvd_logo.y += new_y
+                dvd_logo.x += new_x;
+                dvd_logo.y += new_y;
                 dvd_logo.obj.style.transform = `translate(${dvd_logo.x}px, ${dvd_logo.y}px)`;
-            }
+            };
         </script>
 
     </body>
