@@ -8,9 +8,10 @@ body{
     overflow: hidden;
     width: 100vw;
     height: 100vh;
+    background-color: black;
 
     div.main-container{
-        img.dvd-logo{
+        svg.dvd-logo{
             width: 15vw;
             position: absolute;
         }
