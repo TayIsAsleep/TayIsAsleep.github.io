@@ -223,5 +223,5 @@ document.querySelector(".button-retry").onclick = function(){
     new_game();
 }
 document.querySelector(".button-donate").onclick = function(){
-    window.location.href = "https://paypal.me/pools/c/8zZcBDOLZJ";
+    window.open("https://paypal.me/pools/c/8zZcBDOLZJ");
 }

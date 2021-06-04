@@ -1,7 +1,7 @@
 {
     "error":"error.html",
-    "evidence_tracker":"me/phasmophobia/phasmo_tools/index.html",
-    "item_randomizer":"me/phasmophobia/phasmo_tools/index.html",
+    "phasmo_evidence_tracker":"me/phasmophobia/phasmo_tools/index.html?app=evidence_tracker",
+    "phasmo_item_randomizer":"me/phasmophobia/phasmo_tools/index.html?app=item_randomizer",
     "ttt":"me/games/ttt/index.html",
     "chess":"me/games/chess/index.html"
 }
