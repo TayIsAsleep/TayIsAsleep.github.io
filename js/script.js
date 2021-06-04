@@ -88,10 +88,10 @@ readTextFile("./apps.json", function(text){
 
         document.body.appendChild(iframe);
 
-        setTimeout(function() {
-            window.history.replaceState(null,"",combine_iframe_and_window_params());
+        var t=setInterval(function(){
+            window.history.replaceState(null, "", combine_iframe_and_window_params());
             console.log(1);
-        }, 100);
+        },1000);
     }
     else{
         document.querySelector(".main-container").style.display = "";
