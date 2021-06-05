@@ -23,4 +23,4 @@ for path, subdirs, files in os.walk(os.getcwd()):
             print(this_file)
             hashMe(this_file)
 
-os.system('git add . && git commit -m "pog" && git push')
+os.system('git add . && git commit -m "Updated" && git push')
