@@ -1,10 +1,4 @@
 {
-    "error": {
-        "include": false,
-        "url": "error.html"
-    },
-
-
     "phasmo_evidence_tracker": {
         "include": true,
         "url": "me/phasmophobia/phasmo_tools/index.html?app=evidence_tracker",
