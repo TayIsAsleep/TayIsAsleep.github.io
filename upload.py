@@ -2,8 +2,6 @@ import re
 import random
 import os
 
- 
-
 def hashMe(fn):
     with open(fn,"r") as f:
 
