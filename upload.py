@@ -1,6 +1,7 @@
 import re
 import random
 import os
+import time
 
 def hashMe(fn):
     with open(fn,"r") as f:
@@ -24,3 +25,6 @@ for path, subdirs, files in os.walk(os.getcwd()):
             hashMe(this_file)
 
 os.system('git add . && git commit -m "Updated" && git push')
+
+print("Closing this window in 3 secounds...")
+time.sleep(3)
