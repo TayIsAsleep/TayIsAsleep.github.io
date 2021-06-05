@@ -2,7 +2,7 @@ var randomness = 10; // how much extra angle that can be added on a bounce
 var speed = 1; // how many pixels to go on per tick
 var refreshrate = 1;
 var startValues = [
-    300,300,
+    10,10,
     // 45 * 5
     Math.floor(Math.random() * 3600) /  10
 ];
