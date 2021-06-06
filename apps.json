@@ -1,7 +1,7 @@
 {
     "phasmo_evidence_tracker": {
         "include": true,
-        "url": "me/phasmophobia/phasmo_tools/index.html?app=evidence_tracker",
+        "url": "apps/me/phasmophobia/phasmo_tools/index.html?app=evidence_tracker",
         "title":"Phasmophobia Evidence Tracker",
         "description":"Evidence tracker for Phasmophobia"
     },
@@ -13,7 +13,7 @@
 
     "phasmo_item_randomizer": {
         "include": true,
-        "url": "me/phasmophobia/phasmo_tools/index.html?app=item_randomizer",
+        "url": "apps/me/phasmophobia/phasmo_tools/index.html?app=item_randomizer",
         "title":"Phasmophobia Item Randomizer",
         "description":"A Item randomizer for the game Phasmophobia"
     },
@@ -25,7 +25,7 @@
 
     "ttt": {
         "include": true,
-        "url": "me/games/ttt/index.html",
+        "url": "apps/me/games/ttt/index.html",
         "title":"Tic Tac Toe",
         "description":"Simple Tic Tac Toe game"
     },
@@ -37,7 +37,7 @@
 
     "chess": {
         "include": true,
-        "url": "me/games/chess/index.html",
+        "url": "apps/me/games/chess/index.html",
         "title":"Chess",
         "description":"Its Chess!"
     },
@@ -45,7 +45,7 @@
 
     "hangman": {
         "include": true,
-        "url": "me/games/hangman/index.html",
+        "url": "apps/me/games/hangman/index.html",
         "title":"Hangman",
         "description":"Hangman game"
     },
@@ -53,7 +53,7 @@
 
     "dvd": {
         "include": true,
-        "url": "me/random_projects/dvd_screensaver/index.html",
+        "url": "apps/me/random_projects/dvd_screensaver/index.html",
         "title":"DVD Screensaver",
         "description":"Will it hit the corner? 👀"
     }
