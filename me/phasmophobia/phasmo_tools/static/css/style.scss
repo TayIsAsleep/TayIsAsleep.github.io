@@ -1,34 +1,5 @@
-/* #region https://stackoverflow.com/a/49421832/13921835 */
-$size__site_content_width: 1024px;
-
-/* Media Queries */
-$media_queries : (
-    'mobile'    : "only screen and (max-width: 667px)",
-    'tablet'    : "only screen and (min-width: 668px) and (max-width: $size__site_content_width)",
-    'desktop'   : "only screen and (min-width: ($size__site_content_width + 1))",
-    'retina2'   : "only screen and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi)",
-    'retina3'   : "only screen and (-webkit-min-device-pixel-ratio: 3) and (min-resolution: 288dpi)",
-    'landscape' : "screen and (orientation:landscape) ",    
-    'portrait'  : "screen and (orientation:portrait) "
-);
-
-@mixin for_breakpoint($breakpoints) {
-    $conditions : ();
-    @each $breakpoint in $breakpoints {
-        // If the key exists in the map
-        $conditions: append(
-            $conditions,
-            #{inspect(map-get($media_queries, $breakpoint))},
-            comma
-        );
-    }
-
-    @media #{$conditions} {
-        @content;
-    }
-
-}
-/* #endregion */
+@import "../../../../../global/css/media_queries.scss";
+@import "../../../../../global/css/unselectable.scss";
 
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
 
@@ -54,21 +25,12 @@ $buttonIconColor_off: brightness(0%) invert(16%) sepia(0%) saturate(0%) hue-rota
     padding: 0.5em;
     margin: 2px;
 }
-@mixin unselectable{
-    /* Code from https://stackoverflow.com/a/2310809 */
-	-webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
+
 @mixin flexboxCentering{
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 
 *{
     margin:0;

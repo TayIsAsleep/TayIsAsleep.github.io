@@ -1,6 +1,6 @@
-/* #region https://stackoverflow.com/a/49421832/13921835 */
+/* Code from https://stackoverflow.com/a/49421832/13921835 */
 /* Media Queries */
-/* #endregion */
+/* Code from https://stackoverflow.com/a/2310809 */
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap");
 /* GENERATE THESE AT https://codepen.io/sosuke/pen/Pjoqqp */
 * {
@@ -27,7 +27,6 @@ body {
 }
 
 .bg-image {
-  /* Code from https://stackoverflow.com/a/2310809 */
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -84,7 +83,6 @@ body {
   width: fit-content;
   padding: 0.5em;
   margin: 2px;
-  /* Code from https://stackoverflow.com/a/2310809 */
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -219,7 +217,6 @@ a:hover {
 }
 
 br {
-  /* Code from https://stackoverflow.com/a/2310809 */
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
