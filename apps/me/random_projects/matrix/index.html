@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google" content="notranslate">
+        <link rel="stylesheet" href="./css/style.css?random=6803428351">
+        <script src="../../../../global/js/debounce.js"></script>
+        <title>Matrix</title>
+    </head>
+    <body>
+       
+        <div class="main-container"></div>
+
+        <script>
+            let chars = [
+                "ぁ", "あ", "ぃ", "い", "ぅ", "う", "ぇ", "え", "ぉ",
+                "お", "か", "が", "き", "ぎ", "く", "ぐ", "け", "げ",
+                "こ", "ご", "さ", "ざ", "し", "じ", "す", "ず", "せ",
+                "ぜ", "そ", "ぞ", "た", "だ", "ち", "ぢ", "っ", "つ",
+                "づ", "て", "で", "と", "ど", "な", "に", "ぬ", "ね",
+                "の", "は", "ば", "ぱ", "ひ", "び", "ぴ", "ふ", "ぶ",
+                "ぷ", "へ", "べ", "ぺ", "ほ", "ぼ", "ぽ", "ま", "み",
+                "む", "め", "も", "ゃ", "や", "ゅ", "ゆ", "ょ", "よ",
+                "ら", "り", "る", "れ", "ろ", "ゎ", "わ", "ゐ", "ゑ",
+                "を", "ん", "ゔ", "ゕ", "ゖ", "゛", "゜", "ゝ", "ゞ",
+                "ァ", "ア", "ィ", "イ", "ゥ", "ウ", "ェ", "エ", "ォ",
+                "オ", "カ", "ガ", "キ", "ギ", "ク", "グ", "ケ", "ゲ",
+                "コ", "ゴ", "サ", "ザ", "シ", "ジ", "ス", "ズ", "セ",
+                "ゼ", "ソ", "ゾ", "タ", "ダ", "チ", "ヂ", "ッ", "ツ",
+                "ヅ", "テ", "デ", "ト", "ド", "ナ", "ニ", "ヌ", "ネ",
+                "ノ", "ハ", "バ", "パ", "ヒ", "ビ", "ピ", "フ", "ブ",
+                "プ", "ヘ", "ベ", "ペ", "ホ", "ボ", "ポ", "マ", "ミ",
+                "リ", "ル", "レ", "ロ", "ヮ", "ワ", "ヰ", "ヱ", "ヲ",
+                "ン", "ヴ", "ヵ", "ヶ", "ヷ", "ヸ", "ヹ", "ヺ", "・",
+                "ー", "ヽ", "ヾ", "ヿ", "㍐", "㍿"]
+
+            const urlParams = new URLSearchParams(window.location.search)
+            
+            const main_container = document.querySelector(".main-container");
+            const speed = urlParams.get("speed") == null ? 80 : urlParams.get("speed");
+            const param_font_size = urlParams.get("fontsize") == null ? "100%" : urlParams.get("fontsize");
+
+            document.body.style.fontSize = param_font_size
+
+            let font_size = parseFloat(getComputedStyle(main_container).fontSize);
+            let ammount_of_char_width = Math.floor(main_container.clientWidth / font_size);
+            let ammount_of_columns = null
+
+
+            function fill_screen(){
+                let count_before = -1;
+                let count_now = 0;
+                while (count_now > count_before){
+                    spawn_new_row()
+                    count_before = count_now
+                    count_now = main_container.childElementCount
+                }
+                ammount_of_columns = count_now
+                count_now = null
+                count_before = null
+            }
+
+            fill_screen()
+        
+            var intervalID = window.setInterval(spawn_new_row, speed);
+            function spawn_new_row(){
+                if (ammount_of_columns == null){
+                    main_container.childNodes.forEach(e => {
+                        if (e.getBoundingClientRect().top < window.innerHeight * -1){
+                            e.remove()
+                        }
+                    });
+                }
+                else{
+                    if (main_container.childElementCount > ammount_of_columns){
+                        main_container.firstChild.remove()
+                    }
+                }
+
+                let p = document.createElement("p")
+                for (let x = 0; x < ammount_of_char_width; x++) {
+                    p.innerHTML += chars[Math.floor(Math.random() * chars.length)];
+                }
+                main_container.appendChild(p)
+            }
+
+
+            window.addEventListener('resize', debounce(function(){
+                // font_size = parseFloat(getComputedStyle(main_container).fontSize);
+                ammount_of_char_width = Math.floor(main_container.clientWidth / font_size);
+
+                main_container.innerHTML = ""
+
+                fill_screen()
+            },100));
+
+            
+        </script>
+
+    </body>
+</html>
