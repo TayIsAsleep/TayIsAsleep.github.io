@@ -8,25 +8,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         <link rel="apple-touch-icon" href="./img/icon.png">
-
-        <style>
-            .loading-screen-container{
-                width: 100vw;
-                height: 100vh;
-                background-color: red;
-
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            .loading-screen-container > img{
-                width: 30%;
-            }
-        </style>
+        <link rel="stylesheet" href="./css/style.css">
     </head>
     <body>
         <div class="loading-screen-container">
-            <img src="./img/icon512.png" alt="">
+            <img onclick="install()" src="./img/icon512.png" alt="">
         </div>
 
         <script>
@@ -54,10 +40,10 @@
                 // Stash the event so it can be triggered later.
                 window.deferredPrompt = e;
 
-                let button = document.createElement("button")
-                button.onclick = install;
-                button.innerText = "Install App!"
-                document.body.appendChild(button)
+                // let button = document.createElement("button")
+                // button.onclick = install;
+                // button.innerText = "Install App!"
+                // document.body.appendChild(button)
                 
                 return false;
             });
