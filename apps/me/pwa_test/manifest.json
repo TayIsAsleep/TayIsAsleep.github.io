@@ -3,18 +3,18 @@
     "name": "Test2",
     "icons": [
         {
-            "src": "/img/icon192.png",
+            "src": "./img/icon192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/img/icon512.png",
+            "src": "./img/icon512.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any maskable"
         }
     ],
-    "start_url": "../test.html",
+    "start_url": "/",
     "background_color": "#e05a47",
     "theme_color": "#e05a47",
     "display": "standalone"
