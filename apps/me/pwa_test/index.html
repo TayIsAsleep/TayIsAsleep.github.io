@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="manifest" href="manifest.json">
+        <meta name="theme-color" content="#ff0000"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+
+        <link rel="apple-touch-icon" href="./img/icon.png">
+    </head>
+    <body>
+        <!-- <button onclick="install()">Install App</button> -->
+
+        <script>
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                    navigator.serviceWorker.register('service-worker.js').then(function(registration) {
+                        // Registration was successful
+                        console.log('Registered!');
+                    }, function(err) {
+                        // registration failed :(
+                        console.log('ServiceWorker registration failed: ', err);
+                    }).catch(function(err) {
+                        console.log(err);
+                    });
+                });
+            } else {
+                console.log('service worker is not supported');
+            }
+
+
+            window.addEventListener('beforeinstallprompt', e => {
+                console.log('beforeinstallprompt Event fired');
+                e.preventDefault();
+
+                // Stash the event so it can be triggered later.
+                window.deferredPrompt = e;
+
+                let button = document.createElement("button")
+                button.onclick = install;
+                button.innerText = "Install App!"
+                document.body.appendChild(button)
+                
+                return false;
+            });
+
+            function install(){
+                // When you want to trigger prompt:
+                window.deferredPrompt.prompt();
+                window.deferredPrompt.userChoice.then(choice => {
+                    console.log(choice);
+                });
+                window.deferredPrompt = null;
+            }
+        </script>
+    </body>
+</html>
