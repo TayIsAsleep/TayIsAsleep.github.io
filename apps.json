@@ -56,5 +56,13 @@
         "url": "apps/me/random_projects/dvd_screensaver/index.html",
         "title":"DVD Screensaver",
         "description":"Will it hit the corner? 👀"
+    },
+    
+
+    "matrix": {
+        "include": true,
+        "url": "apps/me/random_projects/matrix/index.html",
+        "title": "Matrix effect",
+        "description": "Pretty neat"
     }
 }
