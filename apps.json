@@ -64,5 +64,13 @@
         "url": "apps/me/random_projects/matrix/index.html",
         "title": "Matrix effect",
         "description": "Pretty neat"
+    },
+
+
+    "gettime": {
+        "include": true,
+        "url": "apps/school/gettime/index.html",
+        "title": "GetTime",
+        "description": "Schedule app for my school"
     }
 }
