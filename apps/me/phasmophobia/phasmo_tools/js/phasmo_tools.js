@@ -243,6 +243,8 @@ function update_ghosts(){
         let new_text = document.createElement("p")
         let ghost_link = document.createElement("a")
 
+        ghost_link.target = "_blank"
+
         if (toAdd[0][1] == ""){
             // appendText(".ghosts-it-could-be-container", `It is a ${toAdd[0][0]}!`);
         
