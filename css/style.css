@@ -20,42 +20,15 @@ body {
   background-color: black;
 }
 
+::-webkit-scrollbar {
+  width: 0;
+  background-color: transparent;
+}
+
 @media only screen and (max-width: 667px) {
   body {
     font-size: 80%;
   }
-}
-
-body div.back-button {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  position: absolute;
-  top: 0em;
-  left: 1em;
-  border: 2px solid white;
-  padding: 0.5em;
-  color: white;
-  background-color: black;
-  -webkit-transition: opacity 0.5s 5s ease, -webkit-transform 0.5s ease;
-  transition: opacity 0.5s 5s ease, -webkit-transform 0.5s ease;
-  transition: transform 0.5s ease, opacity 0.5s 5s ease;
-  transition: transform 0.5s ease, opacity 0.5s 5s ease, -webkit-transform 0.5s ease;
-  opacity: 5%;
-  -webkit-transform: translateY(calc((1em + 4px) * 1 * -1));
-          transform: translateY(calc((1em + 4px) * 1 * -1));
-}
-
-body div.back-button:hover {
-  -webkit-transition: opacity 0.5s ease, -webkit-transform 0.5s ease;
-  transition: opacity 0.5s ease, -webkit-transform 0.5s ease;
-  transition: transform 0.5s ease, opacity 0.5s ease;
-  transition: transform 0.5s ease, opacity 0.5s ease, -webkit-transform 0.5s ease;
-  opacity: 100%;
-  -webkit-transform: none;
-          transform: none;
 }
 
 body div.main-container {
@@ -103,7 +76,54 @@ body div.main-container div.app-list div:not(:last-child) {
   padding-bottom: 1em;
 }
 
-body iframe {
+body div.app-container {
+  width: 100%;
+  height: 100%;
+}
+
+body div.app-container div.menu-container {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1em;
+  margin: 1em 0;
+}
+
+body div.app-container div.menu-container div.button {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  border: 2px solid white;
+  padding: 0.5em;
+  color: white;
+  background-color: black;
+}
+
+body div.app-container div.menu-container div.button:first-child {
+  margin-left: 1em;
+}
+
+body div.app-container div.iframe-container {
+  width: 100%;
+  height: 100%;
+}
+
+body div.app-container div.iframe-container iframe {
   width: 100%;
   height: 100%;
   border: 0;

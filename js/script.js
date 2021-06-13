@@ -10,7 +10,7 @@ function readTextFile(file, callback){
     rawFile.send(null);
 };
 
-function combine_iframe_and_window_params(ignore=[]){
+function combine_iframe_and_window_params(ignore=["app"]){
     let params = Object.assign({},
         Object.fromEntries(new URLSearchParams(window.location.search).entries()),
         Object.fromEntries(new URLSearchParams(window.frames.iframe.window.location.search).entries())
@@ -37,10 +37,10 @@ function update_hash(){
 
 function run_app_manager(bypass=null){
     // Open the apps.json file and fetch all the app list
-    readTextFile("./apps.json", function(text){
+    readTextFile("./apps.json", async function(text){
         let app_list = JSON.parse(text);
         let url_parameters = Object.fromEntries(new URLSearchParams(window.location.search).entries());
-        let specified_app = (bypass ? bypass : url_parameters.app);
+        let specified_app = (bypass != null ? bypass : url_parameters.app);
 
         // If the app specified is actually in the list of apps:
         if (Object.keys(app_list).includes(specified_app)){
@@ -62,7 +62,7 @@ function run_app_manager(bypass=null){
                     specified_app = (url_parameters.app ? url_parameters.app : "error");
                 }
             }
-
+            
             // Then continues to work with the iframe:
             let app_url = new URL(`${window.location.origin}/${app_list[specified_app].url}`);
             let params = Object.assign({},
@@ -77,13 +77,18 @@ function run_app_manager(bypass=null){
                     `${key}=${encodeURIComponent(params[key])}`;
             });
 
+            if ("hidemenu" in url_parameters){
+                document.querySelector(".menu-container").style.display = "none";
+            }
+            document.querySelector(".app-container").style.display = "";
+
             // Make iframe
             let iframe = document.createElement("iframe");
             iframe.id = specified_app;
             iframe.name = "iframe";
             iframe.title = specified_app;
             iframe.src = app_url.href.replace(app_url.search,"") + url_parameters_to_add + "&t=" + Math.round(Date.now() / 1000);
-            iframe.onload = function(){
+            iframe.onload = async function(){
                 let new_favicon = iframe.contentDocument.querySelector('head > link[rel="icon"]');
                 let new_title = iframe.contentDocument.querySelector('head > title');
                 
@@ -101,7 +106,7 @@ function run_app_manager(bypass=null){
 
                 window.history.pushState("Update Thing", "Update Thing", combine_iframe_and_window_params(ignore=["app"]));
             };
-            document.body.appendChild(iframe);
+            document.querySelector(".iframe-container").appendChild(iframe);
 
             window.frames.iframe.window.addEventListener('hashchange', function(){
                 if (window.frames.iframe.window.location.hash.startsWith("#update")){
@@ -109,16 +114,16 @@ function run_app_manager(bypass=null){
                 }
             }, false);
 
-            // Add back button
-            if (!("hidemenu" in url_parameters)){
-                let back_button = document.createElement("div")
+            //Scroll fix TODO is bad
+            window.frames.iframe.window.onscroll = function(event){
+                if (window.scrollY == 0){
+                    window.document.querySelector(".iframe-container").scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+                }
+            };
 
-                back_button.classList.add("back-button")
-                back_button.setAttribute("onclick", "window.location.href = window.location.origin")
-                back_button.innerHTML = "Back to main menu"
-    
-                document.body.appendChild(back_button);
-            }
+            // Wait a few secounds so you can see the menu bar thingy
+            await sleep(800);
+            document.querySelector(".iframe-container").scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
         }
         else if (bypass == null){
             document.querySelector(".main-container").style.display = "";
@@ -154,10 +159,5 @@ function run_app_manager(bypass=null){
     });
 };
 
-// window.onpopstate = function(event) {
-//     console.log(JSON.stringify(event.state),event.state);
-//     // alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
-//     if (event.state == "init"){
-//         window.location.href = window.location.origin
-//     }
-// };
+
+

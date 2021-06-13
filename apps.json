@@ -72,5 +72,10 @@
         "url": "apps/school/gettime/index.html",
         "title": "GetTime",
         "description": "Schedule app for my school"
+    },
+
+    "scroll_test": {
+        "include": false,
+        "url": "apps/me/random_projects/scroll_test/index.html"
     }
 }
