@@ -10,7 +10,7 @@ function readTextFile(file, callback){
     rawFile.send(null);
 };
 
-function combine_iframe_and_window_params(){
+function combine_iframe_and_window_params(ignore=[]){
     let params = Object.assign({},
         Object.fromEntries(new URLSearchParams(window.location.search).entries()),
         Object.fromEntries(new URLSearchParams(window.frames.iframe.window.location.search).entries())
@@ -18,6 +18,12 @@ function combine_iframe_and_window_params(){
     let url_parameters_to_add = "";
     
     Object.keys(params).forEach(key => {
+        if (key=="t"){return;};
+        if (ignore.includes(key)){
+            // If "app" is on the ignorelist, it will take the first "app" it finds (there must be an "app")
+            if (!(key == "app" && !url_parameters_to_add.includes(key))){return;};
+        };
+
         url_parameters_to_add += (url_parameters_to_add == "" ? "?" : "&") + 
             `${key}=${encodeURIComponent(params[key])}`;
     });
@@ -41,13 +47,13 @@ function run_app_manager(bypass=null){
 
             // Checks if its a redirect or not
             while (app_list[specified_app].url.startsWith("redirect")){
-                url_parameters = Object.fromEntries(
+                url_parameters = Object.assign(url_parameters, Object.fromEntries(
                     new URLSearchParams(
                         new URL(
                             `${window.location.origin}/${app_list[specified_app].url}`
                         ).search
                     )
-                );
+                ));
                 
                 if (specified_app == url_parameters.app){
                     specified_app == "error"
@@ -92,6 +98,8 @@ function run_app_manager(bypass=null){
                 if (new_title != undefined){
                     document.querySelector('head > title').innerHTML = new_title.innerHTML;
                 };
+
+                window.history.pushState({}, null, combine_iframe_and_window_params(ignore=["app"]));
             };
 
             document.body.appendChild(iframe);

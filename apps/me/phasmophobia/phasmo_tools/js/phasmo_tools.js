@@ -255,7 +255,7 @@ function update_ghosts(){
         }
     }
     else if (toAdd.length == 0){
-        appendText(".ghosts-it-could-be-container", "No ghost with that configuration");
+        appendText(".ghosts-it-could-be-container", "There is no ghost with that configuration");
     }
     else{
         toAdd.forEach(current => {

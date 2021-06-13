@@ -18,6 +18,8 @@
         <link rel="stylesheet" href="./css/style.css?random=1530068140">
 
         <script type="text/javascript" src="../../../../global/js/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" src="../../../../global/js/uri.js?random=1530068140"></script>
+        <script type="text/javascript" src="../../../../js/script.js?random=1530068140"></script>
         <script type="text/javascript" src="../../../../global/js/scripts.js?random=1530068140"></script>
         <script type="text/javascript" src="./js/phasmo_tools.js?random=1530068140" defer></script>
     </head>
@@ -125,19 +127,19 @@
                             "evidence_found_fingerprints"
                         ]
                     };
+
                     if (new URLSearchParams(window.location.search).get("beta") == "1"){
-                        console.log(ghosts_evidence)
                         ghosts_evidence["Yokai"] = [
-                                "evidence_found_spirit_box",
-                                "evidence_found_orbs",
-                                "evidence_found_writing"
+                            "evidence_found_spirit_box",
+                            "evidence_found_orbs",
+                            "evidence_found_writing"
                         ]
                         ghosts_evidence["Hantu"] = [
-                        "evidence_found_fingerprints",
-                                "evidence_found_orbs",
-                                "evidence_found_writing"
+                            "evidence_found_fingerprints",
+                            "evidence_found_orbs",
+                            "evidence_found_writing"
                         ]
-                    }
+                    };
 
                     ghosts_evidence = sortObjectByKeys(ghosts_evidence)
 
@@ -156,11 +158,16 @@
                     <div class="buttons evidence-buttons"></div>
                     
                     <div class="break"></div>
+
+                    <br>
                     
                     <div class="ghosts-cant-be-container">
                         <p style="text-align: center;">It can't be...</p>
                         <div class="ghosts-cant-be"></div>
                     </div>
+
+                    <!-- <div onclick="updateURLParameterLive({'beta':'1'}); update_hash();" class="beta-ghost-button button" style="max-width: max-content; display: none;">Looking for the new beta ghosts?</div> -->
+                    <!-- <div onclick="updateURLParameterLive({'beta':'0'}); update_hash();" class="stable-ghost-button button" style="max-width: max-content; display: none;">Not on beta?</div> -->
                     
                 </div>
 
@@ -326,6 +333,18 @@
                 }
                 if (Object.keys(options).includes(initial_app)){
                     initial_app = options[initial_app];
+                    
+                    // Create beta button:
+                    let is_beta = (url_params.get("beta") == "1");
+                    let b = document.createElement("div");
+                    b.classList.add(
+                        "button",
+                        (is_beta ? "beta-ghost-button" : "stable-ghost-button")
+                    );
+                    b.setAttribute("onclick",`updateURLParameterLive({'beta':'${(is_beta ? "0" : "1")}'}); update_hash();`);
+                    b.style.maxWidth = "max-content";
+                    b.innerText = (is_beta ? "Not on beta?" : "Looking for the new beta ghosts?")
+                    document.querySelector(".tool-evidence-tracker .main-content").appendChild(b)
                 }
                 else{
                     initial_app = [".tool-selector","Phasmophobia Tools"];
