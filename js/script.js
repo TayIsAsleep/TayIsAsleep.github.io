@@ -18,7 +18,7 @@ function combine_iframe_and_window_params(ignore=[]){
     let url_parameters_to_add = "";
     
     Object.keys(params).forEach(key => {
-        if (key=="t"){return;};
+        if (key == "t"){return;};
         if (ignore.includes(key)){
             // If "app" is on the ignorelist, it will take the first "app" it finds (there must be an "app")
             if (!(key == "app" && !url_parameters_to_add.includes(key))){return;};

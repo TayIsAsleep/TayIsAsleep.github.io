@@ -2,6 +2,7 @@ import re
 import random
 import os
 import time
+import traceback
 
 def hashMe(fn):
     with open(fn,"r") as f:
@@ -20,9 +21,13 @@ def hashMe(fn):
 for path, subdirs, files in os.walk(os.getcwd()):
     for name in files:
         if name == "index.html":
-            this_file = os.path.join(path, name)
-            print(this_file)
-            hashMe(this_file)
+            try:
+                this_file = os.path.join(path, name)
+                print(this_file)
+                hashMe(this_file)
+            except:
+                traceback.print_exc()
+                pass
 
 os.system('git add . && git commit -m "Updated" && git push')
 
