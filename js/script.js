@@ -28,7 +28,7 @@ function combine_iframe_and_window_params(ignore=[]){
             `${key}=${encodeURIComponent(params[key])}`;
     });
 
-    return window.location.href.replace(window.location.search,"") + url_parameters_to_add;
+    return window.location.href.replace(window.location.search, "") + url_parameters_to_add;
 };
 
 function update_hash(){
@@ -99,14 +99,14 @@ function run_app_manager(bypass=null){
                     document.querySelector('head > title').innerHTML = new_title.innerHTML;
                 };
 
-                window.history.pushState(null, null, combine_iframe_and_window_params(ignore=["app"]));
+                window.history.pushState("Update Thing", "Update Thing", combine_iframe_and_window_params(ignore=["app"]));
             };
 
             document.body.appendChild(iframe);
 
             window.frames.iframe.window.addEventListener('hashchange', function(){
                 if (window.frames.iframe.window.location.hash.startsWith("#update")){
-                    window.history.pushState(null, null, combine_iframe_and_window_params());
+                    window.history.pushState("AAA", "AAA", combine_iframe_and_window_params());
                 }
             }, false);
         }
@@ -136,4 +136,12 @@ function run_app_manager(bypass=null){
             });
         };
     });
+};
+
+window.onpopstate = function(event) {
+    console.log("EVENT",JSON.stringify(event.state));
+    // alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
+    if (JSON.stringify(event.state) == "null"){
+        window.history.back()
+    }
 };
