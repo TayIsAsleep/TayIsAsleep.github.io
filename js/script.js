@@ -99,14 +99,14 @@ function run_app_manager(bypass=null){
                     document.querySelector('head > title').innerHTML = new_title.innerHTML;
                 };
 
-                window.history.pushState({}, null, combine_iframe_and_window_params(ignore=["app"]));
+                window.history.pushState(null, null, combine_iframe_and_window_params(ignore=["app"]));
             };
 
             document.body.appendChild(iframe);
 
             window.frames.iframe.window.addEventListener('hashchange', function(){
                 if (window.frames.iframe.window.location.hash.startsWith("#update")){
-                    window.history.pushState({}, null, combine_iframe_and_window_params());
+                    window.history.pushState(null, null, combine_iframe_and_window_params());
                 }
             }, false);
         }
