@@ -1,9 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap%27");
+/* Code from https://stackoverflow.com/a/49421832/13921835 */
+/* Media Queries */
 * {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+/* Code from https://stackoverflow.com/a/2310809 */
+* {
   font-family: 'JetBrains Mono', monospace;
 }
 
@@ -18,6 +24,38 @@ body {
   body {
     font-size: 80%;
   }
+}
+
+body div.back-button {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: absolute;
+  top: 0em;
+  left: 1em;
+  border: 2px solid white;
+  padding: 0.5em;
+  color: white;
+  background-color: black;
+  -webkit-transition: opacity 0.5s 5s ease, -webkit-transform 0.5s ease;
+  transition: opacity 0.5s 5s ease, -webkit-transform 0.5s ease;
+  transition: transform 0.5s ease, opacity 0.5s 5s ease;
+  transition: transform 0.5s ease, opacity 0.5s 5s ease, -webkit-transform 0.5s ease;
+  opacity: 5%;
+  -webkit-transform: translateY(calc((1em + 4px) * 1 * -1));
+          transform: translateY(calc((1em + 4px) * 1 * -1));
+}
+
+body div.back-button:hover {
+  -webkit-transition: opacity 0.5s ease, -webkit-transform 0.5s ease;
+  transition: opacity 0.5s ease, -webkit-transform 0.5s ease;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  transition: transform 0.5s ease, opacity 0.5s ease, -webkit-transform 0.5s ease;
+  opacity: 100%;
+  -webkit-transform: none;
+          transform: none;
 }
 
 body div.main-container {

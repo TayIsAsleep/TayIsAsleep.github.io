@@ -101,7 +101,6 @@ function run_app_manager(bypass=null){
 
                 window.history.pushState("Update Thing", "Update Thing", combine_iframe_and_window_params(ignore=["app"]));
             };
-
             document.body.appendChild(iframe);
 
             window.frames.iframe.window.addEventListener('hashchange', function(){
@@ -109,6 +108,17 @@ function run_app_manager(bypass=null){
                     window.history.pushState("AAA", "AAA", combine_iframe_and_window_params());
                 }
             }, false);
+
+            // Add back button
+            if (!("hidemenu" in url_parameters)){
+                let back_button = document.createElement("div")
+
+                back_button.classList.add("back-button")
+                back_button.setAttribute("onclick", "window.location.href = window.location.origin")
+                back_button.innerHTML = "Back to main menu"
+    
+                document.body.appendChild(back_button);
+            }
         }
         else if (bypass == null){
             document.querySelector(".main-container").style.display = "";
@@ -123,7 +133,13 @@ function run_app_manager(bypass=null){
                 let new_h2_title = document.createElement("h2");
                 let new_p_description = document.createElement("p");
                 
-                new_a.href = window.location.href.replace(window.location.search,"") + `?app=${i}`;
+                let new_url = updateURLParameter(window.location.href,"app",i);
+                // new_a.href = new_url//window.location.href.replace(window.location.search,"") + `?app=${i}`;
+                new_a.onclick = function(){
+                    window.history.pushState("init", "init", new_url);
+                    window.location.href = new_url;
+                }
+                
                 new_h2_title.innerHTML = app_list[i].title;
                 // new_h2_title.setAttribute("onclick",`run_app_manager('${i}');document.getElementById('${i}').scrollIntoView();`);
                 new_p_description.innerHTML = app_list[i].description;
@@ -138,10 +154,10 @@ function run_app_manager(bypass=null){
     });
 };
 
-window.onpopstate = function(event) {
-    console.log("EVENT",JSON.stringify(event.state));
-    // alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
-    if (JSON.stringify(event.state) == "null"){
-        window.history.back()
-    }
-};
+// window.onpopstate = function(event) {
+//     console.log(JSON.stringify(event.state),event.state);
+//     // alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
+//     if (event.state == "init"){
+//         window.location.href = window.location.origin
+//     }
+// };
