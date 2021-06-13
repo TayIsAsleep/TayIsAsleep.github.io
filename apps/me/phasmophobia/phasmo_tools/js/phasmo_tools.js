@@ -82,14 +82,6 @@ function reset(){
 
     generatePool();
 }
-function appendText(location,text) {
-    let a = $(location).append($('<p class="new-text"></p>').text(text));
-    a = a.children();
-    a = $(a[a.length - 1]);
-    a.fadeOut(0);
-    a.fadeIn(200)
-    return a;
-}
 function drawItem(){
     if (inPool.length == 0){
         return -1;
@@ -185,12 +177,14 @@ var evidence_lookup = {
     "evidence_found_fingerprints":"Fingerprints"
 };
 
-function appendText(location,text) {
+function appendText(location,text,dont_fade_in=false) {
     let a = $(location).append($('<p class="new-text"></p>').text(text));
     a = a.children();
     a = $(a[a.length - 1]);
     a.fadeOut(0);
-    a.fadeIn(200)
+    if (!dont_fade_in){
+        a.fadeIn(200)
+    }
     return a;
 }
 function update_ghosts(){
@@ -245,13 +239,35 @@ function update_ghosts(){
     });
 
     if (toAdd.length == 1){
+        let new_text_container = document.createElement("p")
+        let new_text = document.createElement("p")
+        let ghost_link = document.createElement("a")
+
         if (toAdd[0][1] == ""){
-            appendText(".ghosts-it-could-be-container", `It is a ${toAdd[0][0]}!`);
+            // appendText(".ghosts-it-could-be-container", `It is a ${toAdd[0][0]}!`);
+        
+            ghost_link.innerText = toAdd[0][0]
+            ghost_link.href = `https://phasmophobia.fandom.com/wiki/${toAdd[0][0]}`
+            new_text.innerText = "It is a "
+
+            new_text_container.appendChild(new_text)
+            new_text_container.appendChild(ghost_link)
+
+            document.querySelector(".ghosts-it-could-be-container").appendChild(new_text_container)
         }
         else{
-            appendText(".ghosts-it-could-be-container", `It should be a ${toAdd[0][0]}!`);
-            appendText(".ghosts-it-could-be-container", `Evidence not confirmed yet:`);
-            appendText(".ghosts-it-could-be-container", toAdd[0][1]);
+            ghost_link.innerText = toAdd[0][0]
+            ghost_link.href = `https://phasmophobia.fandom.com/wiki/${toAdd[0][0]}`
+            
+            new_text.innerText = "It should be a "
+
+            new_text_container.appendChild(new_text)
+            new_text_container.appendChild(ghost_link)
+
+            document.querySelector(".ghosts-it-could-be-container").appendChild(new_text_container)
+
+            appendText(".ghosts-it-could-be-container", `Evidence not confirmed yet:`,true);
+            appendText(".ghosts-it-could-be-container", toAdd[0][1],true);
         }
     }
     else if (toAdd.length == 0){
@@ -259,10 +275,27 @@ function update_ghosts(){
     }
     else{
         toAdd.forEach(current => {
-            appendText(".ghosts-it-could-be-container", `${current[0]} - ${current[1]}`);
+            let new_text_container = document.createElement("p")
+            let new_text = document.createElement("p")
+            let ghost_link = document.createElement("a")
+
+            ghost_link.innerText = current[0]
+            ghost_link.href = `https://phasmophobia.fandom.com/wiki/${current[0]}`
+            ghost_link.target = "_blank"
+            new_text.innerText = " - " + current[1]
+
+            new_text_container.appendChild(ghost_link)
+            new_text_container.appendChild(new_text)
+
+            document.querySelector(".ghosts-it-could-be-container").appendChild(new_text_container)
         });
     }
 
+    Array.from($(".ghosts-it-could-be-container p")).forEach(e => {
+        $(e).fadeOut(0)
+        $(e).fadeIn(200)
+    });
+    
     /* Update buttons (so that the ones that cant be clicked becomes off) */
     let lookuptablepoopp = {
         "EMF Level 5":"#button-evidence-emf5",

@@ -233,10 +233,11 @@ br {
   width: fit-content;
   padding: 0.5em;
   margin: 2px;
+  white-space: break-spaces;
 }
 
-.ghosts-it-could-be-container p {
-  white-space: break-spaces;
+.ghosts-it-could-be-container p p, .ghosts-it-could-be-container p a {
+  display: inline;
 }
 
 .ghosts-cant-be {

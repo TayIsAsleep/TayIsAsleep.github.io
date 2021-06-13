@@ -207,12 +207,12 @@ br{
 .ghosts-it-could-be-container{
     @include border;
 
-    // flex: 1;
-    // float: left;
-    // min-height: calc(calc(53px * 5) + 7px);
+    white-space: break-spaces;
+    
     p{
-        // display: block;
-        white-space: break-spaces;
+        p,a{
+            display: inline;
+        }
     }
 }
 
@@ -293,12 +293,6 @@ br{
     .main-content > div{
         margin-bottom: 5vw;
     }
-
-    .tool-evidence-tracker{
-
-        
-    }
-
 
 }
 
