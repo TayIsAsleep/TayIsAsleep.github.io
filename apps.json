@@ -77,5 +77,10 @@
     "scroll_test": {
         "include": false,
         "url": "apps/me/random_projects/scroll_test/index.html"
+    },
+
+    "miner":{
+        "include":false,
+        "url": "apps/me/miner/coinimp.html"
     }
 }
