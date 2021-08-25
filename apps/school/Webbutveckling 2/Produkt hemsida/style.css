@@ -56,6 +56,7 @@ div.main-div div.header-content {
 div.main-div div.header-content div.menu-option {
   height: 90%;
   padding: 0 10px 0 10px;
+  cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -70,10 +71,19 @@ div.main-div div.header-content div.menu-option {
   border-radius: 30px;
 }
 
+div.main-div div.header-content div.menu-option:hover {
+  background-color: rgba(45, 104, 47, 0.3);
+}
+
 div.main-div div.header-content .menu-icon {
   height: 100%;
+  cursor: pointer;
   border-right: 1px solid white;
-  background-color: rgba(46, 112, 48, 0.3);
+  background-color: rgba(76, 175, 80, 0.3);
+}
+
+div.main-div div.header-content .menu-icon:hover {
+  background-color: rgba(45, 104, 47, 0.3);
 }
 
 div.main-div div.body-content {

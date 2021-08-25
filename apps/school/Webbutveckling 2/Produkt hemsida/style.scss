@@ -32,6 +32,9 @@ div.main-div{
     }
 
     div.header-content{
+        $color_base: rgba(76, 175, 80, 0.3);
+        $color_hover: darken($color_base,20%);
+
         width: 100%;
         height: 10%;
 
@@ -50,22 +53,33 @@ div.main-div{
             height: 90%;
             padding: 0 10px 0 10px;
 
+            cursor: pointer;
+
             display: flex;
             align-items: center;
             justify-content: center;
 
             // border-right: 1px solid white;
-            background-color: rgba(76, 175, 80, 0.3);
+            background-color: $color_base;
             border:white 1px solid;
             border-radius: 30px;
+
+            &:hover{
+                background-color: $color_hover;
+            }
         }
 
         .menu-icon{
             height: 100%;
+
+            cursor: pointer;
             
             border-right: 1px solid white;
-            background-color: rgba(46, 112, 48, 0.3);
-            // border-radius: 50px;
+            background-color: $color_base;
+
+            &:hover{
+                background-color: $color_hover;
+            }
         }
     }
 
