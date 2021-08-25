@@ -19,11 +19,11 @@
 }
 
 .image-carousel .image-list img {
-  width: inherit;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 #main-image-carousel {
-  width: 400px;
-  height: 300px;
+  width: 50%;
 }
 /*# sourceMappingURL=style.css.map */

@@ -10,13 +10,12 @@
         transition: transform 1s ease-in-out;
     
         img{
-            width: inherit;
+            object-fit: cover;
         }
     }
 }
 
 
 #main-image-carousel{
-    width: 400px;
-    height: 300px;
+    width: 50%;
 }
