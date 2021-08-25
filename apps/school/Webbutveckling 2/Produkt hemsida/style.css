@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap%27");
 /* Code from https://stackoverflow.com/a/2310809 */
+/* Code from https://stackoverflow.com/a/49421832/13921835 */
+/* Media Queries */
 * {
   margin: 0;
   padding: 0;
@@ -11,6 +13,35 @@
 
 ul {
   padding-left: 1.5em;
+}
+
+.egg1 {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  -webkit-animation: 3s ease-in-out fadein_easter_egg_1 forwards;
+          animation: 3s ease-in-out fadein_easter_egg_1 forwards;
+}
+
+@-webkit-keyframes fadein_easter_egg_1 {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
+}
+
+@keyframes fadein_easter_egg_1 {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
 }
 
 .fake-link {
@@ -131,6 +162,13 @@ div.main-div div.body-content div.product-info {
 div.main-div div.body-content div.product-info .product-image {
   background-color: rgba(76, 175, 80, 0.3);
   border-radius: 100px;
+  width: 20em;
+}
+
+@media only screen and (max-width: 667px) {
+  div.main-div div.body-content div.product-info .product-image {
+    width: 60vw;
+  }
 }
 
 div.main-div div.body-content div.body-section {
