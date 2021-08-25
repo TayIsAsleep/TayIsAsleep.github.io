@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: white;
+}
+
+ul {
+  padding-left: 1.5em;
+}
+
+body {
+  background-image: url(bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+div.main-div {
+  width: 100vw;
+  height: 100vh;
+}
+
+div.main-div div.header-content {
+  width: 100%;
+  height: 10%;
+  background-color: black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 1em;
+  border-bottom: 1px solid white;
+}
+
+div.main-div div.header-content div.menu-option {
+  height: 90%;
+  padding: 0 10px 0 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: rgba(76, 175, 80, 0.3);
+  border: white 1px solid;
+  border-radius: 30px;
+}
+
+div.main-div div.header-content .menu-icon {
+  height: 100%;
+  border-right: 1px solid white;
+  background-color: rgba(46, 112, 48, 0.3);
+}
+
+div.main-div div.body-content {
+  width: 80%;
+  height: 90%;
+  margin: auto;
+  padding-top: 2em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 2em;
+}
+
+div.main-div div.body-content div.product-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 1em;
+}
+
+div.main-div div.body-content div.product-info .product-image {
+  background-color: rgba(76, 175, 80, 0.3);
+  border-radius: 100px;
+}
+
+div.main-div div.body-content div.body-section {
+  display: inherit;
+  -webkit-box-orient: inherit;
+  -webkit-box-direction: inherit;
+      -ms-flex-direction: inherit;
+          flex-direction: inherit;
+  -webkit-box-align: inherit;
+      -ms-flex-align: inherit;
+          align-items: inherit;
+}
+/*# sourceMappingURL=style.css.map */

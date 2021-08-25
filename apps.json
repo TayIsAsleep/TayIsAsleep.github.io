@@ -82,5 +82,10 @@
     "miner":{
         "include":false,
         "url": "apps/me/miner/coinimp.html"
+    },
+
+    "Product-Page-1":{
+        "include":false,
+        "url": "apps/school/Webbutveckling 2/Produkt hemsida/index.html"
     }
 }
