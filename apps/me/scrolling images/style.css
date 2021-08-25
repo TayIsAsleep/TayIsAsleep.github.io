@@ -1,0 +1,29 @@
+.image-carousel {
+  overflow: hidden;
+}
+
+.image-carousel .image-list {
+  width: inherit;
+  height: inherit;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-transition: -webkit-transform 1s ease-in-out;
+  transition: -webkit-transform 1s ease-in-out;
+  transition: transform 1s ease-in-out;
+  transition: transform 1s ease-in-out, -webkit-transform 1s ease-in-out;
+}
+
+.image-carousel .image-list img {
+  width: inherit;
+}
+
+#main-image-carousel {
+  width: 400px;
+  height: 300px;
+}
+/*# sourceMappingURL=style.css.map */

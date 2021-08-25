@@ -1,0 +1,22 @@
+.image-carousel{
+    overflow: hidden;
+
+    .image-list{
+        width: inherit;
+        height: inherit;
+        display: flex;
+        flex-direction: row;
+    
+        transition: transform 1s ease-in-out;
+    
+        img{
+            width: inherit;
+        }
+    }
+}
+
+
+#main-image-carousel{
+    width: 400px;
+    height: 300px;
+}

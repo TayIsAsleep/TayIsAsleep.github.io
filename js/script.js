@@ -158,6 +158,3 @@ function run_app_manager(bypass=null){
         };
     });
 };
-
-
-
