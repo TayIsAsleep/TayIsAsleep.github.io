@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap%27");
+@import "../../../../global/css/unselectable.scss";
+
 *{
     margin: 0;
     padding: 0;
@@ -50,6 +52,8 @@ div.main-div{
         border-bottom: 1px solid white;
 
         div.menu-option{
+            @include unselectable;
+
             height: 90%;
             padding: 0 10px 0 10px;
 
@@ -70,6 +74,8 @@ div.main-div{
         }
 
         .menu-icon{
+            // @include unselectable;
+
             height: 100%;
 
             cursor: pointer;

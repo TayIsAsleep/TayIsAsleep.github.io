@@ -31,5 +31,5 @@ for path, subdirs, files in os.walk(os.getcwd()):
 
 # os.system('git add . && git commit -m "Updated" && git push')
 
-print("Closing this window in 3 secounds...")
-time.sleep(3)
+# print("Closing this window in 3 secounds...")
+# time.sleep(3)
