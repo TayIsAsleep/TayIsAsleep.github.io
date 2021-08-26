@@ -76,8 +76,8 @@ function run_app_manager(bypass=null){
                 url_parameters_to_add += (url_parameters_to_add == "" ? "?" : "&") + 
                     `${key}=${encodeURIComponent(params[key])}`;
             });
-
-            if ("hidemenu" in url_parameters){
+            
+            if ("hidemenu" in url_parameters || "hidemenu" in app_list[specified_app]){
                 document.querySelector(".menu-container").style.display = "none";
             }
             document.querySelector(".app-container").style.display = "";
