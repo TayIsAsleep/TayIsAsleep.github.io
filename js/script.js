@@ -5,8 +5,8 @@ function readTextFile(file, callback){
     rawFile.onreadystatechange = function() {
         if (rawFile.readyState === 4 && rawFile.status == "200") {
             callback(rawFile.responseText);
-        }
-    }
+        };
+    };
     rawFile.send(null);
 };
 
@@ -56,12 +56,12 @@ function run_app_manager(bypass=null){
                 ));
                 
                 if (specified_app == url_parameters.app){
-                    specified_app == "error"
+                    specified_app == "error";
                 }
                 else{
                     specified_app = (url_parameters.app ? url_parameters.app : "error");
-                }
-            }
+                };
+            };
             
             // Then continues to work with the iframe:
             let app_url = new URL(`${window.location.origin}/${app_list[specified_app].url}`);
@@ -77,9 +77,11 @@ function run_app_manager(bypass=null){
                     `${key}=${encodeURIComponent(params[key])}`;
             });
             
-            if ("hidemenu" in url_parameters || "hidemenu" in app_list[specified_app]){
+            // Checks if the drop down menu should be displayed or not
+            let hide_menu = "hidemenu" in url_parameters || "hidemenu" in app_list[specified_app]
+            if (hide_menu){
                 document.querySelector(".menu-container").style.display = "none";
-            }
+            };
             document.querySelector(".app-container").style.display = "";
 
             // Make iframe
@@ -118,12 +120,14 @@ function run_app_manager(bypass=null){
             window.frames.iframe.window.onscroll = function(event){
                 if (window.scrollY == 0){
                     window.document.querySelector(".iframe-container").scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
-                }
+                };
             };
 
             // Wait a few secounds so you can see the menu bar thingy
-            await sleep(800);
-            document.querySelector(".iframe-container").scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+            if (!hide_menu){
+                await sleep(800);
+                document.querySelector(".iframe-container").scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+            };
         }
         else if (bypass == null){
             document.querySelector(".main-container").style.display = "";
