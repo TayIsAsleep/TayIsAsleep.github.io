@@ -1,24 +1,26 @@
 {
-    "evidence_tracker": {
+    "phasmo_evidence_tracker": {
         "include": true,
-        "url": "apps/me/phasmophobia/phasmo_tools/index.html?a=evidence_tracker",
+        "url": "apps/me/phasmophobia/phasmo_tools/index.html?app=evidence_tracker",
         "title":"Phasmophobia Evidence Tracker",
         "description":"Evidence tracker for Phasmophobia"
     },
-
-    "beta_evidence_tracker": {
+    "evidence_tracker": {
         "include": false,
-        "url": "apps/me/phasmophobia/phasmo_tools/index-beta.html?a=beta_evidence_tracker"
+        "url": "redirect?app=phasmo_evidence_tracker"
     },
 
 
-    "item_randomizer": {
+    "phasmo_item_randomizer": {
         "include": true,
-        "url": "apps/me/phasmophobia/phasmo_tools/index.html?a=item_randomizer",
+        "url": "apps/me/phasmophobia/phasmo_tools/index.html?app=item_randomizer",
         "title":"Phasmophobia Item Randomizer",
         "description":"A Item randomizer for the game Phasmophobia"
     },
-
+    "item_randomizer": {
+        "include": false,
+        "url": "redirect?app=phasmo_item_randomizer"
+    },
 
     "ttt": {
         "include": true,
