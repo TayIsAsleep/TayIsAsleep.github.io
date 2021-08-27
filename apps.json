@@ -10,6 +10,11 @@
         "url": "redirect?app=phasmo_evidence_tracker"
     },
 
+    "beta_evidence_tracker": {
+        "include": false,
+        "url": "apps/me/phasmophobia/phasmo_tools/index-beta.html?app=beta_evidence_tracker"
+    },
+
 
     "phasmo_item_randomizer": {
         "include": true,
