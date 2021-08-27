@@ -1,0 +1,311 @@
+@import "../../../../../global/css/media_queries.scss";
+@import "../../../../../global/css/unselectable.scss";
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+
+$new_animation: false;
+
+$animation: all .2s ease-out;
+$textColor: #dddddd;
+$buttonColor: #bbbbbb;
+$buttonColorHover: lighten($buttonColor, 20%);
+$buttonColorOff: darken($buttonColor, 55%);
+$buttonColor_found: lime;
+$buttonColor_cantbe: red;
+
+/* GENERATE THESE AT https://codepen.io/sosuke/pen/Pjoqqp */
+$buttonIconColor_green: brightness(0%) invert(58%) sepia(83%) saturate(2771%) hue-rotate(82deg) brightness(113%) contrast(130%);
+$buttonIconColor_red: brightness(0%) invert(14%) sepia(94%) saturate(7483%) hue-rotate(3deg) brightness(103%) contrast(113%);
+$buttonIconColor_off: brightness(0%) invert(16%) sepia(0%) saturate(0%) hue-rotate(347deg) brightness(97%) contrast(92%);
+
+@mixin border{
+    border: 2px solid $buttonColor;
+    width: -moz-fit-content;
+    width: fit-content;
+    padding: 0.5em;
+    margin: 2px;
+}
+
+@mixin flexboxCentering{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'JetBrains Mono', monospace;
+    color: $textColor;
+}
+body{
+    background-color: black;
+    @if $new_animation{
+        overflow-x: hidden;
+    }
+}
+.loader{
+    position:fixed;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99999;
+    background-color: black;
+}
+.bg-image{
+    @include unselectable;
+    /* Add the blur effect */
+    -webkit-filter: blur(8px);
+    filter: blur(8px);
+    
+    object-fit: cover;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 80vw;
+    max-height: 80vh;
+    width: 100%;
+    min-width: 100vw;
+    min-height: 100vh;
+
+    z-index: -99999;
+}
+.main-container{
+    @include flexboxCentering;
+    height: 100vh;
+    width: 100vw;
+}
+.tool{
+    @include border;
+
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    
+    // max-height: 80vh;
+    // max-width: 90vw;
+    // max-width: min-content;
+
+    @if $new_animation{
+        position: absolute;
+        transition: transform 1s ease;
+        &.tool-selector{
+            transform: translateX(0vw);
+        }
+        &.tool-evidence-tracker{
+            transform: translateX(100vw);
+        }
+        &.tool-item-randomizer{
+            transform: translateX(200vw);
+        }
+    }
+}
+
+
+/* Button related stuff */
+.button{
+    @include border;
+    @include unselectable;
+
+    text-align: center;
+
+    transition: $animation;
+    float: left;    
+    background: black;
+    box-sizing: content-box;
+
+    p{
+        transition: $animation;
+        display: inline;
+    }
+    img{
+        display: none;
+    }
+
+    &.button:hover{
+        border-color: $buttonColorHover;
+        p{
+            color: $buttonColorHover;
+        }   
+    }
+
+    /* Learned from https://sass-lang.com/documentation/at-rules/control/each#destructuring */
+    $a:
+        "found" $buttonColor_found $buttonIconColor_green,
+        "cantbe" $buttonColor_cantbe $buttonIconColor_red,
+        "off" $buttonColorOff $buttonIconColor_off;
+    
+    @each $selector, $color, $filter_color in $a{
+        &.button-#{$selector}{
+            border-color: $color !important;
+            p{
+                color: $color !important;
+            }
+            &.icon-button{
+                img{
+                    filter: $filter_color;
+                }
+            }
+        }
+    }
+}
+.buttons{ 
+    // margin: auto;
+    // width: max-content;
+    display: flex;
+}
+.icon-button{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    img{
+        display: inline;
+        transition: $animation;
+        margin-left: 10px;
+    }
+}
+
+/* Text related stuff: */
+.title{
+    text-align: center;
+    color: $textColor;
+    h5{
+        color: darken($textColor, 20%); 
+        text-align: center;
+    }
+}
+a{
+    &, &:link, :visited, :active{
+        color: darken($textColor, 10%);
+    }
+    &:hover{
+        color: $textColor;
+    }
+}
+
+.fields{
+    .selection-field, .output-field{
+        @include border;
+        float: left;
+        width: calc(50% - 4px);
+        height: 503px;
+        overflow-y: auto;
+    }
+}
+
+br{
+    @include unselectable;
+    clear: both;
+    float: none;
+}
+
+.ghosts-it-could-be-container{
+    @include border;
+
+    white-space: break-spaces;
+    
+    div{
+        p,a{
+            display: inline;
+            // padding-right: 2em;
+            // span{
+            //     padding-right: 1em;
+            // }
+        }
+    }
+}
+
+.ghosts-cant-be{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    // flex-wrap: wrap;
+    margin: auto;
+
+    padding: 10px 0px;
+}
+
+.evidence-buttons{
+    flex-direction: column;
+}
+
+.border{
+    @include border;
+}
+
+.tool-evidence-tracker{
+    /* HAS TO BE FIXED AT SOME POINT */
+    max-width: 78%;
+
+    .main-content{
+        @include flexboxCentering;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: stretch;
+    }
+
+    .button{
+        flex: 1;
+        width: unset;
+    }
+
+    @include for_breakpoint(mobile) {
+        .main-content{
+            justify-content: center;
+            // flex-direction: column;
+            
+            .evidence-buttons{
+                order: 1;
+            }
+            .ghosts-cant-be-container{
+                order: 2;
+            }
+            .ghosts-it-could-be-container{
+                order: 3;
+                min-width: 100%;
+                height: fit-content !important;
+            }
+
+            .break{
+                display: none;
+            }
+        }        
+    }
+}
+
+/* MOBILE TWEAKS */
+@media only screen and (max-width: 600px){
+    .main-container{
+        align-items: baseline;
+        width: 100%;
+    }
+
+    .tool{
+        max-width: 100vw;
+        padding-bottom: 0px;
+    }
+
+    .button{
+        padding: 1em;
+    }
+
+    .main-content > div{
+        margin-bottom: 5vw;
+    }
+
+}
+
+.break{
+    flex-basis: 100%;
+    height: 0;
+}
+
+/* Maybe can delete: */
+.button-evidence-found{
+    width: 230px;
+}

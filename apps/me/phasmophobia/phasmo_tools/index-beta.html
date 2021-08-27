@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Phasmophobia Tools</title>
+        <title>Phasmophobia Tools (BETA)</title>
         <meta property="og:title" content="Phasmophobia Evidence Tracker">
         <meta property="og:description" content="Helps you keep track of the evidence you have found in Phasmophobia!">
 
@@ -21,7 +21,7 @@
         <script type="text/javascript" src="../../../../global/js/uri.js?random=5000820870"></script>
         <script type="text/javascript" src="../../../../js/script.js?random=5000820870"></script>
         <script type="text/javascript" src="../../../../global/js/scripts.js?random=5000820870"></script>
-        <script type="text/javascript" src="./js/phasmo_tools.js?random=5000820870" defer></script>
+        <script type="text/javascript" src="./js/phasmo_tools_beta.js?random=5000820870" defer></script>
     </head>
     <body>
         
@@ -67,79 +67,97 @@
                 <script>
                     var ghosts_evidence = {
                         "Shade":[
+                            "evidence_found_freezing_temps",
                             "evidence_found_emf5",
-                            "evidence_found_orbs",
                             "evidence_found_writing"
                         ],
                         "Phantom":[
-                            "evidence_found_emf5",
-                            "evidence_found_orbs",
-                            "evidence_found_freezing_temps"
+                            "evidence_found_spirit_box",
+                            "evidence_found_fingerprints",
+                            "evidence_found_dots"
                         ],
                         "Jinn":[
+                            "evidence_found_freezing_temps",
                             "evidence_found_emf5",
-                            "evidence_found_orbs",
-                            "evidence_found_spirit_box"
+                            "evidence_found_fingerprints"
                         ],
                         "Yurei":[
                             "evidence_found_freezing_temps",
                             "evidence_found_orbs",
-                            "evidence_found_writing"
+                            "evidence_found_dots"
                         ],
                         "Mare":[
-                            "evidence_found_freezing_temps",
                             "evidence_found_orbs",
-                            "evidence_found_spirit_box"
+                            "evidence_found_spirit_box",
+                            "evidence_found_writing"
                         ],
                         "Demon":[
                             "evidence_found_freezing_temps",
-                            "evidence_found_spirit_box",
-                            "evidence_found_writing"
-                        ],
-                        "Banshee":[
-                            "evidence_found_emf5",
-                            "evidence_found_freezing_temps",
+                            "evidence_found_writing",
                             "evidence_found_fingerprints"
                         ],
-                        "Revenant":[
-                            "evidence_found_emf5",
+                        "Banshee":[
+                            "evidence_found_orbs",
                             "evidence_found_fingerprints",
+                            "evidence_found_dots"
+                        ],
+                        "Revenant":[
+                            "evidence_found_freezing_temps",
+                            "evidence_found_orbs",
                             "evidence_found_writing"
                         ],
                         "Oni":[
+                            "evidence_found_freezing_temps",
+                            "evidence_found_emf5",
+                            "evidence_found_dots"
+                        ],
+                        "Poltergeist":[
+                            "evidence_found_spirit_box",
+                            "evidence_found_writing",
+                            "evidence_found_fingerprints"
+                        ],
+                        "Spirit":[
                             "evidence_found_emf5",
                             "evidence_found_spirit_box",
                             "evidence_found_writing"
                         ],
-                        "Poltergeist":[
+                        "Wraith":[
+                            "evidence_found_emf5",
+                            "evidence_found_spirit_box",
+                            "evidence_found_dots"
+                        ],
+
+                        "Yokai":[
+                            "evidence_found_spirit_box",
+                            "evidence_found_orbs",
+                            "evidence_found_dots"
+                        ],
+                        "Hantu":[
                             "evidence_found_fingerprints",
                             "evidence_found_orbs",
-                            "evidence_found_spirit_box"
-                        ],
-                        "Spirit":[
-                            "evidence_found_spirit_box",
-                            "evidence_found_fingerprints",
                             "evidence_found_writing"
                         ],
-                        "Wraith":[
-                            "evidence_found_freezing_temps",
-                            "evidence_found_spirit_box",
+
+                        "Goryo":[
+                            "evidence_found_emf5",
+                            "evidence_found_fingerprints",
+                            "evidence_found_dots"   
+                        ],
+                        "Myling":[
+                            "evidence_found_emf5",
+                            "evidence_found_writing",
                             "evidence_found_fingerprints"
                         ]
                     };
 
-                    if (new URLSearchParams(window.location.search).get("beta") == "1"){
-                        ghosts_evidence["Yokai"] = [
-                            "evidence_found_spirit_box",
-                            "evidence_found_orbs",
-                            "evidence_found_writing"
-                        ]
-                        ghosts_evidence["Hantu"] = [
-                            "evidence_found_fingerprints",
-                            "evidence_found_orbs",
-                            "evidence_found_writing"
-                        ]
-                    };
+                    // if (new URLSearchParams(window.location.search).get("beta") == "1"){
+                    //     ghosts_evidence["Yokai"] = [
+
+                    //     ]
+                    //     ghosts_evidence["Hantu"] = [
+
+                    //     ]
+                    // };
 
                     ghosts_evidence = sortObjectByKeys(ghosts_evidence)
 
@@ -166,11 +184,9 @@
                         <div class="ghosts-cant-be"></div>
                     </div>
 
-                    <!-- <div class="button stable-ghost-button" onclick="updateURLParameterLive({'a':'beta_evidence_tracker','app':'beta_evidence_tracker'}); update_hash();" style="max-width: max-content;">Looking for the new beta ghosts?</div> -->
+                    <!-- <div class="button stable-ghost-button" onclick="window.location.href = '/index.html?app=evidence_tracker'" style="max-width: max-content;">Are you playing on stable branch?</div> -->
 
-                    <!-- <div class="button stable-ghost-button" onclick="window.location.href = '/index.html?app=beta_evidence_tracker'" style="max-width: max-content;">Looking for the new beta ghosts?</div> -->
-
-                    <!-- <div class="button stable-ghost-button" onclick="window.history.pushState(null,null,'/index.html?app=beta_evidence_tracker'); update_hash(); window.location.reload(true);" style="max-width: max-content;">Looking for the new beta ghosts?</div> -->
+                    <!-- <div class="button stable-ghost-button" onclick="updateURLParameterLive({'a':'evidence_tracker','app':'evidence_tracker'}); update_hash();" style="max-width: max-content;">Are you playing on stable branch?</div> -->
                     
                 </div>
 
@@ -184,7 +200,8 @@
                             ["ghost-writing","Ghost Writing"],
                             ["freezing-temps","Freezing Temperatures"],
                             ["spirit-box","Spirit Box"],
-                            ["fingerprints","Fingerprints"]   
+                            ["fingerprints","Fingerprints"],
+                            ["dots","D.O.T.S Projector"]
                         ].forEach(current => {
                             let new_button = document.createElement("div");
                             let new_button_text = document.createElement("p");
@@ -281,7 +298,8 @@
                                 "Infrared Light Sensor",
                                 "Parabolic Microphone",
                                 "Glowstick",
-                                "Head Mounted Camera"
+                                "Head Mounted Camera",
+                                "D.O.T.S. Projector"
                             ].sort().forEach(current => {
                                 
                                 let new_div = document.createElement("div");
@@ -331,13 +349,13 @@
                 let url_params = new URLSearchParams(window.location.search);
                 let initial_app = url_params.get('a');
                 let options = {
-                    "evidence_tracker":[".tool-evidence-tracker","Evidence Tracker"],
-                    "item_randomizer":[".tool-item-randomizer","Item Randomizer"]
+                    "beta_evidence_tracker":[".tool-evidence-tracker","Evidence Tracker"],
+                    "beta_item_randomizer":[".tool-item-randomizer","Item Randomizer"]
                 }
                 if (Object.keys(options).includes(initial_app)){
                     initial_app = options[initial_app];
                     
-                    // // Create beta button:
+                    // Create beta button:
                     // let is_beta = (url_params.get("beta") == "1");
                     // let b = document.createElement("div");
                     // b.classList.add(

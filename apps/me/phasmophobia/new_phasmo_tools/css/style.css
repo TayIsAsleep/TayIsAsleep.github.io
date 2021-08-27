@@ -1,0 +1,367 @@
+/* Code from https://stackoverflow.com/a/49421832/13921835 */
+/* Media Queries */
+/* Code from https://stackoverflow.com/a/2310809 */
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap");
+/* GENERATE THESE AT https://codepen.io/sosuke/pen/Pjoqqp */
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'JetBrains Mono', monospace;
+  color: #dddddd;
+}
+
+body {
+  background-color: black;
+}
+
+.loader {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  background-color: black;
+}
+
+.bg-image {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Add the blur effect */
+  -webkit-filter: blur(8px);
+  filter: blur(8px);
+  -o-object-fit: cover;
+     object-fit: cover;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  max-width: 80vw;
+  max-height: 80vh;
+  width: 100%;
+  min-width: 100vw;
+  min-height: 100vh;
+  z-index: -99999;
+}
+
+.main-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.tool {
+  border: 2px solid #bbbbbb;
+  width: -moz-fit-content;
+  width: -webkit-fit-content;
+  width: fit-content;
+  padding: 0.5em;
+  margin: 2px;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Button related stuff */
+.button {
+  border: 2px solid #bbbbbb;
+  width: -moz-fit-content;
+  width: -webkit-fit-content;
+  width: fit-content;
+  padding: 0.5em;
+  margin: 2px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  text-align: center;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  float: left;
+  background: black;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  /* Learned from https://sass-lang.com/documentation/at-rules/control/each#destructuring */
+}
+
+.button p {
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  display: inline;
+}
+
+.button img {
+  display: none;
+}
+
+.button.button:hover {
+  border-color: #eeeeee;
+}
+
+.button.button:hover p {
+  color: #eeeeee;
+}
+
+.button.button-found {
+  border-color: lime !important;
+}
+
+.button.button-found p {
+  color: lime !important;
+}
+
+.button.button-found.icon-button img {
+  -webkit-filter: brightness(0%) invert(58%) sepia(83%) saturate(2771%) hue-rotate(82deg) brightness(113%) contrast(130%);
+          filter: brightness(0%) invert(58%) sepia(83%) saturate(2771%) hue-rotate(82deg) brightness(113%) contrast(130%);
+}
+
+.button.button-cantbe {
+  border-color: red !important;
+}
+
+.button.button-cantbe p {
+  color: red !important;
+}
+
+.button.button-cantbe.icon-button img {
+  -webkit-filter: brightness(0%) invert(14%) sepia(94%) saturate(7483%) hue-rotate(3deg) brightness(103%) contrast(113%);
+          filter: brightness(0%) invert(14%) sepia(94%) saturate(7483%) hue-rotate(3deg) brightness(103%) contrast(113%);
+}
+
+.button.button-off {
+  border-color: #2f2f2f !important;
+}
+
+.button.button-off p {
+  color: #2f2f2f !important;
+}
+
+.button.button-off.icon-button img {
+  -webkit-filter: brightness(0%) invert(16%) sepia(0%) saturate(0%) hue-rotate(347deg) brightness(97%) contrast(92%);
+          filter: brightness(0%) invert(16%) sepia(0%) saturate(0%) hue-rotate(347deg) brightness(97%) contrast(92%);
+}
+
+.buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.icon-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.icon-button img {
+  display: inline;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  margin-left: 10px;
+}
+
+/* Text related stuff: */
+.title {
+  text-align: center;
+  color: #dddddd;
+}
+
+.title h5 {
+  color: #aaaaaa;
+  text-align: center;
+}
+
+a, a:link, a :visited, a :active {
+  color: #c4c4c4;
+}
+
+a:hover {
+  color: #dddddd;
+}
+
+.fields .selection-field, .fields .output-field {
+  border: 2px solid #bbbbbb;
+  width: -moz-fit-content;
+  width: -webkit-fit-content;
+  width: fit-content;
+  padding: 0.5em;
+  margin: 2px;
+  float: left;
+  width: calc(50% - 4px);
+  height: 503px;
+  overflow-y: auto;
+}
+
+br {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  clear: both;
+  float: none;
+}
+
+.ghosts-it-could-be-container {
+  border: 2px solid #bbbbbb;
+  width: -moz-fit-content;
+  width: -webkit-fit-content;
+  width: fit-content;
+  padding: 0.5em;
+  margin: 2px;
+  white-space: break-spaces;
+}
+
+.ghosts-it-could-be-container div p, .ghosts-it-could-be-container div a {
+  display: inline;
+}
+
+.ghosts-cant-be {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: auto;
+  padding: 10px 0px;
+}
+
+.evidence-buttons {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.border {
+  border: 2px solid #bbbbbb;
+  width: -moz-fit-content;
+  width: -webkit-fit-content;
+  width: fit-content;
+  padding: 0.5em;
+  margin: 2px;
+}
+
+.tool-evidence-tracker {
+  /* HAS TO BE FIXED AT SOME POINT */
+  max-width: 78%;
+}
+
+.tool-evidence-tracker .main-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+}
+
+.tool-evidence-tracker .button {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  width: unset;
+}
+
+@media only screen and (max-width: 667px) {
+  .tool-evidence-tracker .main-content {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .tool-evidence-tracker .main-content .evidence-buttons {
+    -webkit-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+            order: 1;
+  }
+  .tool-evidence-tracker .main-content .ghosts-cant-be-container {
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
+  }
+  .tool-evidence-tracker .main-content .ghosts-it-could-be-container {
+    -webkit-box-ordinal-group: 4;
+        -ms-flex-order: 3;
+            order: 3;
+    min-width: 100%;
+    height: -webkit-fit-content !important;
+    height: -moz-fit-content !important;
+    height: fit-content !important;
+  }
+  .tool-evidence-tracker .main-content .break {
+    display: none;
+  }
+}
+
+/* MOBILE TWEAKS */
+@media only screen and (max-width: 600px) {
+  .main-container {
+    -webkit-box-align: baseline;
+        -ms-flex-align: baseline;
+            align-items: baseline;
+    width: 100%;
+  }
+  .tool {
+    max-width: 100vw;
+    padding-bottom: 0px;
+  }
+  .button {
+    padding: 1em;
+  }
+  .main-content > div {
+    margin-bottom: 5vw;
+  }
+}
+
+.break {
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+  height: 0;
+}
+
+/* Maybe can delete: */
+.button-evidence-found {
+  width: 230px;
+}
+/*# sourceMappingURL=style.css.map */
