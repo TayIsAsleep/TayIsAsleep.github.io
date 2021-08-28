@@ -113,7 +113,7 @@ var ghosts_lookup_table = {
     "Hantu":[
         "fingerprints",
         "orbs",
-        "writing"
+        "freezing_temps"
     ],
 
     "Goryo":[
