@@ -19,7 +19,9 @@ async function run_bg_updater(){
     // console.log("run_bg_updater() started")
     while (true){
         await sleep(10000);
-        next_bg_image();
+        if (!document.hidden){
+            next_bg_image();
+        }
     }
 }
 
