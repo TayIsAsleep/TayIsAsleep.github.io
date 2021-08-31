@@ -27,6 +27,19 @@
         "url": "redirect?app=phasmo_item_randomizer"
     },
 
+
+
+
+    "challange_randomizer":{
+        "include": false,
+        "url": "apps/me/phasmophobia/phasmo_tools/index.html?app=challange_randomizer",
+        "title":"Phasmophobia Evidence Tracker",
+        "description":"Challange Randomizer for Phasmophobia"
+    },
+
+
+
+
     "ttt": {
         "include": true,
         "url": "apps/me/games/ttt/index.html",

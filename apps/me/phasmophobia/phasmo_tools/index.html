@@ -15,13 +15,13 @@
         <link rel="icon" type="image/png" href="./img/favicon.jpg">
         <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-touch-icon.png">
         
-        <link rel="stylesheet" href="./css/style.css?random=5000820870">
+        <link rel="stylesheet" href="./css/style.css?random=7143193407">
 
         <script type="text/javascript" src="../../../../global/js/jquery-3.6.0.min.js"></script>
-        <script type="text/javascript" src="../../../../global/js/uri.js?random=5000820870"></script>
-        <script type="text/javascript" src="../../../../js/script.js?random=5000820870"></script>
-        <script type="text/javascript" src="../../../../global/js/scripts.js?random=5000820870"></script>
-        <script type="text/javascript" src="./js/phasmo_tools.js?random=5000820870" defer></script>
+        <script type="text/javascript" src="../../../../global/js/uri.js?random=7143193407"></script>
+        <script type="text/javascript" src="../../../../js/script.js?random=7143193407"></script>
+        <script type="text/javascript" src="../../../../global/js/scripts.js?random=7143193407"></script>
+        <script type="text/javascript" src="./js/phasmo_tools.js?random=7143193407" defer></script>
     </head>
     <body>
         
@@ -325,6 +325,26 @@
 
             </div>
             <!-- #endregion -->
+            <!-- #region Challange Randomizer -->
+            <div class="tool tool-challange-randomizer">
+
+                <div class="title">
+                    <h1>Phasmophobia Challange/Map Randomizer</h1>
+                    <h5>Made by <a target="_blank" href="https://github.com/TayIsAsleep">TayIsAsleep</a></h5>
+                </div>
+
+                <div class="challange-display">
+                    <p style="text-align: center;">Click the button below to generate a map/challange combo!</p>
+                </div>
+    
+                <div class="buttons">
+                    <div id="generate-challange" class="button">
+                        <p>Generate Challange</p>
+                    </div>
+                </div>
+
+            </div>
+            <!-- #endregion -->
 
             <script>
                 $(".tool").css("display","none"); // Hides all tools by default
@@ -332,9 +352,16 @@
                 let url_params = new URLSearchParams(window.location.search);
                 let initial_app = url_params.get('app');
                 let options = {
-                    "evidence_tracker":[".tool-evidence-tracker","Evidence Tracker"],
-                    "item_randomizer":[".tool-item-randomizer","Item Randomizer"]
-                }
+                    "evidence_tracker":[
+                        ".tool-evidence-tracker","Evidence Tracker"
+                    ],
+                    "item_randomizer":[
+                        ".tool-item-randomizer","Item Randomizer"
+                    ],
+                    "challange_randomizer":[
+                        ".tool-challange-randomizer", "Challange Randomizer"
+                    ]
+                };
                 if (Object.keys(options).includes(initial_app)){
                     initial_app = options[initial_app];
                     
