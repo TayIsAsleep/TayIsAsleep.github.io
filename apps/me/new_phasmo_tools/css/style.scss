@@ -1,0 +1,116 @@
+@import "../../../../global/css/unselectable.scss";
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+
+$textColor: #dddddd;
+$buttonColor: #bbbbbb;
+$buttonColorHover: lighten($buttonColor, 20%);
+$buttonColorOff: darken($buttonColor, 55%);
+$buttonColor_found: lime;
+$buttonColor_cantbe: red;
+
+/* GENERATE THESE AT https://codepen.io/sosuke/pen/Pjoqqp */
+$buttonIconColor_green: brightness(0%) invert(58%) sepia(83%) saturate(2771%) hue-rotate(82deg) brightness(113%) contrast(130%);
+$buttonIconColor_red: brightness(0%) invert(14%) sepia(94%) saturate(7483%) hue-rotate(3deg) brightness(103%) contrast(113%);
+$buttonIconColor_off: brightness(0%) invert(16%) sepia(0%) saturate(0%) hue-rotate(347deg) brightness(97%) contrast(92%);
+
+@mixin border{
+    border: 2px solid $buttonColor;
+    width: -moz-fit-content;
+    width: fit-content;
+    padding: 0.5em;
+    margin: 2px;
+}
+
+*{
+    box-sizing:border-box;
+    font-family: 'JetBrains Mono', monospace;
+    color: $textColor;
+    &:not(ol){
+        margin:0;
+        padding:0;
+    }
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+
+    div.main-container{
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        div.app-container{
+            @include border;
+            padding: 1.5em;
+            max-width: 80vw;
+
+            div.title-container{
+                text-align: center;
+            }
+
+            div.challange-display{
+                margin: 2em;
+            }
+        
+            .buttons{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        
+            li{
+                padding-bottom: 1em;
+            }
+        }
+    }
+}
+
+.button{
+    @include border;
+    @include unselectable;
+
+    text-align: center;
+
+    float: left;    
+    background: black;
+    box-sizing: content-box;
+
+    p{
+        display: inline;
+    }
+    img{
+        display: none;
+    }
+
+    &.button:hover{
+        border-color: $buttonColorHover;
+        p{
+            color: $buttonColorHover;
+        }   
+    }
+
+    /* Learned from https://sass-lang.com/documentation/at-rules/control/each#destructuring */
+    $a:
+        "found" $buttonColor_found $buttonIconColor_green,
+        "cantbe" $buttonColor_cantbe $buttonIconColor_red,
+        "off" $buttonColorOff $buttonIconColor_off;
+    
+    @each $selector, $color, $filter_color in $a{
+        &.button-#{$selector}{
+            border-color: $color !important;
+            p{
+                color: $color !important;
+            }
+            &.icon-button{
+                img{
+                    filter: $filter_color;
+                }
+            }
+        }
+    }
+}
