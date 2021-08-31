@@ -32,9 +32,12 @@ $buttonIconColor_off: brightness(0%) invert(16%) sepia(0%) saturate(0%) hue-rota
     justify-content: center;
 }
 
-*{
+*:not(ol){
     margin:0;
     padding:0;
+}
+
+*{
     box-sizing:border-box;
     font-family: 'JetBrains Mono', monospace;
     color: $textColor;
@@ -152,7 +155,26 @@ body{
         }
     }
 }
-.buttons{ 
+
+
+.tool-challange-randomizer{
+    max-width: 80vw;
+
+    .challange-display{
+        margin: 2em;
+    }
+
+    .buttons{
+        justify-content: center;
+        align-items: center;
+    }
+
+    li{
+        padding-bottom: 1em;
+    }
+}
+
+.buttons{
     // margin: auto;
     // width: max-content;
     display: flex;

@@ -3,9 +3,12 @@
 /* Code from https://stackoverflow.com/a/2310809 */
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap");
 /* GENERATE THESE AT https://codepen.io/sosuke/pen/Pjoqqp */
-* {
+*:not(ol) {
   margin: 0;
   padding: 0;
+}
+
+* {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   font-family: 'JetBrains Mono', monospace;
@@ -153,6 +156,27 @@ body {
 .button.button-off.icon-button img {
   -webkit-filter: brightness(0%) invert(16%) sepia(0%) saturate(0%) hue-rotate(347deg) brightness(97%) contrast(92%);
           filter: brightness(0%) invert(16%) sepia(0%) saturate(0%) hue-rotate(347deg) brightness(97%) contrast(92%);
+}
+
+.tool-challange-randomizer {
+  max-width: 80vw;
+}
+
+.tool-challange-randomizer .challange-display {
+  margin: 2em;
+}
+
+.tool-challange-randomizer .buttons {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.tool-challange-randomizer li {
+  padding-bottom: 1em;
 }
 
 .buttons {
