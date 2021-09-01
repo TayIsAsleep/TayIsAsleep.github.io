@@ -191,10 +191,10 @@ function update_ghosts_it_could_be_container(){
                 let p_entry = document.createElement("p");
 
                 if (ghost_data[current_ghost_id]['evidence_missing'].length == 0){
-                    p_entry.innerHTML = `It is a <a href="https://phasmophobia.fandom.com/wiki/${current_ghost_id}" taget="_blank">${current_ghost_id}</a>!`
+                    p_entry.innerHTML = `It is a <a href="https://phasmophobia.fandom.com/wiki/${current_ghost_id}" target="_blank">${current_ghost_id}</a>!`
                 }
                 else{
-                    p_entry.innerHTML = `It should be a <a href="https://phasmophobia.fandom.com/wiki/${current_ghost_id}" taget="_blank">${current_ghost_id}</a><br><br>Evidence missing: `
+                    p_entry.innerHTML = `It should be a <a href="https://phasmophobia.fandom.com/wiki/${current_ghost_id}" target="_blank">${current_ghost_id}</a><br><br>Evidence missing: `
     
                     ghost_data[current_ghost_id]['evidence_missing'].forEach(i => {
                         p_entry.innerHTML += evidence_lookup_table[i]['display_name'] + ", "
@@ -217,7 +217,7 @@ function update_ghosts_it_could_be_container(){
             if (ghost_data[current_ghost_id]['can_be']){
                 let p_entry = document.createElement("p");
     
-                p_entry.innerHTML = `<a href="https://phasmophobia.fandom.com/wiki/${current_ghost_id}" taget="_blank">${current_ghost_id}</a> - `
+                p_entry.innerHTML = `<a href="https://phasmophobia.fandom.com/wiki/${current_ghost_id}" target="_blank">${current_ghost_id}</a> - `
     
                 ghost_data[current_ghost_id]['evidence_missing'].forEach(i => {
                     p_entry.innerHTML += evidence_lookup_table[i]['display_name'] + ", "
