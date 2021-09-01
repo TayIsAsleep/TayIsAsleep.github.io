@@ -37,7 +37,7 @@ function update_hash(){
 
 function run_app_manager(bypass=null){
     // Open the apps.json file and fetch all the app list
-    readTextFile("./apps.json?random=8652855710", async function(text){
+    readTextFile("./apps.json?random=3747920501", async function(text){
         let app_list = JSON.parse(text);
         let url_parameters = Object.fromEntries(new URLSearchParams(window.location.search).entries());
         let specified_app = (bypass != null ? bypass : url_parameters.app);
