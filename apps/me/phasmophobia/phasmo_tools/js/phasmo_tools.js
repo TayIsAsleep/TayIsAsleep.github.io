@@ -1,14 +1,3 @@
-function appendText(location,text,dont_fade_in=false) {
-    let a = $(location).append($('<p class="new-text"></p>').text(text));
-    a = a.children();
-    a = $(a[a.length - 1]);
-    a.fadeOut(0);
-    if (!dont_fade_in){
-        a.fadeIn(200)
-    }
-    return a;
-}
-
 $(window).on("load", function(){
     $(".tool").css("display","none"); // Hides all tools by default
 
@@ -33,29 +22,6 @@ $(window).on("load", function(){
     }
     $(initial_app[0]).css("display","inline"); // Only shows the selected
     document.title = initial_app[1];
-
-
-    if (initial_app[1] == "Evidence Tracker"){
-        update_ghosts_it_could_be_container()
-
-        $(".ghosts-it-could-be-container").width($(".ghosts-it-could-be-container").width());
-        $(".ghosts-it-could-be-container").height($(".ghosts-it-could-be-container").height());
-    
-        $(".main-content").width($(".ghosts-cant-be").width());
-        // // $(".ghosts-cant-be").width($(".ghosts-it-could-be-container").width() + $(".evidence-buttons").width())
-        
-    }
-    else if (initial_app[1] == "Item Randomizer"){
-        reset();
-
-        checkCheckBoxes();
-    
-        $("#reset-button").addClass("button-off");
-    }
-    else{
-        // pass
-    }
-
 
     /* Fades out the loader (loading screen) */
     setInterval(function(){

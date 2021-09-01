@@ -1,5 +1,40 @@
+const item_list = [
+    "EMF Reader",
+    "Flashlight",
+    "Photo Camera",
+    "Lighter",
+    "Candle",
+    "UV Light",
+    "Crucifix",
+    "Video Camera",
+    "Spirit Box",
+    "Salt",
+    "Smudge Sticks",
+    "Tripod",
+    "Strong Flashlight",
+    "Motion Sensor",
+    "Sound Sensor",
+    "Thermometer",
+    "Sanity Pills",
+    "Ghost Writing Book",
+    "Parabolic Microphone",
+    "Glowstick",
+    "Head Mounted Camera",
+    "D.O.T.S. Projector"
+].sort();
+
 var inPool = [];
 
+function appendText(location,text,dont_fade_in=false) {
+    let a = $(location).append($('<p class="new-text"></p>').text(text));
+    a = a.children();
+    a = $(a[a.length - 1]);
+    a.fadeOut(0);
+    if (!dont_fade_in){
+        a.fadeIn(200)
+    }
+    return a;
+}
 function make_all_options(a){
     inPool = [];
     $(".output-field-text").html("");
@@ -19,7 +54,7 @@ function generatePool(){
     });
     inPool = inPool.sort(() => Math.random() - 0.5);
 }
-function reset(){
+function item_randomizer_reset(){
     $(".new-text").fadeOut(250,function(){
         $(".output-field").html("");
     });
@@ -74,33 +109,9 @@ function checkCheckBoxes(){
         $("#deselect-all-button").removeClass("button-off");
     }
 }
-
 function generate_selection_field(){
     let dest = document.getElementsByClassName("selection-field")[0];
-    [
-        "EMF Reader",
-        "Flashlight",
-        "Photo Camera",
-        "Lighter",
-        "Candle",
-        "UV Light",
-        "Crucifix",
-        "Video Camera",
-        "Spirit Box",
-        "Salt",
-        "Smudge Sticks",
-        "Tripod",
-        "Strong Flashlight",
-        "Motion Sensor",
-        "Sound Sensor",
-        "Thermometer",
-        "Sanity Pills",
-        "Ghost Writing Book",
-        "Parabolic Microphone",
-        "Glowstick",
-        "Head Mounted Camera",
-        "D.O.T.S. Projector"
-    ].sort().forEach(current => {
+    item_list.forEach(current => {
         
         let new_div = document.createElement("div");
         let new_input = document.createElement("input");
@@ -125,10 +136,21 @@ function generate_selection_field(){
     });
 };
 
-generate_selection_field();
+$(window).on("load", function(){
+    generate_selection_field();
+    document.querySelectorAll(".selection-field, .output-field").forEach(e => {
+        e.style.height = `calc(20px + calc(${item_list.length} * 21px))`
+    });
+
+    item_randomizer_reset();
+
+    checkCheckBoxes();
+    
+    $("#reset-button").addClass("button-off");
+});
 
 $("#reset-button").on("click", function(){
-    reset();
+    item_randomizer_reset();
 });
 $("#draw-item-button").on("click", function(){
     drawItem();
@@ -142,17 +164,17 @@ $("#draw-all-button").on("click",async function(){
 });
 $("#select-all-button").on("click", function(){
     make_all_options(true);
-    reset();
+    item_randomizer_reset();
     $("#select-all-button").addClass("button-off");
     $("#deselect-all-button").removeClass("button-off");
 });
 $("#deselect-all-button").on("click", function(){
     make_all_options(false);
-    reset();
+    item_randomizer_reset();
     $("#deselect-all-button").addClass("button-off");
     $("#select-all-button").removeClass("button-off");
 });
 $(".item-option").on("click", function(){
-    reset();
+    item_randomizer_reset();
     checkCheckBoxes();
 });

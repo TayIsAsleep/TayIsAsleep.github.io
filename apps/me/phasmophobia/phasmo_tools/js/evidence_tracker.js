@@ -122,10 +122,6 @@ Object.keys(ghosts_lookup_table).forEach(i => {
 });
 
 
-
-
-
-
 // returns the current status of all the ghosts in raw data
 function get_ghost_status(){
     let to_return = {};
@@ -253,7 +249,6 @@ function update_ghosts_it_could_be_container(){
         dest.appendChild(to_print[i])
     })
 };
-
 function init(){
     let dest = null;
     //#region generate_evidence_buttons
@@ -308,9 +303,18 @@ function init(){
         });
         return !c;
     }
-};
-init();
 
+    update_ghosts_it_could_be_container();
+
+    $(".ghosts-it-could-be-container").width($(".ghosts-it-could-be-container").width());
+    $(".ghosts-it-could-be-container").height($(".ghosts-it-could-be-container").height());
+
+    $(".main-content").width($(".ghosts-cant-be").width());  
+};
+
+$(window).on("load", function(){
+    init();
+});
 
 $(".button-ghost-cant-be").on("click", function(){
     let me = ghosts_lookup_table[document.querySelector(`#${this.id} > p`).innerHTML];
