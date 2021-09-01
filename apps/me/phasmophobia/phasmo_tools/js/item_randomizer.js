@@ -30,13 +30,12 @@ function reset(){
     generatePool();
 }
 function drawItem(){
-    if (inPool.length == 0){
-        return -1;
-    }
+    if (inPool.length == 0){return -1;}
+
     $("#reset-button").removeClass("button-off")
     
     let item = $(`#${inPool.pop()}`).attr("displayName");
-    appendText(".output-field",item)
+    appendText(".output-field", item)
 
     if (inPool.length == 0){
         $("#draw-all-button").addClass("button-off")
@@ -75,6 +74,58 @@ function checkCheckBoxes(){
         $("#deselect-all-button").removeClass("button-off");
     }
 }
+
+function generate_selection_field(){
+    let dest = document.getElementsByClassName("selection-field")[0];
+    [
+        "EMF Reader",
+        "Flashlight",
+        "Photo Camera",
+        "Lighter",
+        "Candle",
+        "UV Light",
+        "Crucifix",
+        "Video Camera",
+        "Spirit Box",
+        "Salt",
+        "Smudge Sticks",
+        "Tripod",
+        "Strong Flashlight",
+        "Motion Sensor",
+        "Sound Sensor",
+        "Thermometer",
+        "Sanity Pills",
+        "Ghost Writing Book",
+        "Parabolic Microphone",
+        "Glowstick",
+        "Head Mounted Camera",
+        "D.O.T.S. Projector"
+    ].sort().forEach(current => {
+        
+        let new_div = document.createElement("div");
+        let new_input = document.createElement("input");
+        let new_label = document.createElement("label");
+
+        new_input.id = current.toLowerCase().replaceAll(" ","-").replaceAll(".","-");
+        new_input.classList.add("item-option");
+        new_input.setAttribute('displayname', current);
+        new_input.setAttribute('type', "checkbox");
+        new_input.setAttribute('name', current.toLowerCase().replaceAll(" ","-"));
+        new_input.setAttribute('value', current.toLowerCase().replaceAll(" ","-"));
+        new_input.setAttribute('checked', "");
+
+        new_label.innerHTML = current;
+        new_label.setAttribute('for', current.toLowerCase().replaceAll(" ","-"));
+
+        new_div.appendChild(new_input);
+        new_div.appendChild(new_label);
+        new_div.appendChild(document.createElement("br"));
+
+        dest.appendChild(new_div);
+    });
+};
+
+generate_selection_field();
 
 $("#reset-button").on("click", function(){
     reset();

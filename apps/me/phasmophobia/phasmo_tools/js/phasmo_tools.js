@@ -1,3 +1,14 @@
+function appendText(location,text,dont_fade_in=false) {
+    let a = $(location).append($('<p class="new-text"></p>').text(text));
+    a = a.children();
+    a = $(a[a.length - 1]);
+    a.fadeOut(0);
+    if (!dont_fade_in){
+        a.fadeIn(200)
+    }
+    return a;
+}
+
 $(window).on("load", function(){
     $(".tool").css("display","none"); // Hides all tools by default
 
