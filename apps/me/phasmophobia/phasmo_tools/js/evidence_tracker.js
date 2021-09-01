@@ -314,68 +314,71 @@ function init(){
 
 $(window).on("load", function(){
     init();
-});
 
-$(".button-ghost-cant-be").on("click", function(){
-    let me = ghosts_lookup_table[document.querySelector(`#${this.id} > p`).innerHTML];
-    
-    if (me["found_status"] == "cant_be"){
-        me["found_status"] = "0"
+    $(".button-ghost-cant-be").on("click", function(){
+        let me = ghosts_lookup_table[document.querySelector(`#${this.id} > p`).innerHTML];
         
-        this.classList.remove("button-cantbe")
-    }
-    else{
-        me["found_status"] = "cant_be"
-        this.classList.add("button-cantbe")
-    }
-
-    update_ghosts_it_could_be_container();
-});
-$(".evidence-button").mousedown(function(ev){
-    let this_evidence_object = evidence_lookup_table[this.getAttribute("evidence-id")];
-
-    if (Array.from(this.classList).includes("button-off")){return;};
-
-    this.classList.remove("button-off");
-    this.classList.remove("button-found");
-    this.classList.remove("button-cantbe");
-
-    if (ev.which == 3){ // If rightclick
-        if (this_evidence_object.found_status == "0"){
-            this.classList.add("button-cantbe");
-            this_evidence_object.found_status = "cant_be"
+        if (me["found_status"] == "cant_be"){
+            me["found_status"] = "0"
+            
+            this.classList.remove("button-cantbe")
         }
         else{
-            this_evidence_object.found_status = "0"
+            me["found_status"] = "cant_be"
+            this.classList.add("button-cantbe")
         }
-    }
-    else{ // If leftclick
-        if (this_evidence_object.found_status == "0"){
-            this.classList.add("button-found");
-            this_evidence_object.found_status = "found"
+    
+        update_ghosts_it_could_be_container();
+    });
+    $(".evidence-button").mousedown(function(ev){
+        console.log("test")
+    
+        let this_evidence_object = evidence_lookup_table[this.getAttribute("evidence-id")];
+    
+        if (Array.from(this.classList).includes("button-off")){return;};
+    
+        this.classList.remove("button-off");
+        this.classList.remove("button-found");
+        this.classList.remove("button-cantbe");
+    
+        if (ev.which == 3){ // If rightclick
+            if (this_evidence_object.found_status == "0"){
+                this.classList.add("button-cantbe");
+                this_evidence_object.found_status = "cant_be"
+            }
+            else{
+                this_evidence_object.found_status = "0"
+            }
         }
-        else if (this_evidence_object.found_status == "found"){
-            this.classList.add("button-cantbe");
-            this_evidence_object.found_status = "cant_be"
+        else{ // If leftclick
+            if (this_evidence_object.found_status == "0"){
+                this.classList.add("button-found");
+                this_evidence_object.found_status = "found"
+            }
+            else if (this_evidence_object.found_status == "found"){
+                this.classList.add("button-cantbe");
+                this_evidence_object.found_status = "cant_be"
+            }
+            else{
+                this_evidence_object.found_status = "0"
+            }
         }
-        else{
-            this_evidence_object.found_status = "0"
-        }
-    }
-
-    update_ghosts_it_could_be_container()
-});
-$("#button-evidence-reset").on("click", function(){
-    Object.keys(evidence_lookup_table).forEach(i => {
-        evidence_lookup_table[i]['found_status'] = "0";
-    })
-    Object.keys(ghosts_lookup_table).forEach(i => {
-        ghosts_lookup_table[i]['found_status'] = "0";
-    })
-
-    $(".button").removeClass("button-off");
-    $(".button").removeClass("button-found");
-    $(".button").removeClass("button-cantbe");
-
-    update_ghosts_it_could_be_container();
+    
+        update_ghosts_it_could_be_container()
+    });
+    $("#button-evidence-reset").on("click", function(){
+        Object.keys(evidence_lookup_table).forEach(i => {
+            evidence_lookup_table[i]['found_status'] = "0";
+        })
+        Object.keys(ghosts_lookup_table).forEach(i => {
+            ghosts_lookup_table[i]['found_status'] = "0";
+        })
+    
+        $(".button").removeClass("button-off");
+        $(".button").removeClass("button-found");
+        $(".button").removeClass("button-cantbe");
+    
+        update_ghosts_it_could_be_container();
+    });
+    
 });
