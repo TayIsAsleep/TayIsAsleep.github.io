@@ -19,17 +19,20 @@ def hashMe(fn):
         
 
 for path, subdirs, files in os.walk(os.getcwd()):
+    if "\\.git\\" in path:
+        continue
     for name in files:
+
         # if name == "index.html":
         try:
             this_file = os.path.join(path, name)
             print(this_file)
             hashMe(this_file)
         except:
-            traceback.print_exc()
+            # traceback.print_exc()
             pass
 
 # os.system('git add . && git commit -m "Updated" && git push')
 
-# print("Closing this window in 3 secounds...")
-# time.sleep(3)
+print("Closing this window in 3 secounds...")
+time.sleep(3)
