@@ -15,38 +15,19 @@
         <link rel="icon" type="image/png" href="./img/favicon.jpg">
         <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-touch-icon.png">
         
-        <link rel="stylesheet" href="./css/style.css?random=2350417344">
+        <link rel="stylesheet" href="./css/style.css?random=1570293858">
 
         <script type="text/javascript" src="../../../../global/js/jquery-3.6.0.min.js"></script>
-        <script type="text/javascript" src="../../../../global/js/uri.js?random=2350417344"></script>
-        <script type="text/javascript" src="../../../../js/script.js?random=2350417344"></script>
-        <script type="text/javascript" src="../../../../global/js/scripts.js?random=2350417344"></script>
-        <script type="text/javascript" src="./js/phasmo_tools.js?random=2350417344" defer></script>
+        <script type="text/javascript" src="../../../../global/js/uri.js?random=1570293858"></script>
+        <script type="text/javascript" src="../../../../js/script.js?random=1570293858"></script>
+        <script type="text/javascript" src="../../../../global/js/scripts.js?random=1570293858"></script>
+        <script type="text/javascript" src="./js/phasmo_tools.js?random=1570293858" defer></script>
+        <script type="text/javascript" src="./js/bg_handler.js?random=1570293858" defer></script>
+        <script type="text/javascript" src="./js/evidence_tracker.js?random=1570293858" defer></script>
+        <script type="text/javascript" src="./js/challange_randomizer.js?random=1570293858" defer></script>
+        <script type="text/javascript" src="./js/item_randomizer.js?random=1570293858" defer></script>
     </head>
     <body>
-        
-        <!-- #region Background images -->
-        <div id="bg-image" style="opacity: 0;"></div>
-        <script>
-            /* IDK why, but these has to be in the HTML code for it to work properly */
-            function generate_bg_images(){
-                let dest = document.getElementById("bg-image");
-                let image_count_string = "image_count_string_1_14_image_count_string_2";
-                let image_count = parseInt(image_count_string.split("string_1_")[1].split("_image")[0])
-
-                for (let i = 1; i <= image_count; i++) {
-                    let new_image = document.createElement("img");
-                    
-                    new_image.src = `./img/bg/bg${i}.jpg`;
-                    new_image.alt = `bg${i}`;
-                    new_image.classList.add("bg-image");
-
-                    dest.appendChild(new_image);
-                }
-            };
-            generate_bg_images();
-        </script>
-        <!-- #endregion -->
         
         <div class="main-container" style="opacity: 0;">
             <!-- #region Tool Selector -->
@@ -60,90 +41,14 @@
                 
                 <p>Press <a href="?app=evidence_tracker">here</a> to go to the Phasmophobia Evidence Tracker</p>
                 <p>Press <a href="?app=item_randomizer">here</a> to go to the Phasmophobia Item Randomizer</p>
+                <p>Press <a href="?app=challange_randomizer">here</a> to go to the Phasmophobia Challange Randomizer</p>
+
             </div>
             <!-- #endregion -->
+
             <!-- #region Evidence Tracker -->
             <div class="tool tool-evidence-tracker">
-                <script>
-                    var ghosts_evidence = {
-                        "Shade":[
-                            "evidence_found_emf5",
-                            "evidence_found_orbs",
-                            "evidence_found_writing"
-                        ],
-                        "Phantom":[
-                            "evidence_found_emf5",
-                            "evidence_found_orbs",
-                            "evidence_found_freezing_temps"
-                        ],
-                        "Jinn":[
-                            "evidence_found_emf5",
-                            "evidence_found_orbs",
-                            "evidence_found_spirit_box"
-                        ],
-                        "Yurei":[
-                            "evidence_found_freezing_temps",
-                            "evidence_found_orbs",
-                            "evidence_found_writing"
-                        ],
-                        "Mare":[
-                            "evidence_found_freezing_temps",
-                            "evidence_found_orbs",
-                            "evidence_found_spirit_box"
-                        ],
-                        "Demon":[
-                            "evidence_found_freezing_temps",
-                            "evidence_found_spirit_box",
-                            "evidence_found_writing"
-                        ],
-                        "Banshee":[
-                            "evidence_found_emf5",
-                            "evidence_found_freezing_temps",
-                            "evidence_found_fingerprints"
-                        ],
-                        "Revenant":[
-                            "evidence_found_emf5",
-                            "evidence_found_fingerprints",
-                            "evidence_found_writing"
-                        ],
-                        "Oni":[
-                            "evidence_found_emf5",
-                            "evidence_found_spirit_box",
-                            "evidence_found_writing"
-                        ],
-                        "Poltergeist":[
-                            "evidence_found_fingerprints",
-                            "evidence_found_orbs",
-                            "evidence_found_spirit_box"
-                        ],
-                        "Spirit":[
-                            "evidence_found_spirit_box",
-                            "evidence_found_fingerprints",
-                            "evidence_found_writing"
-                        ],
-                        "Wraith":[
-                            "evidence_found_freezing_temps",
-                            "evidence_found_spirit_box",
-                            "evidence_found_fingerprints"
-                        ]
-                    };
 
-                    if (new URLSearchParams(window.location.search).get("beta") == "1"){
-                        ghosts_evidence["Yokai"] = [
-                            "evidence_found_spirit_box",
-                            "evidence_found_orbs",
-                            "evidence_found_writing"
-                        ]
-                        ghosts_evidence["Hantu"] = [
-                            "evidence_found_fingerprints",
-                            "evidence_found_orbs",
-                            "evidence_found_writing"
-                        ]
-                    };
-
-                    ghosts_evidence = sortObjectByKeys(ghosts_evidence)
-
-                </script>
                 <div class="title">
                     <h1>Phasmophobia Evidence Tracker</h1>
                     <h5>Made by <a target="_blank" href="https://github.com/TayIsAsleep">TayIsAsleep</a></h5>
@@ -165,80 +70,8 @@
                         <p style="text-align: center;">It can't be...</p>
                         <div class="ghosts-cant-be"></div>
                     </div>
-
-                    <!-- <div class="button stable-ghost-button" onclick="updateURLParameterLive({'a':'beta_evidence_tracker','app':'beta_evidence_tracker'}); update_hash();" style="max-width: max-content;">Looking for the new beta ghosts?</div> -->
-
-                    <!-- <div class="button stable-ghost-button" onclick="window.location.href = '/index.html?app=beta_evidence_tracker'" style="max-width: max-content;">Looking for the new beta ghosts?</div> -->
-
-                    <!-- <div class="button stable-ghost-button" onclick="window.history.pushState(null,null,'/index.html?app=beta_evidence_tracker'); update_hash(); window.location.reload(true);" style="max-width: max-content;">Looking for the new beta ghosts?</div> -->
                     
                 </div>
-
-                <script>
-                    /* IDK why, but these has to be in the HTML code for it to work properly */
-                    function generate_evidence_buttons(){
-                        let dest = document.getElementsByClassName("evidence-buttons")[0];
-                        [
-                            ["emf5","EMF Level 5"],
-                            ["ghost-orbs","Ghost Orbs"],
-                            ["ghost-writing","Ghost Writing"],
-                            ["freezing-temps","Freezing Temperatures"],
-                            ["spirit-box","Spirit Box"],
-                            ["fingerprints","Fingerprints"]   
-                        ].forEach(current => {
-                            let new_button = document.createElement("div");
-                            let new_button_text = document.createElement("p");
-                            let new_button_icon = document.createElement("img");
-                            
-                            new_button_text.innerHTML = current[1];
-
-                            new_button_icon.src = `./img/icon-evidence-${current[0]}.svg`;
-                            new_button_icon.alt = `${current[0]} icon`; 
-
-                            new_button.appendChild(new_button_text);
-                            new_button.appendChild(new_button_icon);
-                            new_button.classList.add("button", "evidence-button");
-
-                            /* ICONS */
-                            // new_button.classList.add("icon-button");
-
-                            new_button.id = `button-evidence-${current[0]}`;
-
-                            dest.appendChild(new_button);
-                            // dest.appendChild(document.createElement("br"));
-                        });
-
-                        // dest.appendChild(document.createElement("br")); //Add the extra BR
-
-                        let new_button = document.createElement("div");
-                        let new_button_text = document.createElement("p");
-                        new_button.id = "button-evidence-reset";
-                        new_button.classList.add("button", "evidence-button")
-                        new_button_text.innerHTML = "Reset";
-                        new_button.appendChild(new_button_text);
-                        dest.appendChild(new_button);
-                    }
-                    function generate_ghosts_cant_be(){
-                        let dest = document.getElementsByClassName("ghosts-cant-be")[0];
-                        
-                        Object.keys(ghosts_evidence).forEach(current => {
-                            let new_button = document.createElement("div");
-                            let new_button_text = document.createElement("p");
-
-                            new_button_text.innerHTML = current;
-
-                            new_button.appendChild(new_button_text);
-                            new_button.classList.add("button", "button-ghost-cant-be");
-                            new_button.id = `button-ghost-${current.toLowerCase()}`;
-                            new_button.setAttribute('value', '0');
-
-                            dest.appendChild(new_button);
-                        });
-                    }
-
-                    generate_evidence_buttons();
-                    generate_ghosts_cant_be();
-                </script>
 
             </div>
             <!-- #endregion -->
@@ -278,7 +111,6 @@
                                 "Thermometer",
                                 "Sanity Pills",
                                 "Ghost Writing Book",
-                                "Infrared Light Sensor",
                                 "Parabolic Microphone",
                                 "Glowstick",
                                 "Head Mounted Camera",
@@ -345,59 +177,9 @@
 
             </div>
             <!-- #endregion -->
-
-            <script>
-                $(".tool").css("display","none"); // Hides all tools by default
-
-                let url_params = new URLSearchParams(window.location.search);
-                let initial_app = url_params.get('app');
-                let options = {
-                    "evidence_tracker":[
-                        ".tool-evidence-tracker","Evidence Tracker"
-                    ],
-                    "item_randomizer":[
-                        ".tool-item-randomizer","Item Randomizer"
-                    ],
-                    "challange_randomizer":[
-                        ".tool-challange-randomizer", "Challange Randomizer"
-                    ]
-                };
-                if (Object.keys(options).includes(initial_app)){
-                    initial_app = options[initial_app];
-                    
-                    // // Create beta button:
-                    // let is_beta = (url_params.get("beta") == "1");
-                    // let b = document.createElement("div");
-                    // b.classList.add(
-                    //     "button",
-                    //     (is_beta ? "beta-ghost-button" : "stable-ghost-button")
-                    // );
-                    // b.setAttribute("onclick",`updateURLParameterLive({'beta':'${(is_beta ? "0" : "1")}'}); update_hash();`);
-                    // b.style.maxWidth = "max-content";
-                    // b.innerText = (is_beta ? "Not on beta?" : "Looking for the new beta ghosts?")
-                    // document.querySelector(".tool-evidence-tracker .main-content").appendChild(b)
-                }
-                else{
-                    initial_app = [".tool-selector","Phasmophobia Tools"];
-                }
-                $(initial_app[0]).css("display","inline"); // Only shows the selected
-                document.title = initial_app[1];
-            </script>
-
         </div>
 
         <div class="loader"></div>
-
-        <!-- <script>
-            // Code from https://stackoverflow.com/a/10338754/13921835
-            $(window).focus(function() {
-                console.log("a")
-            });
-
-            $(window).blur(function() {
-                console.log("b")
-            });
-        </script> -->
 
     </body>
 </html>
