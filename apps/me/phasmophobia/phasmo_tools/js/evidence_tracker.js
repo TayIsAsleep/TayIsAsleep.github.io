@@ -317,7 +317,8 @@ $(window).on("load", function(){
 
     $(".button-ghost-cant-be").on("click", function(){
         let me = ghosts_lookup_table[document.querySelector(`#${this.id} > p`).innerHTML];
-        
+
+        this.classList.remove("button-off")        
         if (me["found_status"] == "cant_be"){
             me["found_status"] = "0"
             
@@ -335,7 +336,14 @@ $(window).on("load", function(){
     
         let this_evidence_object = evidence_lookup_table[this.getAttribute("evidence-id")];
     
-        if (Array.from(this.classList).includes("button-off")){return;};
+        if (Array.from(this.classList).includes("button-off")){
+            if (ev.which == 3){
+                this.classList.remove("button-off");
+                this.classList.add("button-cantbe");
+                this_evidence_object.found_status = "cant_be"
+            }
+            return;
+        };
     
         this.classList.remove("button-off");
         this.classList.remove("button-found");
