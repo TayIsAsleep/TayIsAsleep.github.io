@@ -94,7 +94,7 @@ var ghosts_lookup_table = {
     "Yokai":[
         "spirit_box",
         "orbs",
-        "writing"
+        "dots"
     ],
     "Hantu":[
         "fingerprints",
