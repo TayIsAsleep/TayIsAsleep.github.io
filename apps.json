@@ -100,5 +100,10 @@
         "include":false,
         "hidemenu":true,
         "url": "apps/school/Webbutveckling 2/Layout utan CSS och DIV/index.html"
+    },
+    "BondMoment":{
+        "include":false,
+        "hidemenu":true,
+        "url": "apps/school/Webbutveckling 2/Bygg en sida med figure, img, figcaption och header/index.html"
     }
 }
