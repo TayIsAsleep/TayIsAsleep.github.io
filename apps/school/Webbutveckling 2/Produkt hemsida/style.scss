@@ -5,12 +5,17 @@
 $theme_color_1: rgba(76, 175, 80, 0.3);
 $theme_color_2: white;
 
+@font-face {
+    font-family: "roblox";
+    src: url("Roblox Font Regular.ttf");
+}
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     color: #{$theme_color_2};
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'roblox';
 }
 
 .css-badge{
