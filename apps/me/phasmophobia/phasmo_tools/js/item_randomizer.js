@@ -147,34 +147,36 @@ $(window).on("load", function(){
     checkCheckBoxes();
     
     $("#reset-button").addClass("button-off");
-});
 
-$("#reset-button").on("click", function(){
-    item_randomizer_reset();
-});
-$("#draw-item-button").on("click", function(){
-    drawItem();
-});
-$("#draw-all-button").on("click",async function(){
-    let a = drawItem();
-    while (a != -1){
-        await sleep(8);
-        a = drawItem()
-    }
-});
-$("#select-all-button").on("click", function(){
-    make_all_options(true);
-    item_randomizer_reset();
-    $("#select-all-button").addClass("button-off");
-    $("#deselect-all-button").removeClass("button-off");
-});
-$("#deselect-all-button").on("click", function(){
-    make_all_options(false);
-    item_randomizer_reset();
-    $("#deselect-all-button").addClass("button-off");
-    $("#select-all-button").removeClass("button-off");
-});
-$(".item-option").on("click", function(){
-    item_randomizer_reset();
-    checkCheckBoxes();
+
+
+    $("#reset-button").on("click", function(){
+        item_randomizer_reset();
+    });
+    $("#draw-item-button").on("click", function(){
+        drawItem();
+    });
+    $("#draw-all-button").on("click",async function(){
+        let a = drawItem();
+        while (a != -1){
+            await sleep(8);
+            a = drawItem()
+        }
+    });
+    $("#select-all-button").on("click", function(){
+        make_all_options(true);
+        item_randomizer_reset();
+        $("#select-all-button").addClass("button-off");
+        $("#deselect-all-button").removeClass("button-off");
+    });
+    $("#deselect-all-button").on("click", function(){
+        make_all_options(false);
+        item_randomizer_reset();
+        $("#deselect-all-button").addClass("button-off");
+        $("#select-all-button").removeClass("button-off");
+    });
+    $(".item-option").on("click", function(){
+        item_randomizer_reset();
+        checkCheckBoxes();
+    });
 });
