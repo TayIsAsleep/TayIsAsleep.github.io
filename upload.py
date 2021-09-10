@@ -2,7 +2,6 @@ import re
 import random
 import os
 import time
-import traceback
 
 def hashMe(fn):
     with open(fn,"r") as f:
