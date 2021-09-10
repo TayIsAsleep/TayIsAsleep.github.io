@@ -28,7 +28,7 @@ body{
             margin-bottom: 1em;
 
             img.header-image{
-                width: 20em;
+                width: 15em;
                 border: $border_size * 0.5 solid $color_text;
                 background-color: $color_text;
             }
@@ -49,6 +49,10 @@ body{
 
             h2{
                 margin-bottom: 0.6em;
+            }
+
+            hr{
+                margin: 0 -0.5em;
             }
         }
     }

@@ -27,7 +27,7 @@ body div.main-container div.top-section {
 }
 
 body div.main-container div.top-section img.header-image {
-  width: 20em;
+  width: 15em;
   border: 0.4em solid black;
   background-color: black;
 }
@@ -48,5 +48,9 @@ body div.main-container div.text-section .description {
 
 body div.main-container div.text-section h2 {
   margin-bottom: 0.6em;
+}
+
+body div.main-container div.text-section hr {
+  margin: 0 -0.5em;
 }
 /*# sourceMappingURL=style.css.map */
