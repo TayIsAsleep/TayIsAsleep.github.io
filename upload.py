@@ -14,23 +14,22 @@ def hashMe(fn):
             f'?random={"".join(str(random.randint(0,9)) for x in range(10))}"',
             in_
         )
-    with open(fn,"w") as f:
-        f.write(out)
+
+    if in_ != out:
+        with open(fn,"w") as f:
+            f.write(out)
         
 
 for path, subdirs, files in os.walk(os.getcwd()):
-    if "\\.git\\" in path:
-        continue
+    if "\\.git\\" in path: continue
     for name in files:
-
         # if name == "index.html":
         try:
             this_file = os.path.join(path, name)
             print(this_file)
             hashMe(this_file)
-        except:
-            # traceback.print_exc()
-            pass
+        except: pass
+           
 
 # os.system('git add . && git commit -m "Updated" && git push')
 
