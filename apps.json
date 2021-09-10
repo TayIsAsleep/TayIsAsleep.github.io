@@ -1,4 +1,10 @@
 {
+    "cv": {
+        "include": false,
+        "hidemenu":true,
+        "url": "apps/me/cv/index.html"
+    },
+
     "evidence_tracker": {
         "include": true,
         "url": "apps/me/phasmophobia/phasmo_tools/index.html?app=evidence_tracker",

@@ -10,6 +10,8 @@ function readTextFile(file, callback){
     rawFile.send(null);
 };
 
+
+
 function combine_iframe_and_window_params(ignore=["app"]){
     let params = Object.assign({},
         Object.fromEntries(new URLSearchParams(window.location.search).entries()),
@@ -42,8 +44,17 @@ function run_app_manager(bypass=null){
         let url_parameters = Object.fromEntries(new URLSearchParams(window.location.search).entries());
         let specified_app = (bypass != null ? bypass : url_parameters.app);
 
+        // Code for shorthand URL param
+        let first_object_text = false;
+        let first_object = false;
+        try {
+            first_object_text = Array.from( new URLSearchParams(window.location.search).entries() )[0][0];
+            first_object = Object.keys(app_list).includes(first_object_text);
+        }catch{}
+
         // If the app specified is actually in the list of apps:
-        if (Object.keys(app_list).includes(specified_app)){
+        if (Object.keys(app_list).includes(specified_app) || first_object){
+            if (first_object){ specified_app = first_object_text; }; // Code for shorthand URL param
 
             // Checks if its a redirect or not
             while (app_list[specified_app].url.startsWith("redirect")){
