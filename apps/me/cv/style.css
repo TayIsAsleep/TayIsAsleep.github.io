@@ -39,14 +39,11 @@ body div.main-container div.text-section {
 
 body div.main-container div.text-section .date {
   color: black;
+  padding-left: 0.75rem;
 }
 
 body div.main-container div.text-section .description {
   margin-top: 0.8em;
-}
-
-body div.main-container div.text-section h6 {
-  padding-left: 0.75rem;
 }
 
 body div.main-container div.text-section h2 {
