@@ -1,0 +1,23 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+div.fieldset-container{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0.5em;
+    align-items: center;
+
+    div{
+        margin: 0.5em 0;
+        flex: 1 0 calc(100% / 2);
+        text-align: center;
+    }
+}
+
+input,select{&:focus{
+    background-color: red;
+    width: 70%;
+}}
