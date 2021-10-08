@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <script src="script.js" defer></script>
+        <title>Validering</title>
+        <style>
+            body{
+                background-color: rgb(8,39,245);
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>RANDOM NUMBERS</h1>
+        <div class="center">
+            <h3>Unsorted list of random numbers</h3>
+            <div id="unsorted"></div>
+            <h3>Sorted list of random numbers</h3>
+            <div id="sorted"></div>
+        </div>
+
+        <br>
+
+        <h1>JS VALIDATION</h1>
+        <fieldset>
+            <legend>
+                Registrera dig
+            </legend>
+
+            <div>
+                <label for="First_Name">Förnamn:</label><br>
+                <input id="firstname" type="text"><br>
+
+                <label for="Last_Name">Efternamn:</label><br>
+                <input id="lastname" type="text"><br>
+
+                <label for="email">E-mail</label><br>
+                <input id="mail" type="text"><br>
+
+                <label for="Password"> Lösenord:</label><br>
+                <input id="password1" type="password"><br>
+
+                <label for="Password"> Upprepa Lösenord:</label><br>
+                <input id="password2" type="password"><br>
+            </div>
+
+            <br>
+
+            <button id="btnsubmit" type="submit" value="Submit" onclick="submit()">Submit</button>
+        </fieldset>
+
+        <br>
+
+        <h1>HTML Validation</h1>
+        <fieldset>
+            <legend>
+                Registrera dig
+            </legend>
+
+            <div>
+                <form method="POST" action="done.html">
+
+                    <label for="First_Name">Förnamn:</label><br>
+                    <input id="firstname" type="text"><br>
+    
+                    <label for="Last_Name">Efternamn:</label><br>
+                    <input id="lastname" type="text"><br>
+    
+                    <label for="email">E-mail</label><br>
+                    <input id="mail" ttype="email" pattern="^\S+@\S+\.\S+$"><br>
+    
+                    <label for="Password"> Lösenord:</label><br>
+                    <input id="password1" type="password"><br>
+    
+                    <label for="Password"> Upprepa Lösenord:</label><br>
+                    <input id="password2" type="password"><br>
+                    
+                    <br>
+                    
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </fieldset>
+    </body>
+</html>
