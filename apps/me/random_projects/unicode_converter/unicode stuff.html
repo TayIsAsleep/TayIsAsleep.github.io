@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Unicode Converter</title>
+        <script src="script.js"></script>
+    </head>
+    <body>        
+        <script>
+            var url_params = (new URLSearchParams(window.location.search));
+            var param_encode = url_params.get("encode");
+            var param_decode = url_params.get("decode");
+            var B;
+
+            function generateBaseX(x, offset=32){
+                return Array.from(Array(x + offset).keys()).map( x => String.fromCharCode(x) ).join("").slice(offset);
+            }
+
+            B = generateBaseX(65504)
+
+            if (param_encode){
+                let encode_output = base_encode(param_encode, B);
+                console.log(`Encoding: ${param_encode} => ${encode_output}`);
+                console.log(encode_output);
+            };
+            if (param_decode){
+                let decode_output = base_decode(param_decode, B);
+                console.log(`Decoding: ${param_decode} => ${decode_output}`);
+                console.log(decode_output);
+
+                if (param_encode && param_decode){
+                    console.log(parseInt(param_encode).toString());
+                    console.log(parseInt(param_encode).toString() == decode_output);
+                }
+            };
+        </script>
+    </body>
+</html>
