@@ -136,7 +136,8 @@ var ghosts_lookup_table = {
 };
 Object.keys(ghosts_lookup_table).forEach(i => {
     ghosts_lookup_table[i] = {
-        "id": i,
+        "id": i.replaceAll(" ", "_").toLowerCase(),
+        "display_name": i,
         "found_status": "0",
         "evidence": ghosts_lookup_table[i]
     }
@@ -188,7 +189,8 @@ function update_ghosts_it_could_be_container(){
 
     let ghosts_it_can_be_count = 0;
     Object.keys(ghost_data).forEach(i => {
-        let ghost_button = document.querySelector(`[id="button-ghost-${i.toLowerCase()}"]`);
+        let ghost_button = document.querySelector(`#button-ghost-${ghosts_lookup_table[i].id}`);
+        
         let classList = $(ghost_button).attr('class').split(/\s+/);
 
         if (ghost_data[i]['can_be']){
@@ -284,7 +286,7 @@ function init(){
         new_button.appendChild(new_button_text);
         new_button.classList.add("button", "evidence-button");
         new_button.setAttribute("evidence-id", i)
-        new_button.id = `button-evidence-${i}`;
+        new_button.id = `button-evidence-${i.replaceAll(" ", "_")}`;
 
         dest.appendChild(new_button);
     });
@@ -304,11 +306,11 @@ function init(){
         let new_button = document.createElement("div");
         let new_button_text = document.createElement("p");
 
-        new_button_text.innerHTML = i;
+        new_button_text.innerHTML = ghosts_lookup_table[i].display_name;
 
         new_button.appendChild(new_button_text);
         new_button.classList.add("button", "button-ghost-cant-be");
-        new_button.id = `button-ghost-${i.toLowerCase()}`;
+        new_button.id = `button-ghost-${ghosts_lookup_table[i].id}`;
 
         dest.appendChild(new_button);
     });
@@ -330,14 +332,14 @@ function init(){
     $(".ghosts-it-could-be-container").width($(".ghosts-it-could-be-container").width());
     $(".ghosts-it-could-be-container").height($(".ghosts-it-could-be-container").height());
 
-    // $(".main-content").width($(".ghosts-cant-be").width());  
+    // $(".main-content").width($(".ghosts-cant-be").width());
 };
 
 $(window).on("load", function(){
     init();
 
     $(".button-ghost-cant-be").on("click", function(){
-        let me = ghosts_lookup_table[document.querySelector(`#${this.id} > p`).innerHTML];
+        let me = ghosts_lookup_table[this.querySelector(`p`).innerHTML];
 
         this.classList.remove("button-off")        
         if (me["found_status"] == "cant_be"){
