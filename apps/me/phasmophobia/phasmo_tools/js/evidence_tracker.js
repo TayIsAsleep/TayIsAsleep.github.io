@@ -111,6 +111,27 @@ var ghosts_lookup_table = {
         "emf5",
         "writing",
         "fingerprints"
+    ],
+
+    "The Twins":[
+        "emf5",
+        "spirit_box",
+        "freezing_temps"
+    ],
+    "Raiju":[
+        "emf5",
+        "orbs",
+        "dots"
+    ],
+    "Onryo":[
+        "spirit_box",
+        "orbs",
+        "freezing_temps"
+    ],
+    "Obake":[
+        "emf5",
+        "fingerprints",
+        "orbs"
     ]
 };
 Object.keys(ghosts_lookup_table).forEach(i => {
@@ -309,7 +330,7 @@ function init(){
     $(".ghosts-it-could-be-container").width($(".ghosts-it-could-be-container").width());
     $(".ghosts-it-could-be-container").height($(".ghosts-it-could-be-container").height());
 
-    $(".main-content").width($(".ghosts-cant-be").width());  
+    // $(".main-content").width($(".ghosts-cant-be").width());  
 };
 
 $(window).on("load", function(){

@@ -131,6 +131,9 @@ var maps = {
     },
     "Asylum":{
         "name": "Asylum"
+    },
+    "Maple_Lodge_Campsite":{
+        "name": "Maple Lodge Campsite"
     }
 }
 
