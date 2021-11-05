@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>jQuerry Uppgifter</title>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <style>
+            label{
+                display: block;
+            }
+
+            img{
+                height: 1em;
+            }
+        </style>
+    </head>
+    <body>
+        <form name="form" id="form" onsubmit="return false">
+            <fieldset>
+                <legend>Form</legend>
+
+                <label for="first-name">First name:</label>
+                <input type="text" name="first-name">
+                <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Checkbox.svg/1200px-Checkbox.svg.png" alt=""> -->
+
+                <label for="last-name">Last name:</label>
+                <input type="text" name="last-name">
+                <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Checkbox.svg/1200px-Checkbox.svg.png" alt=""> -->
+
+
+                <br><br>
+
+                <label for="email">Email:</label>
+                <input type="text" name="email">
+                <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Checkbox.svg/1200px-Checkbox.svg.png" alt=""> -->
+                <p class="email-error-text"></p>
+
+                <!-- <br><br> -->
+
+                <label for="password1">Password:</label>
+                <input type="password" name="password1">
+                <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Checkbox.svg/1200px-Checkbox.svg.png" alt=""> -->
+
+
+                <label for="password2">Enter password again: </label>
+                <input type="password" name="password2">
+                <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Checkbox.svg/1200px-Checkbox.svg.png" alt=""> -->
+
+
+                <p class="password-error-text"></p>
+
+                <button type="submit" name="submit">Submit</button>
+            </fieldset>
+        </form>
+
+        <script>
+            $(document).ready(function(){
+                $('[name="email"]').on("input", function() {
+                    let val = $(this).val();
+                    let error_text = $('.email-error-text');
+
+                    if (val == ""){
+                        error_text.text("Du måste ange en Email adress.");
+                        return
+                    }
+                    if (val.match(/^\S+@\S+\.\S+$/)){
+                        error_text.text("");
+                        return
+                    }
+                    else{
+                        error_text.text("Email är ej korrekt");
+                        return
+                    }
+                });
+
+                $('[name="password1"], [name="password2"]').on("input", function() {
+                    let password1 = $('[name="password1"]').val()
+                    let password2 = $('[name="password2"]').val()
+                    let error_text = $('.password-error-text')
+
+                    if (password2 == ""){
+                        error_text.text("")
+                    }
+                    else{
+                        if (password1 == password2){
+                            if (password1.length < 5){
+                                error_text.text("Lösenord måste vara längre än 5")
+                            }
+                            else{
+                                error_text.text("")
+                            }
+                        }
+                        else{
+                            error_text.text("Lösenorden matchar ej")
+                        }
+                    }
+                   
+                });
+            });
+        </script>
+    </body>
+</html>

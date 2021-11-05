@@ -116,5 +116,10 @@
         "include":false,
         "hidemenu":true,
         "url": "apps/school/Webbutveckling 2/html,js validation/index.html"
+    },
+    "validation_jQuery":{
+        "include":false,
+        "hidemenu":true,
+        "url": "apps/school/Webbutveckling 2/html,js validation/with jquerry/index.html"
     }
 }
