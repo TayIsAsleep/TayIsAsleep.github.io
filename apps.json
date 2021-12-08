@@ -92,6 +92,15 @@
     },
 
 
+    "räkna_mil":{
+        "include":true,
+        "hidemenu":true,
+        "url": "apps/me/räkna_mil/index.html",
+        "title":"Räkna mil",
+        "description":"Calculate how much the fuel will cost"
+    },
+
+
 
 
 

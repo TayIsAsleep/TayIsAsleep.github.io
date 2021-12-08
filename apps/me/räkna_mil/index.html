@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>How much it kosta?</title>
+    </head>
+    <body>
+        <p>Om du ska åka <input id="distance" variable-name="distance_val" type="text"> km</p>
+        <p>och bilen drar <input type="text" variable-name="liter_per_100km_val" id="liter-per-100km" placeholder="0"> L/100km</p>
+        <p>och bränsle kostar <input type="text" variable-name="fuel_cost_val" id="fuel-cost" placeholder="0"> kr/L</p>
+        <br>
+        <p>Då kommer det kosta <span id="cost">0</span>kr</p>
+
+        <script defer>
+            function setCookie(cname, cvalue, exdays) {
+                const d = new Date();
+                d.setTime(d.getTime() + (exdays*24*60*60*1000));
+                let expires = "expires="+ d.toUTCString();
+                document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            }
+            function getCookie(cname) {
+                let name = cname + "=";
+                let decodedCookie = decodeURIComponent(document.cookie);
+                let ca = decodedCookie.split(';');
+                for(let i = 0; i <ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+
+            var elem_distance = document.getElementById("distance");
+            var elem_liter_per_100km = document.getElementById("liter-per-100km");
+            var elem_fuel_cost = document.getElementById("fuel-cost");
+            var elem_cost = document.getElementById("cost");
+
+            var distance_val = null; // KM
+            var liter_per_100km_val = null; // L/100KM
+            var fuel_cost_val = null; // KR/L
+            var cost_val = null; // KR
+
+            function update_cost(){
+                if (![distance_val, liter_per_100km_val, fuel_cost_val].includes(null)){
+                    elem_cost.innerText = Math.round(((((distance_val / 100) * liter_per_100km_val) * fuel_cost_val) + Number.EPSILON) * 100) / 100;
+                }
+                else{
+                    elem_cost.innerText = 0;
+                }
+            };
+
+            document.querySelectorAll("input").forEach(e => { e.oninput = function(){
+                let variable_name = this.getAttribute("variable-name");
+                let val = this.value.replaceAll(",", ".");
+
+                if (val != "" && val.match(/^[0-9]*\.?[0-9]*$/)){
+                    eval(`${variable_name} = ${val}`);
+                    setCookie(variable_name, val, 365);
+                }
+                else{
+                    eval(`${variable_name} = null`);
+                    setCookie(variable_name, "", 365);
+                }
+
+                update_cost();
+            }});
+
+            ["liter_per_100km_val", "fuel_cost_val"].forEach(e => {
+                let cookie_val = getCookie(e);
+                if (cookie_val != ""){
+                    document.querySelector(`input[variable-name="${e}"]`).value = cookie_val;
+                    eval(`${e} = ${cookie_val}`);
+                }
+            });
+
+            let cookie_val = getCookie("distance_val");
+            if (cookie_val != ""){
+                distance_val = cookie_val;
+                elem_distance.setAttribute("placeholder", cookie_val);
+            }
+        </script>
+    </body>
+</html>
