@@ -35,6 +35,9 @@
                 }
                 return "";
             }
+            function round_too(n, d){
+                return Math.round((n + Number.EPSILON) * (10 ** d)) / (10 ** d);
+            }
 
             var elem_distance = document.getElementById("distance");
             var elem_liter_per_100km = document.getElementById("liter-per-100km");
@@ -46,21 +49,11 @@
             var liter_per_100km_val = null; // L/100KM
             var fuel_cost_val = null; // KR/L
 
-            function update_cost(){
-                if (![distance_val, liter_per_100km_val, fuel_cost_val].includes(null)){
-                    elem_cost.innerText = Math.round(((((distance_val / 100) * liter_per_100km_val) * fuel_cost_val) + Number.EPSILON) * 100) / 100;
-                    elem_liter_used.innerText = Math.round((((distance_val / 100) * liter_per_100km_val) + Number.EPSILON) * 100) / 100;
-                }
-                else{
-                    elem_cost.innerText = 0;
-                    elem_liter_used.innerText = 0;
-                }
-            };
-
             document.querySelectorAll("input").forEach(e => { e.oninput = function(){
                 let variable_name = this.getAttribute("variable-name");
                 let val = this.value.replaceAll(",", ".");
 
+                // Make sure input is in the correct format
                 if (val != "" && val.match(/^[0-9]*\.?[0-9]*$/)){
                     eval(`${variable_name} = ${val}`);
                     setCookie(variable_name, val, 365);
@@ -70,9 +63,22 @@
                     setCookie(variable_name, "", 365);
                 }
 
-                update_cost();
+                // If all inputs have been filled in correctly, then do all the math and then put out the result
+                if (![distance_val, liter_per_100km_val, fuel_cost_val].includes(null)){
+                    elem_cost.innerText = round_too(
+                        ((distance_val / 100) * liter_per_100km_val) * fuel_cost_val,
+                    2);
+                    elem_liter_used.innerText = round_too(
+                        (distance_val / 100) * liter_per_100km_val,
+                    2);
+                }
+                else{
+                    elem_cost.innerText = 0;
+                    elem_liter_used.innerText = 0;
+                }
             }});
 
+            // Load cookies for all the values except for the distance
             ["liter_per_100km_val", "fuel_cost_val"].forEach(e => {
                 let cookie_val = getCookie(e);
                 if (cookie_val != ""){
@@ -81,6 +87,7 @@
                 }
             });
 
+            // Load the cookies for the distance, and put it as a placeholder instead
             let cookie_val = getCookie("distance_val");
             if (cookie_val != ""){
                 distance_val = cookie_val;
