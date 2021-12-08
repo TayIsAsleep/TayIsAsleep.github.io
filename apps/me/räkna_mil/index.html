@@ -11,7 +11,7 @@
         <p>och bilen drar <input type="text" variable-name="liter_per_100km_val" id="liter-per-100km" placeholder="0"> L/100km</p>
         <p>och bränsle kostar <input type="text" variable-name="fuel_cost_val" id="fuel-cost" placeholder="0"> kr/L</p>
         <br>
-        <p>Då kommer det kosta <span id="cost">0</span>kr</p>
+        <p>Då kommer det kosta <span id="cost">0</span>kr (<span id="liter-used">0</span> liter)</p>
 
         <script defer>
             function setCookie(cname, cvalue, exdays) {
@@ -40,18 +40,20 @@
             var elem_liter_per_100km = document.getElementById("liter-per-100km");
             var elem_fuel_cost = document.getElementById("fuel-cost");
             var elem_cost = document.getElementById("cost");
+            var elem_liter_used = document.getElementById("liter-used");
 
             var distance_val = null; // KM
             var liter_per_100km_val = null; // L/100KM
             var fuel_cost_val = null; // KR/L
-            var cost_val = null; // KR
 
             function update_cost(){
                 if (![distance_val, liter_per_100km_val, fuel_cost_val].includes(null)){
                     elem_cost.innerText = Math.round(((((distance_val / 100) * liter_per_100km_val) * fuel_cost_val) + Number.EPSILON) * 100) / 100;
+                    elem_liter_used.innerText = Math.round((((distance_val / 100) * liter_per_100km_val) + Number.EPSILON) * 100) / 100;
                 }
                 else{
                     elem_cost.innerText = 0;
+                    elem_liter_used.innerText = 0;
                 }
             };
 
