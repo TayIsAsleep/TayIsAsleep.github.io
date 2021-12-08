@@ -44,7 +44,6 @@
             var elem_fuel_cost = document.getElementById("fuel-cost");
             var elem_cost = document.getElementById("cost");
             var elem_liter_used = document.getElementById("liter-used");
-
             var distance_val = null; // KM
             var liter_per_100km_val = null; // L/100KM
             var fuel_cost_val = null; // KR/L
@@ -53,12 +52,18 @@
                 let variable_name = this.getAttribute("variable-name");
                 let val = this.value.replaceAll(",", ".");
 
+                // Reset color
+                this.style.color = "";
+
                 // Make sure input is in the correct format
                 if (val != "" && val.match(/^[0-9]*\.?[0-9]*$/)){
                     eval(`${variable_name} = ${val}`);
                     setCookie(variable_name, val, 365);
                 }
                 else{
+                    if (val != ""){
+                        this.style.color = "red"; // Set color to red if error in input
+                    }
                     eval(`${variable_name} = null`);
                     setCookie(variable_name, "", 365);
                 }
