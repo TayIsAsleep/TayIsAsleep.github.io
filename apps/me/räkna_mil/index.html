@@ -7,7 +7,7 @@
         <title>How much it kosta?</title>
     </head>
     <body>
-        <p>Om du ska åka <input id="distance" variable-name="distance_val" type="text"> km</p>
+        <p>Om du ska åka <input id="distance" variable-name="distance_val" type="text" placeholder="0"> km</p>
         <p>och bilen drar <input type="text" variable-name="liter_per_100km_val" id="liter-per-100km" placeholder="0"> L/100km</p>
         <p>och bränsle kostar <input type="text" variable-name="fuel_cost_val" id="fuel-cost" placeholder="0"> kr/L</p>
         <br>
@@ -50,7 +50,7 @@
 
             document.querySelectorAll("input").forEach(e => { e.oninput = function(){
                 let variable_name = this.getAttribute("variable-name");
-                let val = this.value.replaceAll(",", ".");
+                let val = this.value.replaceAll(",", ".").trim();
 
                 // Reset color
                 this.style.color = "";
@@ -68,6 +68,9 @@
                     setCookie(variable_name, "", 365);
                 }
 
+                update_cost();
+            }});
+            function update_cost(){
                 // If all inputs have been filled in correctly, then do all the math and then put out the result
                 if (![distance_val, liter_per_100km_val, fuel_cost_val].includes(null)){
                     elem_cost.innerText = round_too(
@@ -81,23 +84,19 @@
                     elem_cost.innerText = 0;
                     elem_liter_used.innerText = 0;
                 }
-            }});
+            }
 
             // Load cookies for all the values except for the distance
-            ["liter_per_100km_val", "fuel_cost_val"].forEach(e => {
+            ["distance_val", "liter_per_100km_val", "fuel_cost_val"].forEach(e => {
                 let cookie_val = getCookie(e);
                 if (cookie_val != ""){
-                    document.querySelector(`input[variable-name="${e}"]`).value = cookie_val;
+                    document.querySelector(`input[variable-name="${e}"]`).setAttribute("placeholder", cookie_val);
                     eval(`${e} = ${cookie_val}`);
                 }
             });
-
-            // Load the cookies for the distance, and put it as a placeholder instead
-            let cookie_val = getCookie("distance_val");
-            if (cookie_val != ""){
-                distance_val = cookie_val;
-                elem_distance.setAttribute("placeholder", cookie_val);
-            }
+            
+            // After cookies have been loaded, it calculates the values (if possible)
+            update_cost();
         </script>
     </body>
 </html>
