@@ -12,6 +12,9 @@
         <p>och bränsle kostar <input type="text" variable-name="fuel_cost_val" id="fuel-cost" placeholder="0"> kr/L</p>
         <br>
         <p>Då kommer det kosta <span id="cost">0</span>kr (<span id="liter-used">0</span> liter)</p>
+        <br><br>
+        <p>Om du har <input type="text" id="have-this-much-money" variable-name="have_this_much_money_val"> kr</p>
+        <p>Då kommer du komma <span id="how-long-can-you-get">0</span> km</p>
 
         <script defer>
             function setCookie(cname, cvalue, exdays) {
@@ -44,9 +47,12 @@
             var elem_fuel_cost = document.getElementById("fuel-cost");
             var elem_cost = document.getElementById("cost");
             var elem_liter_used = document.getElementById("liter-used");
+            var elem_have_this_much_money = document.getElementById("have-this-much-money");
+            var elem_how_long_can_you_get = document.getElementById("how-long-can-you-get");
             var distance_val = null; // KM
             var liter_per_100km_val = null; // L/100KM
             var fuel_cost_val = null; // KR/L
+            var have_this_much_money_val = null;
 
             document.querySelectorAll("input").forEach(e => { e.oninput = function(){
                 let variable_name = this.getAttribute("variable-name");
@@ -66,6 +72,12 @@
                     }
                     eval(`${variable_name} = null`);
                     setCookie(variable_name, "", 365);
+                }
+
+                if (![have_this_much_money_val, liter_per_100km_val, fuel_cost_val].includes(null)){
+                    elem_how_long_can_you_get.innerText = round_too(
+                        (have_this_much_money_val / fuel_cost_val) / (liter_per_100km_val / 100),
+                    2);
                 }
 
                 update_cost();
