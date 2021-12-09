@@ -14,7 +14,10 @@
         <p>Då kommer det kosta <span id="cost">0</span>kr (<span id="liter-used">0</span> liter)</p>
         <br><br>
         <p>Om du har <input type="text" id="have-this-much-money" variable-name="have_this_much_money_val"> kr</p>
-        <p>Då kommer du komma <span id="how-long-can-you-get">0</span> km</p>
+        <p>Då kommer du komma <span id="how-long-can-you-get-money">0</span> km</p>
+        <br><br>
+        <p>Om du tankar <input type="text" id="have-this-much-liter" variable-name="have_this_much_liter_val"> liter</p>
+        <p>Då kommer du komma <span id="how-long-can-you-get-liter">0</span> km</p>
 
         <script defer>
             function setCookie(cname, cvalue, exdays) {
@@ -48,11 +51,14 @@
             var elem_cost = document.getElementById("cost");
             var elem_liter_used = document.getElementById("liter-used");
             var elem_have_this_much_money = document.getElementById("have-this-much-money");
-            var elem_how_long_can_you_get = document.getElementById("how-long-can-you-get");
+            var elem_have_this_much_liter = document.getElementById("have-this-much-liter");
+            var elem_how_long_can_you_get_money = document.getElementById("how-long-can-you-get-money");
+            var elem_how_long_can_you_get_liter = document.getElementById("how-long-can-you-get-liter");
             var distance_val = null; // KM
             var liter_per_100km_val = null; // L/100KM
             var fuel_cost_val = null; // KR/L
             var have_this_much_money_val = null;
+            var have_this_much_liter_val = null;
 
             document.querySelectorAll("input").forEach(e => { e.oninput = function(){
                 let variable_name = this.getAttribute("variable-name");
@@ -75,8 +81,14 @@
                 }
 
                 if (![have_this_much_money_val, liter_per_100km_val, fuel_cost_val].includes(null)){
-                    elem_how_long_can_you_get.innerText = round_too(
+                    elem_how_long_can_you_get_money.innerText = round_too(
                         (have_this_much_money_val / fuel_cost_val) / (liter_per_100km_val / 100),
+                    2);
+                }
+
+                if (![have_this_much_liter_val, liter_per_100km_val, fuel_cost_val].includes(null)){
+                    elem_how_long_can_you_get_liter.innerText = round_too(
+                        have_this_much_liter_val / (liter_per_100km_val / 100),
                     2);
                 }
 
