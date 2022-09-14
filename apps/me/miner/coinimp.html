@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>TayMiner</title>
 
     <style>
         /* Hide Ad: */
@@ -32,11 +32,11 @@
                 <br>
                 You can donate to the creator here:
                 <br>
-                BTC  : 35ZgUWkH9ovjgPgyEd8exrhZWYZSnxjTHv
+                BTC  : 3EmkzBF6TAtn1vaY9meXVGrWn8Xd1emJHb 
                 <br>
-                ETH  : 0x3013aD9D7cdCBcD44d1030047E56d71FCa61b49F
+                Monero  : 44UMnotGfzXVSQLsQ9MnR34acnZwNcgfAJGtTWrcCDDMNiVV6dmcL1AUmzXoZsvEXYTBe4zZQ2xzufpmXkViDQ4S5WFpLmc
                 <br>
-                DOGE : D6egb4pJbikh8oKdMLXbtEuKyZtTJrMJbo
+                MintMe : 0x2ed1885430307c6cb136e26372c47cfc455a5882 
             </p>
         </div>
 
@@ -44,6 +44,8 @@
             <h3>Mining status:</h3>
             
             <p class="status">Loading...</p>
+
+            
         </div>
 
         <div class="dev-tools">
@@ -70,6 +72,13 @@
                     hashes/S : ${_client.getHashesPerSecond()}
                     <br>
                     Accepted Hashes : ${_client.getAcceptedHashes()}
+                    <br>
+                    Threads : ${_client.getNumThreads()}
+                    <br>
+                    Throttle : ${_client.getThrottle()}
+                    <br>
+                    <button onclick="_client.stop();">Stop Mining</button>
+                    <button onclick="_client.start();">Start Mining</button>
                 `
             }, 1000);
         } catch (error) {
