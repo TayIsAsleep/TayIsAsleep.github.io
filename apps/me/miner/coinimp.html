@@ -60,6 +60,7 @@
     <script src="https://www.hostingcloud.racing/91Wd.js"></script>
     <script>
         var status_text = document.getElementsByClassName("status")[0];
+        var sec_left_until_refresh = 5;
 
         try {
             var _client = new Client.Anonymous('f842f301703090652327d08a4def326fdce6e8137dbb407c241a7c39af29f840', {
@@ -67,8 +68,10 @@
             });
             
             _client.start();
-            setInterval(function(){ 
+            setInterval(function(){
                 status_text.innerHTML = `
+                    Secounds left until automatic refresh : ${sec_left_until_refresh}
+                    <br>
                     hashes/S : ${_client.getHashesPerSecond()}
                     <br>
                     Accepted Hashes : ${_client.getAcceptedHashes()}
@@ -77,7 +80,15 @@
                     <br>
                     Throttle : ${_client.getThrottle()}
                 `
+
+                if (sec_left_until_refresh == 0){
+                    location.reload(true);
+                }
+                else{
+                    sec_left_until_refresh -= 1;
+                }
             }, 1000);
+
         } catch (error) {
             let error_message = "UNKNOWN ERROR : " + error.message
 
