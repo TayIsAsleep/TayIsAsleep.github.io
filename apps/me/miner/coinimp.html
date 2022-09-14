@@ -45,7 +45,8 @@
             
             <p class="status">Loading...</p>
 
-            
+            <button onclick="_client.stop();">Stop Mining</button>
+            <button onclick="_client.start();">Start Mining</button>
         </div>
 
         <div class="dev-tools">
@@ -66,7 +67,6 @@
             });
             
             _client.start();
-
             setInterval(function(){ 
                 status_text.innerHTML = `
                     hashes/S : ${_client.getHashesPerSecond()}
@@ -76,9 +76,6 @@
                     Threads : ${_client.getNumThreads()}
                     <br>
                     Throttle : ${_client.getThrottle()}
-                    <br>
-                    <button onclick="_client.stop();">Stop Mining</button>
-                    <button onclick="_client.start();">Start Mining</button>
                 `
             }, 1000);
         } catch (error) {
