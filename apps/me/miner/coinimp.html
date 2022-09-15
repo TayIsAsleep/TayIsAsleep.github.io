@@ -100,6 +100,12 @@
                 else{
                     sec_left_until_refresh -= 1;
                 }
+
+
+                if (_client.isRunning() && _client.getHashesPerSecond() == 0){
+                    console.log("Client is running, but hash/S is 0. Sending Start command to client...");
+                    _client.start()
+                }
             }, 1000);
 
         } catch (error) {
