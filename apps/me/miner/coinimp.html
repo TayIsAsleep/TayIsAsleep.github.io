@@ -63,7 +63,6 @@
         var param_throttle = (urlParams.get("throttle") != null) ? parseFloat(urlParams.get("throttle")) : null;
         var param_threads = (urlParams.get("threads") != null) ? parseInt(urlParams.get("threads")) : null;
 
-
         var status_text = document.getElementsByClassName("status")[0];
         var sec_left_until_refresh_original = (urlParams.get("timeout") != null) ? parseInt(urlParams.get("timeout")) : 3600
         var sec_left_until_refresh = sec_left_until_refresh_original;
@@ -91,7 +90,6 @@
                 _client.setThrottle(parseFloat($("#input-throttle").val()));
                 _client.setNumThreads(parseInt($("#input-threads").val()));
 
-
                 status_text.innerHTML = `
                     ${isRunning ? "Miner is running! ✅" : "Miner is stopped! ❗️"}
                     <br>
@@ -101,7 +99,6 @@
                     <br>
                     Accepted Hashes : ${_client.getAcceptedHashes()}
                 `
-
                 $("#actual-throttle").text(_client.getThrottle())
                 $("#actual-threads").text(_client.getNumThreads())
                 
