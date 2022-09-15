@@ -44,7 +44,7 @@
             <p>Threads  : <input type="text" id="input-threads"> <span id="actual-threads"></span></p>
 
             <button onclick="_client.stop(); isRunning = false;">Stop Mining</button>
-            <button onclick="_client.start(); isRunning = true;">Start Mining</button>
+            <button onclick="StartMiner();">Start Mining</button>
             
         </div>
 
@@ -65,9 +65,16 @@
 
 
         var status_text = document.getElementsByClassName("status")[0];
-        var sec_left_until_refresh = (urlParams.get("timeout") != null) ? parseInt(urlParams.get("timeout")) : 3600;
+        var sec_left_until_refresh_original = (urlParams.get("timeout") != null) ? parseInt(urlParams.get("timeout")) : 3600
+        var sec_left_until_refresh = sec_left_until_refresh_original;
 
         var isRunning = false;
+
+        function StartMiner(){
+            _client.start();
+            isRunning = true;
+            sec_left_until_refresh = sec_left_until_refresh_original;
+        }
 
         try {
             var _client = new Client.Anonymous('f842f301703090652327d08a4def326fdce6e8137dbb407c241a7c39af29f840', {
@@ -78,14 +85,16 @@
             $("#input-throttle").val((param_throttle == null) ? _client.getThrottle() : param_throttle);
             $("#input-threads").val((param_threads == null) ? _client.getNumThreads() : param_threads);
             
-            _client.start();
-            isRunning = true;
+            StartMiner();
+
             setInterval(function(){
                 _client.setThrottle(parseFloat($("#input-throttle").val()));
                 _client.setNumThreads(parseInt($("#input-threads").val()));
 
 
                 status_text.innerHTML = `
+                    ${isRunning ? "Miner is running! ✅" : "Miner is stopped! ❗️"}
+                    <br>
                     Secounds left until automatic refresh : ${sec_left_until_refresh}
                     <br>
                     hashes/S : ${_client.getHashesPerSecond()}
@@ -96,18 +105,18 @@
                 $("#actual-throttle").text(_client.getThrottle())
                 $("#actual-threads").text(_client.getNumThreads())
                 
-
-                if (sec_left_until_refresh == 0){
-                    location.reload(true);
+                if (isRunning){
+                    if (sec_left_until_refresh == 0){
+                        location.reload(true);
+                    }
+                    else{
+                        sec_left_until_refresh -= 1;
+                    }
                 }
-                else{
-                    sec_left_until_refresh -= 1;
-                }
-
 
                 if (isRunning && _client.getHashesPerSecond() == 0){
                     console.log("Client is running, but hash/S is 0. Sending Start command to client...");
-                    _client.start()
+                    StartMiner();
                 }
             }, 1000);
 
