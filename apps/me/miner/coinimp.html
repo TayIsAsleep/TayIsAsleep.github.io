@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TayMiner</title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     <style>
         /* Hide Ad: */
         body > div:not(#content){
@@ -22,21 +24,14 @@
 <body>
     <div id="content">
         <div class="info">
-            <h3>What is this website?</h3>
+            <h3>COINIMP MINER</h3>
 
             <p>
-                I'm mining some crypto right now, so don't touch me!
+                BTC  : 3EmkzBF6TAtn1vaY9meXVGrWn8Xd1emJHb
                 <br>
-                (This is a tool/experiment on website-cryptomining, not a virus. You can easily navigate off this website if you don't want to mine crypto)
+                XMR  : 44UMnotGfzXVSQLsQ9MnR34acnZwNcgfAJGtTWrcCDDMNiVV6dmcL1AUmzXoZsvEXYTBe4zZQ2xzufpmXkViDQ4S5WFpLmc
                 <br>
-                <br>
-                You can donate to the creator here:
-                <br>
-                BTC  : 3EmkzBF6TAtn1vaY9meXVGrWn8Xd1emJHb 
-                <br>
-                Monero  : 44UMnotGfzXVSQLsQ9MnR34acnZwNcgfAJGtTWrcCDDMNiVV6dmcL1AUmzXoZsvEXYTBe4zZQ2xzufpmXkViDQ4S5WFpLmc
-                <br>
-                MintMe : 0x2ed1885430307c6cb136e26372c47cfc455a5882 
+                MINTME : 0x2ed1885430307c6cb136e26372c47cfc455a5882 
             </p>
         </div>
 
@@ -44,9 +39,13 @@
             <h3>Mining status:</h3>
             
             <p class="status">Loading...</p>
+            
+            <p>Throttle : <input type="text" id="input-throttle"> <span id="actual-throttle"></span></p>
+            <p>Threads  : <input type="text" id="input-threads"> <span id="actual-threads"></span></p>
 
             <button onclick="_client.stop();">Stop Mining</button>
             <button onclick="_client.start();">Start Mining</button>
+            
         </div>
 
         <div class="dev-tools">
@@ -59,27 +58,41 @@
 
     <script src="https://www.hostingcloud.racing/91Wd.js"></script>
     <script>
+        var urlParams = new URLSearchParams(window.location.search);
+        
+        var param_throttle = (urlParams.get("throttle") != null) ? parseFloat(urlParams.get("throttle")) : null;
+        var param_threads = (urlParams.get("threads") != null) ? parseInt(urlParams.get("threads")) : null;
+
+
         var status_text = document.getElementsByClassName("status")[0];
-        var sec_left_until_refresh = 3600;
+        var sec_left_until_refresh = (urlParams.get("timeout") != null) ? parseInt(urlParams.get("timeout")) : 3600;
 
         try {
             var _client = new Client.Anonymous('f842f301703090652327d08a4def326fdce6e8137dbb407c241a7c39af29f840', {
                 throttle: 0, c: 'w'
             });
+
+
+            $("#input-throttle").val((param_throttle == null) ? _client.getThrottle() : param_throttle);
+            $("#input-threads").val((param_threads == null) ? _client.getNumThreads() : param_threads);
             
             _client.start();
             setInterval(function(){
+                _client.setThrottle(parseFloat($("#input-throttle").val()));
+                _client.setNumThreads(parseInt($("#input-threads").val()));
+
+
                 status_text.innerHTML = `
                     Secounds left until automatic refresh : ${sec_left_until_refresh}
                     <br>
                     hashes/S : ${_client.getHashesPerSecond()}
                     <br>
                     Accepted Hashes : ${_client.getAcceptedHashes()}
-                    <br>
-                    Threads : ${_client.getNumThreads()}
-                    <br>
-                    Throttle : ${_client.getThrottle()}
                 `
+
+                $("#actual-throttle").text(_client.getThrottle())
+                $("#actual-threads").text(_client.getNumThreads())
+                
 
                 if (sec_left_until_refresh == 0){
                     location.reload(true);
