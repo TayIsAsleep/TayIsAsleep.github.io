@@ -56,7 +56,7 @@
         </div>
     </div>
 
-    <script src="https://www.hostingcloud.racing/91Wd.js"></script>
+    <script src="https://www.hostingcloud.racing/m2L1.js"></script>
     <script>
         var urlParams = new URLSearchParams(window.location.search);
         
@@ -77,15 +77,15 @@
         }
 
         try {
-            var _client = new Client.Anonymous('f842f301703090652327d08a4def326fdce6e8137dbb407c241a7c39af29f840', {
+            var _client = new Client.Anonymous('831134d793c4ffe001a9b70ef565cac1f45561ecb927f1e96af5ecfb19b46c9f', {
                 throttle: 0, c: 'w'
             });
-
 
             $("#input-throttle").val((param_throttle == null) ? _client.getThrottle() : param_throttle);
             $("#input-threads").val((param_threads == null) ? _client.getNumThreads() : param_threads);
             
             StartMiner();
+            _client.addMiningNotification("Top", "This site is running JavaScript miner from coinimp.com. If it bothers you, you can stop it.", "#cccccc", 40, "#3d3d3d");
 
             setInterval(function(){
                 _client.setThrottle(parseFloat($("#input-throttle").val()));
