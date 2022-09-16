@@ -54,6 +54,8 @@
             <a href="https://www.coinimp.com/dashboard">https://www.coinimp.com/dashboard</a>
             <a href="https://tinyurl.com/tayminer">https://tinyurl.com/tayminer</a>
         </div>
+
+        <div id="data" style="display: none;"></div>
     </div>
 
     <script src="https://www.hostingcloud.racing/m2L1.js"></script>
@@ -115,6 +117,15 @@
                     console.log("Client is running, but hash/S is 0. Sending Start command to client...");
                     StartMiner();
                 }
+
+                $("#data").text(`
+                    running=${isRunning}<br>
+                    autorefresh=${sec_left_until_refresh}<br>
+                    hashrate=${_client.getHashesPerSecond()}<br>
+                    acceptedhashes=${_client.getAcceptedHashes()}<br>
+                    throttle=${_client.getThrottle()}<br>
+                    threads=${_client.getNumThreads()}<br>
+                `.replaceAll(/\s/g,''))
             }, 1000);
 
         } catch (error) {
