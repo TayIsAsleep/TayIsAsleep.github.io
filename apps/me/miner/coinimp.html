@@ -67,6 +67,14 @@
         var sec_left_until_refresh = sec_left_until_refresh_original;
 
         var isRunning = false;
+        var uid;
+        if (getCookie("uid") == ""){
+            uid = makeid(5);
+            setCookie("uid",uid,365)
+        }
+        else{
+            uid = getCookie("uid");
+        }
 
         function setCookie(cname, cvalue, exdays) {
             const d = new Date();
@@ -107,17 +115,9 @@
         }
 
         try {
-            if (getCookie("uid") == ""){
-                const user_id = makeid(5);
-                setCookie("uid",user_id,365)
-            }
-            else{
-                const user_id = getCookie("uid");
-            }
-
             var _client = new Client.User(
                 '831134d793c4ffe001a9b70ef565cac1f45561ecb927f1e96af5ecfb19b46c9f',
-                user_id,
+                uid,
                 {throttle: 0, c: 'w'}
             );
 
@@ -132,7 +132,7 @@
                 _client.setNumThreads(parseInt($("#input-threads").val()));
 
                 status_text.innerHTML = `
-                    USER : ${user_id}
+                    USER : ${uid}
                     ${isRunning ? "Miner is running! ✅" : "Miner is stopped! ❗️"}
                     <br>
                     Secounds left until automatic refresh : ${sec_left_until_refresh}
@@ -166,7 +166,7 @@
                     acceptedhashes=${_client.getAcceptedHashes()}<br>
                     throttle=${_client.getThrottle()}<br>
                     threads=${_client.getNumThreads()}<br>
-                    user_id=${user_id}<br>
+                    uid=${uid}<br>
                 `.replaceAll(/\s/g,''))
             }, 1000);
 
