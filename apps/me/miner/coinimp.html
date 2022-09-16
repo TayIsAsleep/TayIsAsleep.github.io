@@ -68,6 +68,28 @@
 
         var isRunning = false;
 
+        function setCookie(cname, cvalue, exdays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            let expires = "expires="+d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+        function getCookie(cname) {
+            let name = cname + "=";
+            let ca = document.cookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
         function StartMiner(){
             _client.start();
             isRunning = true;
@@ -85,7 +107,13 @@
         }
 
         try {
-            const user_id = makeid(5);
+            if (getCookie("uid") == ""){
+                const user_id = makeid(5);
+                setCookie("uid",user_id,365)
+            }
+            else{
+                const user_id = getCookie("uid");
+            }
 
             var _client = new Client.User(
                 '831134d793c4ffe001a9b70ef565cac1f45561ecb927f1e96af5ecfb19b46c9f',
