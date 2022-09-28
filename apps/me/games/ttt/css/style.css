@@ -3,9 +3,8 @@
 * {
   margin: 0;
   padding: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  font-family: 'JetBrains Mono', monospace;
+  box-sizing: border-box;
+  font-family: "JetBrains Mono", monospace;
 }
 
 body {
@@ -18,188 +17,118 @@ div.main-container {
   width: 100vw;
   height: 100vh;
   background-color: white;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 10%;
 }
-
 div.main-container div.score-board, div.main-container div.bottom-row {
   width: 100%;
   max-width: 100ch;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: space-evenly;
-      -ms-flex-pack: space-evenly;
-          justify-content: space-evenly;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
 }
-
 div.main-container div.score-board > div :first-child, div.main-container div.bottom-row > div :first-child {
   font-size: 500%;
 }
-
 div.main-container div.score-board div.score-counter, div.main-container div.bottom-row div.score-counter {
-  -webkit-user-select: none;
-  /* Safari */
-  -moz-user-select: none;
-  /* Firefox */
-  -ms-user-select: none;
-  /* IE10+/Edge */
-  user-select: none;
-  /* Standard */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
 }
-
 div.main-container div.score-board div.score-counter.p1 :first-child, div.main-container div.bottom-row div.score-counter.p1 :first-child {
   color: red;
 }
-
 div.main-container div.score-board div.score-counter.p2 :first-child, div.main-container div.bottom-row div.score-counter.p2 :first-child {
   color: blue;
 }
-
 div.main-container div.score-board div.current-turn :first-child, div.main-container div.bottom-row div.current-turn :first-child {
-  -webkit-transition: -webkit-transform 0.3s ease-in-out;
-  transition: -webkit-transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;
-  transition: transform 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
 }
-
 div.main-container div.score-board div.current-turn :first-child.p1-turn, div.main-container div.bottom-row div.current-turn :first-child.p1-turn {
   color: red;
-  -webkit-transform: rotate(0deg);
-          transform: rotate(0deg);
+  transform: rotate(0deg);
 }
-
 div.main-container div.score-board div.current-turn :first-child.p2-turn, div.main-container div.bottom-row div.current-turn :first-child.p2-turn {
   color: blue;
-  -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
+  transform: rotate(180deg);
 }
-
 div.main-container div.score-board div.button, div.main-container div.bottom-row div.button {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   border-radius: 10%;
   background-color: black;
   padding: 3%;
   text-align: center;
   color: white;
 }
-
 div.main-container div.score-board div.button i, div.main-container div.bottom-row div.button i {
   font-size: 200%;
 }
-
 div.main-container div.score-board div.button p, div.main-container div.bottom-row div.button p {
-  -webkit-user-select: none;
-  /* Safari */
-  -moz-user-select: none;
-  /* Firefox */
-  -ms-user-select: none;
-  /* IE10+/Edge */
-  user-select: none;
-  /* Standard */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
   font-size: 120%;
   padding-top: 1ch;
 }
-
 div.main-container div.score-board div.button:active, div.main-container div.bottom-row div.button:active {
   background-color: #666666;
 }
-
 div.main-container div.game-board {
   /* 100% is full circle */
   height: 40%;
   background-color: black;
-  border-radius: calc(calc(100% / 2) / 3);
-  display: -ms-grid;
+  border-radius: calc(50% / 3);
   display: grid;
-  -ms-grid-columns: calc(100% / 3) calc(100% / 3) calc(100% / 3);
-      grid-template-columns: calc(100% / 3) calc(100% / 3) calc(100% / 3);
-  -ms-grid-rows: calc(100% / 3) calc(100% / 3) calc(100% / 3);
-      grid-template-rows: calc(100% / 3) calc(100% / 3) calc(100% / 3);
+  grid-template-columns: 33.3333333333% 33.3333333333% 33.3333333333%;
+  grid-template-rows: 33.3333333333% 33.3333333333% 33.3333333333%;
 }
-
 div.main-container div.game-board > div.block {
   width: 90%;
   height: 90%;
-  margin: calc(calc(100% - 90%) / 4);
+  margin: calc((100% - 90%) / 4);
   background-color: white;
-  border-radius: calc(100% / 2);
-  -webkit-transition: background-color 0.2s ease;
+  border-radius: 50%;
   transition: background-color 0.2s ease;
 }
-
 div.main-container div.game-board > div.block[state="1"] {
   background-color: red;
 }
-
 div.main-container div.game-board > div.block[state="2"] {
   background-color: blue;
 }
-
 div.main-container div.game-board :nth-child(1) {
   place-self: end;
 }
-
 div.main-container div.game-board :nth-child(2) {
   place-self: end center;
 }
-
 div.main-container div.game-board :nth-child(3) {
   place-self: end start;
 }
-
 div.main-container div.game-board :nth-child(4) {
   place-self: center end;
 }
-
 div.main-container div.game-board :nth-child(5) {
   place-self: center;
 }
-
 div.main-container div.game-board :nth-child(6) {
   place-self: center start;
 }
-
 div.main-container div.game-board :nth-child(7) {
   place-self: start end;
 }
-
 div.main-container div.game-board :nth-child(8) {
   place-self: start center;
 }
-
 div.main-container div.game-board :nth-child(9) {
   place-self: start;
-}
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

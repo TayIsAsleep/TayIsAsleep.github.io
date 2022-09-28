@@ -1,12 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
 * {
   margin: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  font-family: 'Roboto Mono', monospace;
+  box-sizing: border-box;
+  font-family: "Roboto Mono", monospace;
   color: black;
 }
-
 *:not(ul) {
   padding: 0;
 }
@@ -14,43 +12,34 @@
 body {
   border: 0.8em solid white;
 }
-
 body div.main-container {
   border: 0.8em solid black;
   background-color: white;
   padding: 1.6em;
 }
-
 body div.main-container div.top-section {
   text-align: center;
   margin-bottom: 1em;
 }
-
 body div.main-container div.top-section img.header-image {
   width: 15em;
   border: 0.4em solid black;
   background-color: black;
 }
-
 body div.main-container div.text-section {
   width: 80%;
   margin: auto;
 }
-
 body div.main-container div.text-section .date {
   color: black;
   padding-left: 0.75rem;
 }
-
 body div.main-container div.text-section .description {
   margin-top: 0.8em;
 }
-
 body div.main-container div.text-section h2 {
   margin-bottom: 0.6em;
 }
-
 body div.main-container div.text-section hr {
   margin: 0 -0.5em;
-}
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */
