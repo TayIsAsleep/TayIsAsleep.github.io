@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap%27');
+
+$player_1_color: red;
+$player_2_color: blue;
+
+$theme_color_1: white;
+$theme_color_2: black;
+
+/* Code from https://stackoverflow.com/a/6900392 */
+@mixin unselectable{
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+
+@mixin flexBoxCenter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+div.main-container{
+    @include flexBoxCenter;
+    flex-direction: column;
+    
+    width: 100vw;
+    height: 100vh;
+
+    .piece-image{
+        @include unselectable;
+        
+        width: calc((min(80vh, 80vw) / 10) * 0.9);
+        height: calc((min(80vh, 80vw) / 10) * 0.9);
+        z-index: 0;
+
+        &.holding{
+            position: relative;
+            z-index: 1;
+        }
+        &[color="white"]{
+            filter: none;
+        }
+        &[color="black"]{
+            filter: invert(1);
+        }
+    }
+
+    div.pieces-out-container{
+        @include flexBoxCenter;
+        flex-direction: row;
+        // height: inherit;
+        flex: 1;
+        flex-wrap: wrap;
+        max-width: 80%;
+    }
+
+    div.chess-board{
+        height: min(80vh, 80vw);
+        width: min(80vh, 80vw);
+
+        display: grid;
+        grid-template-columns: repeat(10, calc(100% / 10));
+        grid-template-rows: repeat(10, calc(100% / 10));
+
+        > div{
+            @include flexBoxCenter;
+        }
+
+        div.chess-square{
+            &.white{
+                background-color: white;
+            }
+            &.black{
+                background-color: black;
+            }
+
+            $border: 3px solid black;
+            &[y="0"]{
+                border-top: $border;
+            }
+            &[y="7"]{
+                border-bottom: $border;
+            }
+            &[x="0"]{
+                border-left: $border;
+            }
+            &[x="7"]{
+                border-right: $border;
+            }
+
+
+
+            
+        }
+        div.coordinate-container{
+            p{
+                @include unselectable;
+            }
+        }
+
+    }
+}
+

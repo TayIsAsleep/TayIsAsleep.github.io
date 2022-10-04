@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </head>
+    <body>
+        <p id="test"></p>
+
+
+        <script>
+            let apps = {
+                "miner":{
+                    "include":false,
+                    "hidemenu":true,
+                    "url": "apps/me/miner/coinimp.html"
+                },
+
+
+                "räkna_mil":{
+                    "include":true,
+                    "hidemenu":true,
+                    "url": "apps/me/räkna_mil/index.html",
+                    "title":"Räkna mil",
+                    "description":"Calculate how much the fuel will cost"
+                }
+            }
+
+            let url_parameters = Object.fromEntries(new URLSearchParams(window.location.search).entries());
+
+
+            
+
+
+            console.log(url_parameters);
+        </script>
+    </body>
+</html>
