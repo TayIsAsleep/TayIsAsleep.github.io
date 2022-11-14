@@ -66,6 +66,7 @@ body{
     div.app-container{
         width: 100%;
         height: 100%;
+        overflow-y: hidden;
 
         div.menu-container{
             $menu_container_margin: 1em;

@@ -4,6 +4,13 @@
         "hidemenu":true,
         "url": "apps/me/cv/index.html"
     },
+    
+    "fragile": {
+        "include": false,
+        "hidemenu":true,
+        "url": "apps/me/fragile_website/index.html"
+    },
+    
 
     "evidence_tracker": {
         "include": true,
