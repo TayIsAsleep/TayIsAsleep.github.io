@@ -12,6 +12,7 @@ div.main-container {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   width: 100vw;
   height: 100vh;
 }
@@ -20,6 +21,8 @@ div.main-container .piece-image {
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */
   user-select: none; /* Standard */
+  width: calc(min(80vh, 80vw) / 10 * 0.9);
+  height: calc(min(80vh, 80vw) / 10 * 0.9);
   z-index: 0;
 }
 div.main-container .piece-image.holding {
@@ -38,11 +41,13 @@ div.main-container div.pieces-out-container {
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  height: inherit;
+  flex: 1;
+  flex-wrap: wrap;
+  max-width: 80%;
 }
 div.main-container div.chess-board {
-  width: 500px;
-  height: 500px;
+  height: min(80vh, 80vw);
+  width: min(80vh, 80vw);
   display: grid;
   grid-template-columns: repeat(10, 10%);
   grid-template-rows: repeat(10, 10%);

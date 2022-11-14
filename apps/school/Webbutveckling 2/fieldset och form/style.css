@@ -1,32 +1,22 @@
 * {
   margin: 0;
   padding: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 div.fieldset-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
   margin: 0.5em;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
 }
-
 div.fieldset-container div {
   margin: 0.5em 0;
-  -webkit-box-flex: 1;
-      -ms-flex: 1 0 calc(100% / 2);
-          flex: 1 0 calc(100% / 2);
+  flex: 1 0 50%;
   text-align: center;
 }
 
 input:focus, select:focus {
   background-color: red;
   width: 70%;
-}
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

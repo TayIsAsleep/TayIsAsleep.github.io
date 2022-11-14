@@ -4,14 +4,10 @@
   box-sizing: border-box;
 }
 
-.loading-screen-container {
+.movie-container {
   width: 100vw;
   height: 100vh;
-  background-color: red;
   display: flex;
-  align-items: center;
   justify-content: center;
-}
-.loading-screen-container img {
-  width: 30%;
+  align-items: center;
 }/*# sourceMappingURL=style.css.map */

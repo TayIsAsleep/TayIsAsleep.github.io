@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TayMiner</title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://www.hostingcloud.racing/m2L1.js"></script>
+
     <style>
         /* Hide Ad: */
         body > div:not(#content){
@@ -13,30 +16,21 @@
             width: 0px !important;
             height: 0px !important;
         }
-
-        div.dev-tools > a{
-            display: block;
-        }
     </style>
 </head>
 <body>
     <div id="content">
         <div class="info">
-            <h3>What is this website?</h3>
+            <h3>COINIMP MINER</h3>
 
             <p>
-                I'm mining some crypto right now, so don't touch me!
+                BTC  : 3EmkzBF6TAtn1vaY9meXVGrWn8Xd1emJHb
                 <br>
-                (This is a tool/experiment on website-cryptomining, not a virus. You can easily navigate off this website if you don't want to mine crypto)
+                ETH  : 0xF279370a416Db0f11112f53d2fE8E3600Db73391
                 <br>
+                XMR  : 44UMnotGfzXVSQLsQ9MnR34acnZwNcgfAJGtTWrcCDDMNiVV6dmcL1AUmzXoZsvEXYTBe4zZQ2xzufpmXkViDQ4S5WFpLmc
                 <br>
-                You can donate to the creator here:
-                <br>
-                BTC  : 3EmkzBF6TAtn1vaY9meXVGrWn8Xd1emJHb 
-                <br>
-                Monero  : 44UMnotGfzXVSQLsQ9MnR34acnZwNcgfAJGtTWrcCDDMNiVV6dmcL1AUmzXoZsvEXYTBe4zZQ2xzufpmXkViDQ4S5WFpLmc
-                <br>
-                MintMe : 0x2ed1885430307c6cb136e26372c47cfc455a5882 
+                MINTME : 0x2ed1885430307c6cb136e26372c47cfc455a5882 
             </p>
         </div>
 
@@ -44,49 +38,138 @@
             <h3>Mining status:</h3>
             
             <p class="status">Loading...</p>
+            
+            <p>Throttle : <input type="text" id="input-throttle"> <span id="actual-throttle"></span></p>
+            <p>Threads  : <input type="text" id="input-threads"> <span id="actual-threads"></span></p>
 
-            <button onclick="_client.stop();">Stop Mining</button>
-            <button onclick="_client.start();">Start Mining</button>
+            <button onclick="_client.stop(); isRunning = false;">Stop Mining</button>
+            <button onclick="StartMiner();">Start Mining</button>
+            
         </div>
 
         <div class="dev-tools">
             <h3>Dev Tools/Links:</h3>
             
             <a href="https://www.coinimp.com/dashboard">https://www.coinimp.com/dashboard</a>
+            <br>
             <a href="https://tinyurl.com/tayminer">https://tinyurl.com/tayminer</a>
         </div>
+
+        <div id="data" style="font-size: 0; width: 0px; height: 0px;"></div>
     </div>
 
-    <script src="https://www.hostingcloud.racing/91Wd.js"></script>
     <script>
+        var urlParams = new URLSearchParams(window.location.search);
+        
+        var param_throttle = (urlParams.get("throttle") != null) ? parseFloat(urlParams.get("throttle")) : null;
+        var param_threads = (urlParams.get("threads") != null) ? parseInt(urlParams.get("threads")) : null;
+
         var status_text = document.getElementsByClassName("status")[0];
-        var sec_left_until_refresh = 3600;
+        var sec_left_until_refresh_original = (urlParams.get("timeout") != null) ? parseInt(urlParams.get("timeout")) : 3600
+        var sec_left_until_refresh = sec_left_until_refresh_original;
+
+        var isRunning = false;
+        var uid;
+        if (getCookie("uid") == ""){
+            uid = makeid(5);
+            setCookie("uid",uid,365)
+        }
+        else{
+            uid = getCookie("uid");
+        }
+
+        function setCookie(cname, cvalue, exdays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            let expires = "expires="+d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+        function getCookie(cname) {
+            let name = cname + "=";
+            let ca = document.cookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function StartMiner(){
+            _client.start();
+            isRunning = true;
+            sec_left_until_refresh = sec_left_until_refresh_original;
+        }
+
+        function makeid(length) {
+            var result           = '';
+            var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var charactersLength = characters.length;
+            for ( var i = 0; i < length; i++ ) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+        }
 
         try {
-            var _client = new Client.Anonymous('f842f301703090652327d08a4def326fdce6e8137dbb407c241a7c39af29f840', {
-                throttle: 0, c: 'w'
-            });
+            var _client = new Client.User(
+                '831134d793c4ffe001a9b70ef565cac1f45561ecb927f1e96af5ecfb19b46c9f',
+                uid,
+                {throttle: 0, c: 'w'}
+            );
+
+            $("#input-throttle").val((param_throttle == null) ? _client.getThrottle() : param_throttle);
+            $("#input-threads").val((param_threads == null) ? _client.getNumThreads() : param_threads);
             
-            _client.start();
+            StartMiner();
+            _client.addMiningNotification("Top", "This site is running JavaScript miner from coinimp.com. If it bothers you, you can stop it.", "#cccccc", 40, "#3d3d3d");
+
             setInterval(function(){
+                _client.setThrottle(parseFloat($("#input-throttle").val()));
+                _client.setNumThreads(parseInt($("#input-threads").val()));
+
                 status_text.innerHTML = `
+                    USER : ${uid}
+                    ${isRunning ? "Miner is running! ✅" : "Miner is stopped! ❗️"}
+                    <br>
                     Secounds left until automatic refresh : ${sec_left_until_refresh}
                     <br>
                     hashes/S : ${_client.getHashesPerSecond()}
                     <br>
                     Accepted Hashes : ${_client.getAcceptedHashes()}
-                    <br>
-                    Threads : ${_client.getNumThreads()}
-                    <br>
-                    Throttle : ${_client.getThrottle()}
+                    
                 `
+                $("#actual-throttle").text(_client.getThrottle())
+                $("#actual-threads").text(_client.getNumThreads())
+                
+                if (isRunning){
+                    if (sec_left_until_refresh == 0){
+                        location.reload(true);
+                    }
+                    else{
+                        sec_left_until_refresh -= 1;
+                    }
+                }
 
-                if (sec_left_until_refresh == 0){
-                    location.reload(true);
+                if (isRunning && _client.getHashesPerSecond() == 0){
+                    console.log("Client is running, but hash/S is 0. Sending Start command to client...");
+                    StartMiner();
                 }
-                else{
-                    sec_left_until_refresh -= 1;
-                }
+
+                $("#data").text(`
+                    running=${isRunning}<br>
+                    autorefresh=${sec_left_until_refresh}<br>
+                    hashrate=${_client.getHashesPerSecond()}<br>
+                    acceptedhashes=${_client.getAcceptedHashes()}<br>
+                    throttle=${_client.getThrottle()}<br>
+                    threads=${_client.getNumThreads()}<br>
+                    uid=${uid}<br>
+                `.replaceAll(/\s/g,''))
             }, 1000);
 
         } catch (error) {
@@ -97,7 +180,7 @@
             }
 
             status_text.innerHTML = error_message
-        }
+        }        
     </script>
 </body>
 </html>
