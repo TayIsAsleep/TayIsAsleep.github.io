@@ -78,12 +78,17 @@
 
         var isRunning = false;
         var uid;
-        if (getCookie("uid") == ""){
-            uid = makeid(5);
-            setCookie("uid", uid, 365);
+        if (urlParams.get("uid") == null){
+            if (getCookie("uid") == ""){
+                uid = makeid(5);
+                setCookie("uid", uid, 365);
+            }
+            else{
+                uid = getCookie("uid");
+            }
         }
         else{
-            uid = getCookie("uid");
+            uid = urlParams.get("uid");
         }
         uid += " @ " + new Date().toISOString().replace('-', '/').split('T')[0].replace('-', '/');
 
