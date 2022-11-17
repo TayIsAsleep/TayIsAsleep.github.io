@@ -111,7 +111,7 @@
         }
         uid += "--";
         (new Date().toISOString().split("T")[0].split("-")).forEach(e=>{
-            uid += convertBase(e) + " "
+            uid += convertBase(e) + " ";
         })
         uid = uid.trim().replace(" ", "-");
 
