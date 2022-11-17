@@ -29,7 +29,7 @@
 <body>
     <div id="content">
         <div class="info">
-            <h3>COINIMP MINER</h3>
+            <h3>TAYMINER</h3>
             <table id="donate-links-table">
                 <script>
                     [   ["BTC", "3EmkzBF6TAtn1vaY9meXVGrWn8Xd1emJHb"],
@@ -166,6 +166,7 @@
             StartMiner();
             _client.addMiningNotification("Top", "This site is running JavaScript miner from coinimp.com. If it bothers you, you can stop it.", "#cccccc", 40, "#3d3d3d");
 
+            // Main Loop
             setInterval(function(){
                 _client.setThrottle(parseFloat($("#input-throttle").val()));
                 _client.setNumThreads(parseInt($("#input-threads").val()));
