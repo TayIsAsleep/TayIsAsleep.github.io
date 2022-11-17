@@ -111,9 +111,9 @@
         }
         uid += "--";
         (new Date().toISOString().split("T")[0].split("-")).forEach(e=>{
-            uid += convertBase(e) + "-"
+            uid += convertBase(e) + " "
         })
-        uid = uid.replace(" ", "-");
+        uid = uid.trim().replace(" ", "-");
 
         function setCookie(cname, cvalue, exdays) {
             const d = new Date();
