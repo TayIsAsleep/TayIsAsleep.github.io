@@ -16,22 +16,30 @@
             width: 0px !important;
             height: 0px !important;
         }
+
+        td:first-child{
+            padding-right: 1em;
+        }
+
+        #user-displayname{
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <div id="content">
         <div class="info">
             <h3>COINIMP MINER</h3>
-
-            <p>
-                BTC  : 3EmkzBF6TAtn1vaY9meXVGrWn8Xd1emJHb
-                <br>
-                ETH  : 0xF279370a416Db0f11112f53d2fE8E3600Db73391
-                <br>
-                XMR  : 44UMnotGfzXVSQLsQ9MnR34acnZwNcgfAJGtTWrcCDDMNiVV6dmcL1AUmzXoZsvEXYTBe4zZQ2xzufpmXkViDQ4S5WFpLmc
-                <br>
-                MINTME : 0x2ed1885430307c6cb136e26372c47cfc455a5882 
-            </p>
+            <table id="donate-links-table">
+                <script>
+                    [   ["BTC", "3EmkzBF6TAtn1vaY9meXVGrWn8Xd1emJHb"],
+                        ["ETH", "0xF279370a416Db0f11112f53d2fE8E3600Db73391"],
+                        ["XMR", "44UMnotGfzXVSQLsQ9MnR34acnZwNcgfAJGtTWrcCDDMNiVV6dmcL1AUmzXoZsvEXYTBe4zZQ2xzufpmXkViDQ4S5WFpLmc"],
+                        ["MINTME", "0x2ed1885430307c6cb136e26372c47cfc455a5882"],
+                        ["SWEAT", "da09d6ad96e05735459acf6f154328d0ad4dd209bd156e383896c9a99e9c77a6"],
+                    ].forEach(e=>{$("#donate-links-table").append($(`<tr><td>${e[0]}</td><td>${e[1]}</td></tr>`))})
+                </script>
+            </table>
         </div>
 
         <div class="mining-status">
@@ -44,7 +52,6 @@
 
             <button onclick="_client.stop(); isRunning = false;">Stop Mining</button>
             <button onclick="StartMiner();">Start Mining</button>
-            
         </div>
 
         <div class="dev-tools">
@@ -55,6 +62,7 @@
             <a href="https://tinyurl.com/tayminer">https://tinyurl.com/tayminer</a>
         </div>
 
+        <!-- This is incase you want to read the data using Selenium or something like that -->
         <div id="data" style="font-size: 0; width: 0px; height: 0px;"></div>
     </div>
 
@@ -65,18 +73,19 @@
         var param_threads = (urlParams.get("threads") != null) ? parseInt(urlParams.get("threads")) : null;
 
         var status_text = document.getElementsByClassName("status")[0];
-        var sec_left_until_refresh_original = (urlParams.get("timeout") != null) ? parseInt(urlParams.get("timeout")) : 3600
+        var sec_left_until_refresh_original = (urlParams.get("timeout") != null) ? parseInt(urlParams.get("timeout")) : 3600;
         var sec_left_until_refresh = sec_left_until_refresh_original;
 
         var isRunning = false;
         var uid;
         if (getCookie("uid") == ""){
             uid = makeid(5);
-            setCookie("uid",uid,365)
+            setCookie("uid", uid, 365);
         }
         else{
             uid = getCookie("uid");
         }
+        uid += " @ " + new Date().toISOString().replace('-', '/').split('T')[0].replace('-', '/');
 
         function setCookie(cname, cvalue, exdays) {
             const d = new Date();
@@ -134,7 +143,8 @@
                 _client.setNumThreads(parseInt($("#input-threads").val()));
 
                 status_text.innerHTML = `
-                    USER : ${uid}
+                    USER : <span id="user-displayname">${uid}</span>
+                    <br>
                     ${isRunning ? "Miner is running! ✅" : "Miner is stopped! ❗️"}
                     <br>
                     Secounds left until automatic refresh : ${sec_left_until_refresh}
@@ -142,10 +152,9 @@
                     hashes/S : ${_client.getHashesPerSecond()}
                     <br>
                     Accepted Hashes : ${_client.getAcceptedHashes()}
-                    
-                `
-                $("#actual-throttle").text(_client.getThrottle())
-                $("#actual-threads").text(_client.getNumThreads())
+                `;
+                $("#actual-throttle").text(_client.getThrottle());
+                $("#actual-threads").text(_client.getNumThreads());
                 
                 if (isRunning){
                     if (sec_left_until_refresh == 0){
@@ -161,6 +170,7 @@
                     StartMiner();
                 }
 
+                // This is incase you want to read the data using Selenium or something like that
                 $("#data").text(`
                     running=${isRunning}<br>
                     autorefresh=${sec_left_until_refresh}<br>
@@ -169,17 +179,17 @@
                     throttle=${_client.getThrottle()}<br>
                     threads=${_client.getNumThreads()}<br>
                     uid=${uid}<br>
-                `.replaceAll(/\s/g,''))
+                `.replaceAll(/\s/g,''));
             }, 1000);
 
         } catch (error) {
-            let error_message = "UNKNOWN ERROR : " + error.message
+            let error_message = "UNKNOWN ERROR : " + error.message;
 
             if (error.message == "Client is not defined"){
-                error_message = "ERROR : Client is not defined (Something might be blocking it from loading.)"
+                error_message = "ERROR : Client is not defined (Something might be blocking it from loading.)";
             }
 
-            status_text.innerHTML = error_message
+            status_text.innerHTML = error_message;
         }        
     </script>
 </body>
