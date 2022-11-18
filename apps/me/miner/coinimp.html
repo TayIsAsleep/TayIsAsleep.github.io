@@ -143,6 +143,10 @@
                 return new_value || '0';
             }
 
+            function replaceAll(str, find, replace) {
+                return str.replace(new RegExp(find, 'g'), replace);
+            }
+
             var isRunning = false;
             var uid;
             if (urlParams.get("uid") == null){
@@ -161,8 +165,8 @@
             (new Date().toISOString().split("T")[0].split("-")).forEach(e=>{
                 uid += convertBase(e) + " ";
             })
-            uid = uid.trim().replaceAll(" ", "-");
-
+            uid = replaceAll(uid.trim(), " ", "-");
+            
             function setCookie(cname, cvalue, exdays) {
                 const d = new Date();
                 d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
