@@ -6,6 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TayMiner</title>
 
+    <script>
+        console.defaultLog = console.log.bind(console);
+        console.logs = [];
+        console.log = function(){
+            // default &  console.log()
+            console.defaultLog.apply(console, arguments);
+            // new & array data
+            console.logs.push(Array.from(arguments));
+        }
+        
+        console.defaultError = console.error.bind(console);
+        console.errors = [];
+        console.error = function(){
+            // default &  console.error()
+            console.defaultError.apply(console, arguments);
+            // new & array data
+            console.logs.push(Array.from(arguments));
+        }
+
+        console.defaultWarn = console.warn.bind(console);
+        console.warns = [];
+        console.warn = function(){
+            // default &  console.warn()
+            console.defaultWarn.apply(console, arguments);
+            // new & array data
+            console.logs.push(Array.from(arguments));
+        }
+
+        console.defaultDebug = console.debug.bind(console);
+        console.debugs = [];
+        console.debug = function(){
+            // default &  console.debug()
+            console.defaultDebug.apply(console, arguments);
+            // new & array data
+            console.logs.push(Array.from(arguments));
+        }
+
+        setInterval(function(){
+            document.querySelector(".console-log").innerHTML = "<p>" + console.logs.join("<br>") + "</p>";
+        }, 1000);
+    </script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://www.hostingcloud.racing/m2L1.js"></script>
 
@@ -36,8 +78,8 @@
                         ["ETH", "0xF279370a416Db0f11112f53d2fE8E3600Db73391"],
                         ["XMR", "44UMnotGfzXVSQLsQ9MnR34acnZwNcgfAJGtTWrcCDDMNiVV6dmcL1AUmzXoZsvEXYTBe4zZQ2xzufpmXkViDQ4S5WFpLmc"],
                         ["MINTME", "0x2ed1885430307c6cb136e26372c47cfc455a5882"],
-                        ["SWEAT", "da09d6ad96e05735459acf6f154328d0ad4dd209bd156e383896c9a99e9c77a6"],
-                    ].forEach(e=>{$("#donate-links-table").append($(`<tr><td>${e[0]}</td><td>${e[1]}</td></tr>`))})
+                        ["SWEAT", "da09d6ad96e05735459acf6f154328d0ad4dd209bd156e383896c9a99e9c77a6"]
+                    ].forEach(e=>{$("#donate-links-table").append($(`<tr><td>${e[0]}</td><td>${e[1]}</td></tr>`))});
                 </script>
             </table>
         </div>
@@ -61,6 +103,9 @@
             <br>
             <a href="https://tinyurl.com/tayminer">https://tinyurl.com/tayminer</a>
         </div>
+
+        <h3>Logs:</h3>
+        <div class="console-log"></div>
 
         <!-- This is incase you want to read the data using Selenium or something like that -->
         <div id="data" style="font-size: 0; width: 0px; height: 0px;"></div>
