@@ -6,66 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TayMiner</title>
 
-    <script>
-        console.defaultLog = console.log.bind(console);
-        console.logs = [];
-        console.log = function(){
-            // default &  console.log()
-            console.defaultLog.apply(console, arguments);
-            // new & array data
-            console.logs.push(Array.from(arguments));
-        }
-        
-        console.defaultError = console.error.bind(console);
-        console.errors = [];
-        console.error = function(){
-            // default &  console.error()
-            console.defaultError.apply(console, arguments);
-            // new & array data
-            console.logs.push(Array.from(arguments));
-        }
-
-        console.defaultWarn = console.warn.bind(console);
-        console.warns = [];
-        console.warn = function(){
-            // default &  console.warn()
-            console.defaultWarn.apply(console, arguments);
-            // new & array data
-            console.logs.push(Array.from(arguments));
-        }
-
-        console.defaultDebug = console.debug.bind(console);
-        console.debugs = [];
-        console.debug = function(){
-            // default &  console.debug()
-            console.defaultDebug.apply(console, arguments);
-            // new & array data
-            console.logs.push(Array.from(arguments));
-        }
-
-        setInterval(function(){
-            document.querySelector(".console-log").innerHTML = "<p>" + console.logs.join("<br>") + "</p>";
-        }, 1000);
-
-        console.log("Logging setup (If you can see this that means its working :)");
-    </script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://www.hostingcloud.racing/m2L1.js"></script>
 
     <style>
-        /* Hide Ad: */
-        body > div:not(#content){
+        .console-log > div{
+            display: flex;
+            margin-bottom: 0.25em;
+        }
+        .console-log pre{ /* Make HTML console log not have spacing */
+            margin: 0;
+        }
+        .console-log > div:nth-child(even){ /* Add some color to the console for every other line*/
+            background-color: rgb(222, 222, 222);
+        }
+        body > div:not(#content){ /* Hide Ad: */
             display: none !important;
             width: 0px !important;
             height: 0px !important;
         }
-
-        td:first-child{
+        #donate-links-table td:first-child{ /* Add small padding on the donationlink table */
             padding-right: 1em;
         }
-
-        #user-displayname{
+        #user-displayname{ /* Make the displayname bold */
             font-weight: bold;
         }
     </style>
@@ -107,7 +70,33 @@
         </div>
 
         <h3>Logs:</h3>
-        <div class="console-log"></div>
+        <div class="console-log">
+            <script>
+                var container = document.querySelector(".console-log");
+                ["Log","Error","Warn","Debug"].forEach(type=>{eval(`
+                        console.default${type} = console.${type.toLowerCase()}.bind(console);
+                        console.${type.toLowerCase()} = function(){
+                            console_log_override("${type.toUpperCase()}", arguments);
+                        };
+                `);});
+        
+                function console_log_override(type){
+                    console.defaultLog.apply(console, arguments[1]); // Make the default console log work still
+
+                    let log_div = document.createElement("div");
+                    let info_pre = document.createElement("pre");
+                    let text_pre = document.createElement("pre");
+
+                    info_pre.innerText = `${new Date().toISOString().split("T")[1].slice(0, -1)} (${arguments[0]}) : `;
+                    text_pre.innerText = Array.from(arguments[1]).join(" ");
+                    log_div.appendChild(info_pre);
+                    log_div.appendChild(text_pre);
+                    container.insertBefore(log_div, container.firstChild);
+                }
+
+                console.log("Logging setup (If you can see this that means its working :)");
+            </script>
+        </div>
 
         <!-- This is incase you want to read the data using Selenium or something like that -->
         <div id="data" style="font-size: 0; width: 0px; height: 0px;"></div>
@@ -115,14 +104,27 @@
 
     <script>
         try {
-            var urlParams = new URLSearchParams(window.location.search);
-            
-            var param_throttle = (urlParams.get("throttle") != null) ? parseFloat(urlParams.get("throttle")) : null;
-            var param_threads = (urlParams.get("threads") != null) ? parseInt(urlParams.get("threads")) : null;
+            function setCookie(cname, cvalue, exdays) {
+                const d = new Date();
+                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                let expires = "expires="+d.toUTCString();
+                document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            }
 
-            var status_text = document.getElementsByClassName("status")[0];
-            var sec_left_until_refresh_original = (urlParams.get("timeout") != null) ? parseInt(urlParams.get("timeout")) : 3600;
-            var sec_left_until_refresh = sec_left_until_refresh_original;
+            function getCookie(cname) {
+                let name = cname + "=";
+                let ca = document.cookie.split(';');
+                for(let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
 
             function convertBase(value) {
                 var from_range = '0123456789'.split('');
@@ -147,6 +149,34 @@
                 return str.replace(new RegExp(find, 'g'), replace);
             }
 
+            function makeid(length) {
+                var result           = '';
+                var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                var charactersLength = characters.length;
+                for ( var i = 0; i < length; i++ ) {
+                    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                }
+                return result;
+            }
+
+            function StartMiner(){
+                _client.start();
+                isRunning = true;
+                sec_left_until_refresh = sec_left_until_refresh_original;
+            }
+
+            var urlParams = new URLSearchParams(window.location.search);
+            
+            var param_throttle = (urlParams.get("throttle") != null) ? parseFloat(urlParams.get("throttle")) : null;
+            var param_threads = (urlParams.get("threads") != null) ? parseInt(urlParams.get("threads")) : null;
+
+            var status_text = document.getElementsByClassName("status")[0];
+            var sec_left_until_refresh_original = (urlParams.get("timeout") != null) ? parseInt(urlParams.get("timeout")) : 3600;
+            var sec_left_until_refresh = sec_left_until_refresh_original;
+
+            var avg_hashrate_long = [];
+            var avg_hashrate_short = [];
+
             var isRunning = false;
             var uid;
             if (urlParams.get("uid") == null){
@@ -167,43 +197,6 @@
             })
             uid = replaceAll(uid.trim(), " ", "-");
             
-            function setCookie(cname, cvalue, exdays) {
-                const d = new Date();
-                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-                let expires = "expires="+d.toUTCString();
-                document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-            }
-
-            function getCookie(cname) {
-                let name = cname + "=";
-                let ca = document.cookie.split(';');
-                for(let i = 0; i < ca.length; i++) {
-                    let c = ca[i];
-                    while (c.charAt(0) == ' ') {
-                    c = c.substring(1);
-                    }
-                    if (c.indexOf(name) == 0) {
-                    return c.substring(name.length, c.length);
-                    }
-                }
-                return "";
-            }
-
-            function StartMiner(){
-                _client.start();
-                isRunning = true;
-                sec_left_until_refresh = sec_left_until_refresh_original;
-            }
-
-            function makeid(length) {
-                var result           = '';
-                var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-                var charactersLength = characters.length;
-                for ( var i = 0; i < length; i++ ) {
-                    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-                }
-                return result;
-            }
             
             var _client = new Client.User(
                 '831134d793c4ffe001a9b70ef565cac1f45561ecb927f1e96af5ecfb19b46c9f',
@@ -237,6 +230,17 @@
                 $("#actual-threads").text(_client.getNumThreads());
                 
                 if (isRunning){
+                    if (avg_hashrate_short.length > 0 && sec_left_until_refresh % 10 == 0){
+                        let short_calculated = avg_hashrate_short.reduce((a, b) => a + b, 0) / avg_hashrate_short.length;
+                        let long_calculated = avg_hashrate_long.reduce((a, b) => a + b, 0) / avg_hashrate_long.length;
+                        avg_hashrate_short = [];
+                        console.log(`Current average h/s: ${short_calculated}\nTotal   average h/s: ${long_calculated}`);
+                    }
+                    else{
+                        avg_hashrate_long.push(_client.getHashesPerSecond());
+                        avg_hashrate_short.push(_client.getHashesPerSecond());
+                    }
+
                     if (sec_left_until_refresh == 0){
                         location.reload(true);
                     }
@@ -270,6 +274,7 @@
             }
 
             status_text.innerHTML = error_message;
+            console.error(error_message)
         }        
     </script>
 </body>
