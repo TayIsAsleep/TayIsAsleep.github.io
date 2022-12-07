@@ -45,9 +45,16 @@
             }
 
             if ("pdf" in Object.fromEntries(new URLSearchParams(window.location.search).entries())){
-                $(".main-container").css("border","none");
-                $(".main-container").css("padding", "0");
-                $("body").css("border", "0");
+                try {
+                    $(".main-container").css("border","none");
+                    $(".main-container").css("padding", "0");
+                    $("body").css("border", "0");
+                } catch (err) {
+                    document.getElementsByClassName("main-container")[0].style.border = "none";
+                    document.getElementsByClassName("main-container")[0].style.padding = "0";
+                    document.getElementsByTagName("body")[0].style.border = "0";
+                }
+                
             }
 
             [
