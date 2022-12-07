@@ -15,6 +15,10 @@ $color_alt: white;
     color: $color_text;
 }
 
+.entry:not(:last-child) {
+    padding-bottom: 2.5em;
+}
+
 body{
     border: $border_size solid $color_alt;
 
@@ -35,8 +39,19 @@ body{
         }
 
         div.text-section{
-            width: 80%;
+
+
+
+            width: 95%;
             margin: auto;
+
+            display: flex;
+            gap: 3em;
+
+
+            > div{
+                width: 50%;
+            }
 
             .date{
                 color: $color_text_darker;

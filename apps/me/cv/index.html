@@ -7,6 +7,7 @@
         <title>Isak Karlsen CV</title>
         <link rel="stylesheet" href="style.css?random=5496956823">
         <link rel="icon" href="images/V1.png" type="image/x-icon">
+        <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
     </head>
     <body>
         <div class="main-container">
@@ -25,74 +26,199 @@
             </div>
 
             <div class="text-section">
-                <br><hr><br>
-
-                <h2>Arbetslivserfarenhet</h2>
-                <h4>Huddinge Kommun - Huddinge Bibliotek</h4>
-                <h6 class="date">17 juni 2019 - 5 juli 2019</h6>
-                <p class="description">
-                    Mitt arbete bestod av sortering av böcker och post samt ansvarade för ett projekt där
-                    jag märkte om samtliga ljudböcker på CD. Arbetet innebar mycket eget ansvar, noggrannhet
-                    och krav på struktur. Personalen på biblioteket ansåg att jag var pålitlig, effektiv och ordningsam.
-                    Jag tyckte att detta första arbete lade en bra grund för framtida anställningar då dessa egenskaper
-                    går att använda på många olika arbetsplatser.
-                </p>
-    
-                <br><hr><br>
-    
-                <h2>Utbildning</h2>
-                <h4>NTI Södertörn - Teknisk Linje</h4>
-                <h6 class="date">Augusti 2019 - Pågående</h6>
-                <p class="description">
-                    Jag går andra året på teknisk linje på gymnasiet med inriktning på programmering.
-                    Utbildningen innehåller många intressanta kurser och jag är mycket nöjd med mitt val
-                    eftersom jag har alltid varit mycket intresserad av teknik.
-                </p>
-    
-                <br><hr><br>
-    
-                <h2>Utmärkelser</h2>
-                <h4>#HackYourWorld - Vinnare (Bästa tekniska lösning)</h4>
-                <h6 class="date">Februari 2021</h6>
-                <p class="description">
-                    I en tävling för samtliga gymnasieelever årskurs 2, anordnad av Ericsson,
-                    IBM och Drivhuset blev vår idé vinnare till priset "Bästa tekniska lösning".
-                    Vår idé var en hemsida som kunde faktachecka en text som användaren matade in.
-                    Den kan vara användbar för t.ex elever som skriver en faktatext och behöver kolla sina källor.
-                    <!-- <img src="images/Diplom-Hack-Your-World-2021.png" alt="Diplom-Hack-Your-World-2021"> -->
-                </p>
-    
-                <br><hr><br>
-    
-                <h2>Språk</h2>
-                <p class="description">
-                    <ul>
-                        <li>Svenska - Modersmål</li>
-                        <li>Engelska - Flytande</li>
-                    </ul>
-                </p>
-    
-                <br><hr><br>
-    
-                <h2>Kort om mig</h2>
-                <p class="description">
-                    Hej! Jag heter Isak Karlsen, och är 18 år gammal. Jag skulle vilja beskriva mig själv som en positiv person
-                    och mina bästa egenskaper är att jag har lätt att lära mig nya saker, är ambitiös och har hög arbetsmoral.
-                    Jag söker primärt ett sommarjobb, men är självklart intresserad för extrajobb under terminerna också.
-                </p>
-
-                <br><hr><br>
-
-                <!-- <h2>Övrigt</h2>
-                <p class="description">
-                    Jag har B körkort samt tillgång till egen bil.
-                </p> 
-
-                <br><hr><br>
-                -->
+                <div class="left"></div>
+                <div class="right"></div>
             </div>
             
         </div>
 
+        <script>
+            function getAge(dateString) {
+                var today = new Date();
+                var birthDate = new Date(dateString);
+                var age = today.getFullYear() - birthDate.getFullYear();
+                var m = today.getMonth() - birthDate.getMonth();
+                if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+                return age;
+            }
+
+            [
+                /* Kort om mig */ {
+                    "displayName": "Kort om mig",
+                    "className": "aboutMe",
+                    "data": [
+                        {
+                            "description": `
+                                Hej! Jag heter Isak Karlsen, och är ${getAge('2003-2-05')} år gammal. Jag skulle vilja beskriva mig själv som en positiv person
+                                och mina bästa egenskaper är att jag har lätt att lära mig nya saker, är ambitiös och har hög arbetsmoral.
+                            `
+                        }
+                    ]
+                },
+                /* Arbetslivserfarenhet */ {
+                    "displayName": "Arbetslivserfarenhet",
+                    "className": "Arbetslivserfarenhet",
+                    "data":[
+                        {
+                            "name": "Huddinge Bibliotek",
+                            "company": "Huddinge Kommun",
+                            "startDate": "17 juni 2019",
+                            "endDate": "5 juli 2019",
+                            "description":`
+                                Mitt arbete bestod av sortering av böcker och post samt ansvarade för ett projekt där
+                                jag märkte om samtliga ljudböcker på CD. Arbetet innebar mycket eget ansvar, noggrannhet
+                                och krav på struktur. Personalen på biblioteket ansåg att jag var pålitlig, effektiv och ordningsam.
+                                Jag tyckte att detta första arbete lade en bra grund för framtida anställningar då dessa egenskaper
+                                går att använda på många olika arbetsplatser.
+                            `
+                        },
+                        {
+                            "name": "Bzzt",
+                            "company": "Bzzt Stockholm",
+                            "startDate": "19 April 2022",
+                            "endDate": null,
+                            "description":`
+                                Bzzt är en “sista milen” leverans företag i centrala Stockholm, där man kör bland annat mat (Foodora), 
+                                bud och liknande. Jag fick lära mig mycket på detta jobb, då det är mycket eget ansvar. 
+                                En av dom mest värdefulla egenskaperna jag har fått av detta jobb är att kunna hantera den stressiga 
+                                miljön som är Stockholms innerstadstrafik. Man får lära sig att effektivisera sitt arbete för att kunna göra 
+                                så många leveranser som möjligt under sitt pass, samt planera för nästa leveranser. 
+                                Genom detta jobb har jag även fått anställning på en resturang som heter FAVO.
+                            `
+                        },
+                        {
+                            "name": "FAVO",
+                            "company": "Future Dining AB",
+                            "startDate": "22 Augusti 2022",
+                            "endDate": null,
+                            "description":`
+                                FAVO är en restaurang på Östermalm och Telefonplan. Arbetet liknar det jag gjort på Bzzt, 
+                                men då endast för en restaurang, istället för flera olika. Arbetet går ut på att utföra mat leveranser, 
+                                men även att hjälpa till i köket, packa mat, fylla hyllor, fixa dipsåser mm. 
+                                Arbetet har lärt mig mycket om kundbemötande, och även hur det är att jobba i en restaurang. 
+                                Arbetsmiljön varierar mellan lugn och stressig ofta, och det har lärt mig att hantera den stress 
+                                som kan tillkomma när allt inte går som tänkt. Ibland så kan man få 4-5 leveranser som ska ut 
+                                under en 30 minutes period, och då är det viktigt att tänka ut en bra och effektiv rutt så att man hinner med allt.
+                            `
+                        }
+                    ]
+                },
+                /* Utbildning */ {
+                    "displayName": "Utbildning",
+                    "className": "Utbildning",
+                    "data":[
+                        {
+                            "name": "NTI Södertörn",
+                            "linje": "Teknisk Linje",
+                            "startDate": "Augusti 2019",
+                            "endDate": "Juni 2022",
+                            "description": `
+                                Jag går andra året på teknisk linje på gymnasiet med inriktning på programmering.
+                                Utbildningen innehåller många intressanta kurser och jag är mycket nöjd med mitt val
+                                eftersom jag har alltid varit mycket intresserad av teknik.
+                            `
+                        },
+                        {
+                            "name": "NTI Södertörn",
+                            "linje": "T4 (Gymnasieingenjör)",
+                            "startDate": "Augusti 2022",
+                            "endDate": null,
+                            "description": `
+                                Jag valde att gå en gymnasieingenjörs kurs på samma gymnasium som är inriktad på 
+                                webbutveckling.
+                            `
+                        }
+                    ]
+                },
+                /* Utmärkelser */ {
+                    "displayName": "Utmärkelser",
+                    "className": "Utmärkelser",
+                    "data":[
+                        {
+                            "name": "#HackYourWorld - Vinnare (Bästa tekniska lösning)",
+                            "date": "Februari 2021",
+                            "description": `
+                                I en tävling för samtliga gymnasieelever årskurs 2, anordnad av Ericsson,
+                                IBM och Drivhuset blev vår idé vinnare till priset "Bästa tekniska lösning".
+                                Vår idé var en hemsida som kunde faktachecka en text som användaren matade in.
+                                Den kan vara användbar för t.ex elever som skriver en faktatext och behöver kolla sina källor.
+                                
+                                <!-- <img src="images/Diplom-Hack-Your-World-2021.png" alt="Diplom-Hack-Your-World-2021"> -->
+                            `
+                        }
+                    ]
+                },
+                /* Språk */ {
+                    "displayName": "Språk",
+                    "className": "Språk",
+                    "data": [
+                        [
+                            ["Svenska 🇸🇪", "Modersmål"],
+                            ["Engelska 🇺🇸", "Flytande"]
+                        ]
+                    ]
+                },
+                /* Övrigt */ {
+                    "displayName": "Övrigt",
+                    "className": "Övrigt",
+                    "data":[
+                        {
+                            "description":`
+                                Jag har B körkort samt tillgång till egen bil.
+                            `
+                        }
+                    ]
+                }
+            ].forEach(category_obj=>{
+                let side = category_obj.className == "Arbetslivserfarenhet" ? "right" : "left";
+                
+                $(`.text-section .${side}`).append($(`<div class="${category_obj.className}"><br><hr><br><h2>${category_obj.displayName}</h2></div>`));
+                
+                category_obj.data.forEach(dataEntry=>{
+                    let dataTemp = null;
+                    
+                    if      (category_obj.className == "aboutMe"){
+                        dataTemp = `<p class="description">${dataEntry.description}</p>`
+                    }
+                    else if (category_obj.className == "Arbetslivserfarenhet"){
+                        dataTemp = `
+                            <h4><span class="work-name">${dataEntry.name}</span> - <span class="work-company-name">${dataEntry.company}</span></h4>
+                            <h6 class="date"><span class="date-start">${dataEntry.startDate}</span> - <span class="date-end">${(dataEntry.endDate == null) ? 'Pågående' : dataEntry.endDate}</span></h6>
+                            <p class="description">${dataEntry.description}</p>
+                        `;
+                    }
+                    else if (category_obj.className == "Utbildning"){
+                        dataTemp = `
+                            <h4><span class="work-name">${dataEntry.name}</span> - <span class="work-company-name">${dataEntry.linje}</span></h4>
+                            <h6 class="date"><span class="date-start">${dataEntry.startDate}</span> - <span class="date-end">${(dataEntry.endDate == null) ? 'Pågående' : dataEntry.endDate}</span></h6>
+                            <p class="description">${dataEntry.description}</p>
+                        `
+                    }
+                    else if (category_obj.className == "Utmärkelser"){
+                        dataTemp = `
+                            <h4><span class="work-name">${dataEntry.name}</span></h4>
+                            <h6 class="date"><span class="date-start">${dataEntry.date}</span></h6>
+                            <p class="description">${dataEntry.description}</p>
+                        `;
+                    }
+                    else if (category_obj.className == "Språk"){
+                        dataTemp = "<ul>"
+                        dataEntry.forEach(lang=>{
+                            dataTemp += `<li><span class="lang-name">${lang[0]}</span> - <span class="lang-skills">${lang[1]}</span></li>`
+                        })
+                        
+                    }
+                    else if (category_obj.className == "Övrigt"){
+                        dataTemp = `
+                            <p class="description">${dataEntry.description}</p>
+                        `;
+                    }
+                    
+                    $(`div.${category_obj.className}`).append($(`<div class="entry">` + dataTemp + `</div>`));
+                })
+            })
+        </script>
     </body>
 </html>

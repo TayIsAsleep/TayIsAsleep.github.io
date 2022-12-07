@@ -9,6 +9,10 @@
   padding: 0;
 }
 
+.entry:not(:last-child) {
+  padding-bottom: 2.5em;
+}
+
 body {
   border: 0.8em solid white;
 }
@@ -27,8 +31,13 @@ body div.main-container div.top-section img.header-image {
   background-color: black;
 }
 body div.main-container div.text-section {
-  width: 80%;
+  width: 95%;
   margin: auto;
+  display: flex;
+  gap: 3em;
+}
+body div.main-container div.text-section > div {
+  width: 50%;
 }
 body div.main-container div.text-section .date {
   color: black;
