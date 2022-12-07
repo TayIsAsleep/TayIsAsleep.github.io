@@ -44,6 +44,12 @@
                 return age;
             }
 
+            if ("pdf" in Object.fromEntries(new URLSearchParams(window.location.search).entries())){
+                $(".main-container").css("border","none");
+                $(".main-container").css("padding", "0");
+                $("body").css("border", "0");
+            }
+
             [
                 /* Kort om mig */ {
                     "displayName": "Kort om mig",
