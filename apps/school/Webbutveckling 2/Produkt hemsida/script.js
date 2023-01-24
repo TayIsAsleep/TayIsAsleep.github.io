@@ -1,6 +1,6 @@
 var egg = 0;
 document.getElementsByClassName("menu-icon")[0].onclick = function(){
-    window.location.href = "index.html?random=6106401765"
+    window.location.href = "index.html?random=1727331525"
 };
 
 function egg_check(me){

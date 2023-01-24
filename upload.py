@@ -42,13 +42,13 @@ def hashMe(fn, filetypes_to_include=("css","js","json","html","png")):
 for path, subdirs, files in os.walk(os.getcwd()):
     if "\\.git\\" in path: continue
     for name in files:
-        # if name == "index.html?random=7637978817":
-        try:
-            this_file = os.path.join(path, name)
-            print(f"{hashMe(this_file)} url's hashed in file \"{this_file}\"")
-            
-        except UnicodeDecodeError: 
-            pass
+        if not name in ("upload.py","apps.json"):
+            try:
+                this_file = os.path.join(path, name)
+                print(f"{hashMe(this_file)} url's hashed in file \"{this_file}\"")
+                
+            except UnicodeDecodeError: 
+                pass
            
 
 # os.system('git add . && git commit -m "Updated" && git push')

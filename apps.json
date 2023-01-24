@@ -2,13 +2,13 @@
     "cv": {
         "include": false,
         "hidemenu":true,
-        "url": "apps/me/cv/index.html?random=7214708938"
+        "url": "apps/me/cv/index.html"
     },
     
     "fragile": {
         "include": false,
         "hidemenu":true,
-        "url": "apps/me/fragile_website/index.html?random=2316402159"
+        "url": "apps/me/fragile_website/index.html"
     },
     
 
@@ -38,7 +38,7 @@
 
     "ttt": {
         "include": true,
-        "url": "apps/me/games/ttt/index.html?random=5155969602",
+        "url": "apps/me/games/ttt/index.html",
         "title":"Tic Tac Toe",
         "description":"Simple Tic Tac Toe game"
     },
@@ -50,7 +50,7 @@
 
     "chess": {
         "include": true,
-        "url": "apps/me/games/chess/index.html?random=4475665901",
+        "url": "apps/me/games/chess/index.html",
         "title":"Chess",
         "description":"Its Chess!"
     },
@@ -58,7 +58,7 @@
 
     "hangman": {
         "include": true,
-        "url": "apps/me/games/hangman/index.html?random=6021948578",
+        "url": "apps/me/games/hangman/index.html",
         "title":"Hangman",
         "description":"Hangman game"
     },
@@ -66,7 +66,7 @@
 
     "dvd": {
         "include": true,
-        "url": "apps/me/random_projects/dvd_screensaver/index.html?random=6166682367",
+        "url": "apps/me/random_projects/dvd_screensaver/index.html",
         "title":"DVD Screensaver",
         "description":"Will it hit the corner? 👀"
     },
@@ -74,7 +74,7 @@
 
     "matrix": {
         "include": true,
-        "url": "apps/me/random_projects/matrix/index.html?random=9405686437",
+        "url": "apps/me/random_projects/matrix/index.html",
         "title": "Matrix effect",
         "description": "Pretty neat"
     },
@@ -82,27 +82,27 @@
 
     "gettime": {
         "include": true,
-        "url": "apps/school/gettime/index.html?random=1528456062",
+        "url": "apps/school/gettime/index.html",
         "title": "GetTime",
         "description": "Schedule app for my school"
     },
 
     "scroll_test": {
         "include": false,
-        "url": "apps/me/random_projects/scroll_test/index.html?random=4911351016"
+        "url": "apps/me/random_projects/scroll_test/index.html"
     },
 
     "miner":{
         "include":false,
         "hidemenu":true,
-        "url": "apps/me/miner/coinimp.html?random=1324527831"
+        "url": "apps/me/miner/coinimp.html"
     },
 
 
     "räkna_mil":{
         "include":true,
         "hidemenu":true,
-        "url": "apps/me/räkna_mil/index.html?random=4384175118",
+        "url": "apps/me/räkna_mil/index.html",
         "title":"Räkna mil",
         "description":"Calculate how much the fuel will cost"
     },
