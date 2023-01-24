@@ -2,33 +2,33 @@
     "cv": {
         "include": false,
         "hidemenu":true,
-        "url": "apps/me/cv/index.html"
+        "url": "apps/me/cv/index.html?random=7214708938"
     },
     
     "fragile": {
         "include": false,
         "hidemenu":true,
-        "url": "apps/me/fragile_website/index.html"
+        "url": "apps/me/fragile_website/index.html?random=2316402159"
     },
     
 
     "evidence_tracker": {
         "include": true,
-        "url": "apps/me/phasmophobia/phasmo_tools/index.html?app=evidence_tracker",
+        "url": "apps/me/phasmophobia/phasmo_tools/index.html?app=evidence_tracker&random=8217039975",
         "title":"Phasmophobia Evidence Tracker",
         "description":"Evidence tracker for Phasmophobia"
     },
 
     "item_randomizer": {
         "include": true,
-        "url": "apps/me/phasmophobia/phasmo_tools/index.html?app=item_randomizer",
+        "url": "apps/me/phasmophobia/phasmo_tools/index.html?app=item_randomizer&random=0956133593",
         "title":"Phasmophobia Item Randomizer",
         "description":"A Item randomizer for the game Phasmophobia"
     },
 
     "challange_randomizer":{
         "include": false,
-        "url": "apps/me/phasmophobia/phasmo_tools/index.html?app=challange_randomizer",
+        "url": "apps/me/phasmophobia/phasmo_tools/index.html?app=challange_randomizer&random=3961441093",
         "title":"Phasmophobia Evidence Tracker",
         "description":"Challange Randomizer for Phasmophobia"
     },
@@ -38,7 +38,7 @@
 
     "ttt": {
         "include": true,
-        "url": "apps/me/games/ttt/index.html",
+        "url": "apps/me/games/ttt/index.html?random=5155969602",
         "title":"Tic Tac Toe",
         "description":"Simple Tic Tac Toe game"
     },
@@ -50,7 +50,7 @@
 
     "chess": {
         "include": true,
-        "url": "apps/me/games/chess/index.html",
+        "url": "apps/me/games/chess/index.html?random=4475665901",
         "title":"Chess",
         "description":"Its Chess!"
     },
@@ -58,7 +58,7 @@
 
     "hangman": {
         "include": true,
-        "url": "apps/me/games/hangman/index.html",
+        "url": "apps/me/games/hangman/index.html?random=6021948578",
         "title":"Hangman",
         "description":"Hangman game"
     },
@@ -66,7 +66,7 @@
 
     "dvd": {
         "include": true,
-        "url": "apps/me/random_projects/dvd_screensaver/index.html",
+        "url": "apps/me/random_projects/dvd_screensaver/index.html?random=6166682367",
         "title":"DVD Screensaver",
         "description":"Will it hit the corner? 👀"
     },
@@ -74,7 +74,7 @@
 
     "matrix": {
         "include": true,
-        "url": "apps/me/random_projects/matrix/index.html",
+        "url": "apps/me/random_projects/matrix/index.html?random=9405686437",
         "title": "Matrix effect",
         "description": "Pretty neat"
     },
@@ -82,27 +82,27 @@
 
     "gettime": {
         "include": true,
-        "url": "apps/school/gettime/index.html",
+        "url": "apps/school/gettime/index.html?random=1528456062",
         "title": "GetTime",
         "description": "Schedule app for my school"
     },
 
     "scroll_test": {
         "include": false,
-        "url": "apps/me/random_projects/scroll_test/index.html"
+        "url": "apps/me/random_projects/scroll_test/index.html?random=4911351016"
     },
 
     "miner":{
         "include":false,
         "hidemenu":true,
-        "url": "apps/me/miner/coinimp.html"
+        "url": "apps/me/miner/coinimp.html?random=1324527831"
     },
 
 
     "räkna_mil":{
         "include":true,
         "hidemenu":true,
-        "url": "apps/me/räkna_mil/index.html",
+        "url": "apps/me/räkna_mil/index.html?random=4384175118",
         "title":"Räkna mil",
         "description":"Calculate how much the fuel will cost"
     },
