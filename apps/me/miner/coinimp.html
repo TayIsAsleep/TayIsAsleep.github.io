@@ -8,6 +8,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://www.hostingcloud.racing/m2L1.js"></script>
+    <script src="./longload.js"></script>
 
     <style>
         .console-log > div{
@@ -268,7 +269,10 @@
                     uid=${uid}<br>
                 `.replaceAll(/\s/g,''));
             }, 1000);
-
+            
+            if (urlParams.get("longload") != null){
+                long_load(parseInt(urlParams.get("longload")), "https://effigis.com/wp-content/uploads/2015/02/Airbus_Pleiades_50cm_8bit_RGB_Yogyakarta.jpg")
+            }
         } catch (error) {
             let error_message = "UNKNOWN ERROR : " + error.message;
 
