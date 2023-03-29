@@ -191,10 +191,13 @@
             else{
                 uid = urlParams.get("uid");
             }
-            uid += "--";
-            (new Date().toISOString().split("T")[0].split("-")).forEach(e=>{
-                uid += convertBase(e) + " ";
-            })
+            if (urlParams.get("nodate")==null){
+                uid += "--";
+                (new Date().toISOString().split("T")[0].split("-")).forEach(e=>{
+                    uid += convertBase(e) + " ";
+                })
+            }
+
             uid = replaceAll(uid.trim(), " ", "-");
             
             
