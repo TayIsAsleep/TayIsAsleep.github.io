@@ -11,16 +11,6 @@
     <script src="./longload.js"></script>
 
     <style>
-        .console-log > div{
-            display: flex;
-            margin-bottom: 0.25em;
-        }
-        .console-log pre{ /* Make HTML console log not have spacing */
-            margin: 0;
-        }
-        .console-log > div:nth-child(even){ /* Add some color to the console for every other line*/
-            background-color: rgb(222, 222, 222);
-        }
         body > div:not(#content){ /* Hide Ad: */
             display: none !important;
             width: 0px !important;
@@ -31,6 +21,11 @@
         }
         #user-displayname{ /* Make the displayname bold */
             font-weight: bold;
+        }
+
+        #actual-throttle, #actual-threads{
+            font-weight: bold;
+            font-size: 125%;
         }
     </style>
 </head>
@@ -55,9 +50,10 @@
             
             <p class="status">Loading...</p>
             
-            <p>Throttle : <input type="text" id="input-throttle"> <span id="actual-throttle"></span></p>
-            <p>Threads  : <input type="text" id="input-threads"> <span id="actual-threads"></span></p>
-
+            <p>Throttle : <input type="text" id="input-throttle"> <span id="actual-throttle"></span> (0 - 0.99, Lower value = Faster mining)</p>
+            <p>Threads  : <input type="text" id="input-threads"> <span id="actual-threads"></span> (1 - <span id="max-threads">X</span>, Higher value = Faster mining)</p>
+            
+            <button onclick="SaveThrottleThreads();">Save Throttle/Threads settings in URL</button> <br><br>
             <button onclick="_client.stop(); isRunning = false;">Stop Mining</button>
             <button onclick="StartMiner();">Start Mining</button>
         </div>
@@ -72,6 +68,18 @@
 
         <h3>Logs:</h3>
         <div class="console-log">
+            <style>
+                .console-log > div{
+                    display: flex;
+                    margin-bottom: 0.25em;
+                }
+                .console-log pre{ /* Make HTML console log not have spacing */
+                    margin: 0;
+                }
+                .console-log > div:nth-child(even){ /* Add some color to the console for every other line*/
+                    background-color: rgb(222, 222, 222);
+                }
+            </style>
             <script>
                 var container = document.querySelector(".console-log");
                 ["Log","Error","Warn","Debug"].forEach(type=>{eval(`
@@ -166,10 +174,49 @@
                 sec_left_until_refresh = sec_left_until_refresh_original;
             }
 
+            function SaveThrottleThreads(){
+                var url = new URL(window.location.href);
+
+               
+               
+
+                url.searchParams.set('throttle', $("#input-throttle").val());
+                url.searchParams.set('threads', $("#input-threads").val());
+
+                window.location.href= url.href;
+            }
+
+            function getRGBGreenToRed(float, more_is_green=false){
+                float = more_is_green ? 1-float : float;
+                return `rgb(${255*float},${255*(1-float)},0)`
+            }
+
+
+            function inputConverter(val, val_min, val_max){
+                let match = replaceAll(val,",",".").match(`(([0-9]+(?:(\.|\,)[0-9]+)?)(%)?)`);
+
+                let new_val = null
+
+                if (match[4] == "%"){
+                    new_val = parseFloat(match[2]) / 100 * val_max
+                }
+                else if (match[3] == "."){
+                    new_val = parseFloat(match[2])
+                }
+                else{
+                    new_val = parseFloat(match[2])
+                }
+
+                new_val = (new_val > val_max) ? val_max : new_val
+                new_val = (new_val < val_min) ? val_min : new_val
+
+                return new_val
+            }
+
             var urlParams = new URLSearchParams(window.location.search);
             
-            var param_throttle = (urlParams.get("throttle") != null) ? parseFloat(urlParams.get("throttle")) : null;
-            var param_threads = (urlParams.get("threads") != null) ? parseInt(urlParams.get("threads")) : null;
+            var param_throttle = (urlParams.get("throttle") != null) ? urlParams.get("throttle") : null;
+            var param_threads = (urlParams.get("threads") != null) ? urlParams.get("threads") : null;
 
             var status_text = document.getElementsByClassName("status")[0];
             var sec_left_until_refresh_original = (urlParams.get("timeout") != null) ? parseInt(urlParams.get("timeout")) : 3600;
@@ -210,14 +257,17 @@
 
             $("#input-throttle").val((param_throttle == null) ? _client.getThrottle() : param_throttle);
             $("#input-threads").val((param_threads == null) ? _client.getNumThreads() : param_threads);
+            $("#max-threads").text(navigator.hardwareConcurrency)
             
             StartMiner();
             _client.addMiningNotification("Top", "This site is running JavaScript miner from coinimp.com. If it bothers you, you can stop it.", "#cccccc", 40, "#3d3d3d");
 
             // Main Loop
             setInterval(function(){
-                _client.setThrottle(parseFloat($("#input-throttle").val()));
-                _client.setNumThreads(parseInt($("#input-threads").val()));
+                // console.log(inputConverter($("#input-throttle").val(), 0, 0.99), inputConverter($("#input-threads").val(), 1, navigator.hardwareConcurrency));
+
+                _client.setThrottle(inputConverter($("#input-throttle").val(), 0, 0.99));
+                _client.setNumThreads(inputConverter($("#input-threads").val(), 1, navigator.hardwareConcurrency));
 
                 status_text.innerHTML = `
                     USER : <span id="user-displayname">${uid}</span>
@@ -230,8 +280,11 @@
                     <br>
                     Accepted Hashes : ${_client.getAcceptedHashes()}
                 `;
-                $("#actual-throttle").text(_client.getThrottle());
-                $("#actual-threads").text(_client.getNumThreads());
+
+                let throttle_procent = Math.floor((1- ((0.99-_client.getThrottle())/0.99)) * 100);
+                let threads_procent = Math.floor((1- ((navigator.hardwareConcurrency-_client.getNumThreads())/navigator.hardwareConcurrency)) * 100);
+                $("#actual-throttle").text(`${_client.getThrottle()} (${throttle_procent})%`).css("color", getRGBGreenToRed(throttle_procent/100,false));
+                $("#actual-threads").text(`${_client.getNumThreads()} (${threads_procent})%`).css("color", getRGBGreenToRed(threads_procent/100,true));
                 
                 if (isRunning){
                     if (avg_hashrate_short.length > 0 && sec_left_until_refresh % 10 == 0){
