@@ -109,6 +109,16 @@
 
 
 
+    "time":{
+        "include":true,
+        "hidemenu":true,
+        "url": "apps/me/date_help/index.html",
+        "title":"What time is it?",
+        "description":"Make time easy."
+    },
+
+
+
 
 
 

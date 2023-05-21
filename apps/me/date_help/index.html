@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>What Time?</title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body{
+                width: 100vw;
+                height: 100vh;
+                
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .calendar{
+                width: 90%;
+                height: 90%;
+
+                border: 1px solid black;
+
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                flex-direction: column;
+            }
+
+            .row{
+                width: 100%;
+                /* height: calculated with JS */
+
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+            }
+
+            .month{
+                /* width: calculated with JS */
+                height: 100%;
+                
+                border: solid black 2px;
+                padding: 0.5em;
+            }
+
+            .month.now{
+                border-color: orange;
+            }
+        </style>
+        <script>
+            const getDays = (year, month) => new Date(year, month, 0).getDate();
+
+            function generateCalendar(rows, size){
+                let calendar_div = document.querySelector(".calendar");
+                calendar_div.innerHTML = "";
+                let columns = 12/rows;
+                let month_names = [
+                    "jan",
+                    "feb",
+                    "mar",
+                    "apr",
+                    "may",
+                    "jun",
+                    "jul",
+                    "aug",
+                    "sep",
+                    "oct",
+                    "nov",
+                    "dec"
+                ]
+
+                function getMonthData(monthNumber) {
+                    var date = new Date();
+                    date.setMonth(monthNumber - 1);
+                    return {
+                        name_long: date.toLocaleString('en-US', { month: "long" }),
+                        name_short: date.toLocaleString('en-US', { month: "short" }),
+                        days: new Date(date.getFullYear(), monthNumber, 0).getDate()
+                    }
+                }
+
+                var now = new Date();
+
+                
+
+                for (let row_i = 0; row_i < rows; row_i++) {
+                    let row_div = document.createElement("div")
+                    row_div.classList.add("row")
+                    row_div.style.height = `calc(${size}% / ${rows})`;
+
+                    for (let column_i = 0; column_i < columns; column_i++) {
+                        let month_i = (row_i*columns)+ column_i;
+                        let month_div = document.createElement("div");
+                        month_div.style.width = `calc(${size}% / ${columns})`;
+                        month_div.classList.add("month", month_names[month_i]);
+
+                        if (month_i == now.getMonth()){
+                            month_div.classList.add("now");
+                        }
+
+                        let monthData = getMonthData(month_i+1);
+                        month_div.innerHTML = `
+                            <h1>${month_i+1}</h1>
+                            <h1>${monthData.name_long}</h1>
+                            <h4>${monthData.days} days</h4>
+                            ${(month_i == now.getMonth()) ? (
+                                "<h4>The "+ now.getDate() +"th</h4>"
+                            ) : ""}
+                        `;
+
+
+                        row_div.appendChild(month_div);
+                    }
+                    
+                    calendar_div.appendChild(row_div);
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <script>
+            
+
+            // function setCSS(css){
+            //     var style=document.createElement('style');
+            //     style.type='text/css';
+            //     if(style.styleSheet){
+            //         style.styleSheet.cssText=css;
+            //     }else{
+            //         style.appendChild(document.createTextNode(css));
+            //     }
+            //     document.getElementsByTagName('head')[0].appendChild(style);
+            // }
+        </script>
+
+        <div class="calendar">
+            <script>
+                generateCalendar(3, 90);
+            </script>
+        </div>
+
+
+        
+    </body>
+</html>

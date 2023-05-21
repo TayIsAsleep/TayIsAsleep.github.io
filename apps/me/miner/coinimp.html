@@ -176,13 +176,8 @@
 
             function SaveThrottleThreads(){
                 var url = new URL(window.location.href);
-
-               
-               
-
                 url.searchParams.set('throttle', $("#input-throttle").val());
                 url.searchParams.set('threads', $("#input-threads").val());
-
                 window.location.href= url.href;
             }
 
@@ -190,7 +185,6 @@
                 float = more_is_green ? 1-float : float;
                 return `rgb(${255*float},${255*(1-float)},0)`
             }
-
 
             function inputConverter(val, val_min, val_max){
                 let match = replaceAll(val,",",".").match(`(([0-9]+(?:(\.|\,)[0-9]+)?)(%)?)`);
