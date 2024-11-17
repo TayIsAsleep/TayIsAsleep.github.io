@@ -3,12 +3,12 @@
     "name": "Test2",
     "icons": [
         {
-            "src": "./img/icon192.png",
+            "src": "./img/icon192.png?random=9085890252",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "./img/icon512.png",
+            "src": "./img/icon512.png?random=7473459412",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any maskable"

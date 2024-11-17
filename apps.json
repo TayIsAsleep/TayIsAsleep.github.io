@@ -14,21 +14,21 @@
 
     "evidence_tracker": {
         "include": true,
-        "url": "apps/me/phasmophobia/phasmo_tools/index.html?app=evidence_tracker",
+        "url": "apps/me/phasmophobia/phasmo_tools/index.html?app=evidence_tracker&random=8217039975",
         "title":"Phasmophobia Evidence Tracker",
         "description":"Evidence tracker for Phasmophobia"
     },
 
     "item_randomizer": {
         "include": true,
-        "url": "apps/me/phasmophobia/phasmo_tools/index.html?app=item_randomizer",
+        "url": "apps/me/phasmophobia/phasmo_tools/index.html?app=item_randomizer&random=0956133593",
         "title":"Phasmophobia Item Randomizer",
         "description":"A Item randomizer for the game Phasmophobia"
     },
 
     "challange_randomizer":{
         "include": false,
-        "url": "apps/me/phasmophobia/phasmo_tools/index.html?app=challange_randomizer",
+        "url": "apps/me/phasmophobia/phasmo_tools/index.html?app=challange_randomizer&random=3961441093",
         "title":"Phasmophobia Evidence Tracker",
         "description":"Challange Randomizer for Phasmophobia"
     },
@@ -113,6 +113,16 @@
         "url": "apps/me/räkna_mil/index.html",
         "title":"Räkna mil",
         "description":"Calculate how much the fuel will cost"
+    },
+
+
+
+    "time":{
+        "include":true,
+        "hidemenu":true,
+        "url": "apps/me/date_help/index.html",
+        "title":"What time is it?",
+        "description":"Make time easy."
     },
 
 

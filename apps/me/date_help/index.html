@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>What Time?</title>
+        <link rel="shortcut icon" href="icon-min.png" type="image/x-icon">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap');
+
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Oswald', sans-serif;
+            }
+            body{
+                width: 100vw;
+                height: 100vh;
+                
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .calendar{
+                width: 90%;
+                min-height: 90%;
+                border: 0.18em solid black;
+
+                display: flex;
+                justify-content:space-between;
+                align-items: center;
+                flex-direction: column;
+            }
+
+            .calendar-container{
+                width: 100%;
+
+                flex: 1;
+
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                flex-direction: column;
+            }
+
+            .today{
+                margin: 2em;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+
+            .row{
+                width: 100%;
+                /* height: calculated with JS */
+
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+            }
+
+            .month{
+                /* width: calculated with JS */
+                height: 100%;
+                
+                border: solid black 0.18em;
+                padding: 0.5em;
+            }
+
+            .month.now{
+                color: rgb(200, 0, 0);
+            }
+        </style>
+        <script>
+            // const getDays = (year, month) => new Date(year, month, 0).getDate();
+
+            function generateCalendar(rows, size){
+                let calendar_div = document.querySelector(".calendar");
+                calendar_div.innerHTML = `
+                    <div class="today"></div>
+                    <div class="calendar-container"></div>
+                `;
+                calendar_div.setAttribute("rows", rows)
+                calendar_div.setAttribute("size", size)
+                calendar_div.setAttribute("done", "0")
+                let today_div = document.querySelector(".calendar > .today");
+                let columns = Math.ceil(12/rows);
+                let month_names = [
+                    "jan",
+                    "feb",
+                    "mar",
+                    "apr",
+                    "may",
+                    "jun",
+                    "jul",
+                    "aug",
+                    "sep",
+                    "oct",
+                    "nov",
+                    "dec"
+                ]
+
+                function getMonthData(monthNumber) {
+                    var date = new Date();
+                    date.setMonth(monthNumber - 1);
+                    return {
+                        name_long: date.toLocaleString('en-US', { month: "long" }),
+                        name_short: date.toLocaleString('en-US', { month: "short" }),
+                        days: new Date(date.getFullYear(), monthNumber, 0).getDate()
+                    }
+                }
+
+                var now = new Date();
+                var now_month_name = now.toLocaleString('en-US', { month: "long" });
+                var now_day_number = now.getDate();
+                var now_day_name = now.toLocaleDateString('en-US', { weekday: 'long' })
+
+                today_div.innerHTML = `
+                    <h1>${now_day_name} | ${now_day_number} of ${now_month_name}</h1>
+                    <h3>${now.toISOString().split('T')[0]}</h3>
+                `
+
+                document.getElementsByTagName("title")[0].innerText = now_day_number + " of " + now_month_name;
+
+                for (let row_i = 0; row_i < rows; row_i++) {
+                    let row_div = document.createElement("div")
+                    row_div.classList.add("row")
+                    row_div.style.height = `calc(${size}% / ${rows})`;
+
+                    for (let column_i = 0; column_i < columns; column_i++) {
+                        let month_i = (row_i*columns)+ column_i;
+                        if (month_i > 11){continue}
+
+                        let month_div = document.createElement("div");
+                        month_div.style.width = `calc(${size}% / ${columns})`;
+                        month_div.classList.add("month", month_names[month_i]);
+
+                        if (month_i == now.getMonth()){
+                            month_div.classList.add("now");
+                        }
+
+                        let monthData = getMonthData(month_i+1);
+                        month_div.innerHTML = `
+                            <h1>${month_i+1}</h1>
+                            <h1>${monthData.name_long}</h1>
+                            <h4>${monthData.days} days</h4>
+                        `;
+
+                        row_div.appendChild(month_div);
+
+                    }
+                    
+                    document.querySelector(".calendar > .calendar-container").appendChild(row_div);
+                }
+
+                setTimeout(function(){
+                    calendar_div.setAttribute("done", "1");
+                }, 3)
+                
+            }
+
+            function resize(){
+                if (document.querySelector(".calendar").getAttribute("done") == "0"){
+                    setTimeout(resize, 5)
+                    return
+                }
+
+                let a_month = document.querySelector(".month")
+                let width = a_month.offsetWidth;
+                let height = a_month.offsetHeight;
+                let changeBy = false;
+
+                if (width < height){
+                    changeBy = 1;
+                }
+                else if (width > height* 2){
+                    changeBy = -1;
+                }
+
+                if (changeBy){
+                    let calendar_div = document.querySelector(".calendar");
+                    let old_rows = parseInt(calendar_div.getAttribute("rows"));
+                    let old_size = parseInt(calendar_div.getAttribute("size"));
+                    generateCalendar(Math.max(old_rows + changeBy, 3), old_size);
+                    resize();
+                }
+            }
+
+            window.onresize = resize;
+
+            
+
+
+
+        </script>
+    </head>
+    <body>
+        <div class="calendar">
+            <script>
+                generateCalendar(3, 90);
+                resize();
+            </script>
+        </div>
+    </body>
+</html>

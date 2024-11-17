@@ -1,15 +1,16 @@
 /* Code from https://stackoverflow.com/a/49421832/13921835 */
+/* Modified from this comment https://stackoverflow.com/questions/36957904/media-queries-in-sass#comment94871206_49421832 */
+
 $size__site_content_width: 1024px;
 
-/* Media Queries */
 $media_queries : (
-    'mobile'    : "only screen and (max-width: 667px)",
-    'tablet'    : "only screen and (min-width: 668px) and (max-width: $size__site_content_width)",
-    'desktop'   : "only screen and (min-width: ($size__site_content_width + 1))",
-    'retina2'   : "only screen and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi)",
-    'retina3'   : "only screen and (-webkit-min-device-pixel-ratio: 3) and (min-resolution: 288dpi)",
-    'landscape' : "screen and (orientation:landscape) ",    
-    'portrait'  : "screen and (orientation:portrait) "
+    'mobile'    : unquote("only screen and (max-width: 667px)"),
+    'tablet'    : unquote("only screen and (min-width: 668px) and (max-width: $size__site_content_width)"),
+    'desktop'   : unquote("only screen and (min-width: ($size__site_content_width + 1))"),
+    'retina2'   : unquote("only screen and (-webkit-min-device-pixel-ratio: 2) and (min-resolution: 192dpi)"),
+    'retina3'   : unquote("only screen and (-webkit-min-device-pixel-ratio: 3) and (min-resolution: 288dpi)"),
+    'landscape' : unquote("screen and (orientation:landscape) "),    
+    'portrait'  : unquote("screen and (orientation:portrait) ")
 );
 
 @mixin for_breakpoint($breakpoints) {
@@ -22,7 +23,9 @@ $media_queries : (
             comma
         );
     }
+
     @media #{$conditions} {
         @content;
     }
+
 }

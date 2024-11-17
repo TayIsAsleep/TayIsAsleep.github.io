@@ -1,16 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap%27");
-/* Code from https://stackoverflow.com/a/49421832/13921835 */
-/* Media Queries */
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap%27"); /* Code from https://stackoverflow.com/a/49421832/13921835 */
+/* Modified from this comment https://stackoverflow.com/questions/36957904/media-queries-in-sass#comment94871206_49421832 */
 * {
   margin: 0;
   padding: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 /* Code from https://stackoverflow.com/a/2310809 */
 * {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: "JetBrains Mono", monospace;
 }
 
 body {
@@ -19,7 +17,6 @@ body {
   scroll-behavior: smooth;
   background-color: black;
 }
-
 ::-webkit-scrollbar {
   width: 0;
   background-color: transparent;
@@ -30,76 +27,53 @@ body {
     font-size: 80%;
   }
 }
-
 body div.main-container {
   min-height: 100%;
   min-width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  align-items: center;
 }
-
 @media only screen and (max-width: 667px) {
   body div.main-container {
     padding: 2em;
   }
 }
-
-body div.main-container div.top-padding {
+body div.main-container div.padding {
   width: 1px;
   height: 20vh;
 }
-
 @media only screen and (max-width: 667px) {
-  body div.main-container div.top-padding {
+  body div.main-container div.padding.top {
     display: none;
   }
 }
-
 body div.main-container p, body div.main-container a, body div.main-container h1, body div.main-container h2, body div.main-container h3, body div.main-container h4, body div.main-container h5, body div.main-container h6 {
   color: white;
   text-decoration: none;
 }
-
 body div.main-container p > h1, body div.main-container p h2, body div.main-container p h3, body div.main-container p h4, body div.main-container p h5, body div.main-container p h6, body div.main-container a > h1, body div.main-container a h2, body div.main-container a h3, body div.main-container a h4, body div.main-container a h5, body div.main-container a h6, body div.main-container h1 > h1, body div.main-container h1 h2, body div.main-container h1 h3, body div.main-container h1 h4, body div.main-container h1 h5, body div.main-container h1 h6, body div.main-container h2 > h1, body div.main-container h2 h2, body div.main-container h2 h3, body div.main-container h2 h4, body div.main-container h2 h5, body div.main-container h2 h6, body div.main-container h3 > h1, body div.main-container h3 h2, body div.main-container h3 h3, body div.main-container h3 h4, body div.main-container h3 h5, body div.main-container h3 h6, body div.main-container h4 > h1, body div.main-container h4 h2, body div.main-container h4 h3, body div.main-container h4 h4, body div.main-container h4 h5, body div.main-container h4 h6, body div.main-container h5 > h1, body div.main-container h5 h2, body div.main-container h5 h3, body div.main-container h5 h4, body div.main-container h5 h5, body div.main-container h5 h6, body div.main-container h6 > h1, body div.main-container h6 h2, body div.main-container h6 h3, body div.main-container h6 h4, body div.main-container h6 h5, body div.main-container h6 h6 {
   color: blueviolet;
 }
-
 body div.main-container div.app-list div:not(:last-child) {
   padding-bottom: 1em;
 }
-
 body div.app-container {
   width: 100%;
   height: 100%;
   overflow-y: hidden;
 }
-
 body div.app-container div.menu-container {
   width: 100%;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  justify-content: flex-start;
+  align-items: center;
   gap: 1em;
   margin: 1em 0;
 }
-
 body div.app-container div.menu-container div.button {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -114,20 +88,16 @@ body div.app-container div.menu-container div.button {
   color: white;
   background-color: black;
 }
-
 body div.app-container div.menu-container div.button:first-child {
   margin-left: 1em;
 }
-
 body div.app-container div.iframe-container {
   width: 100%;
   height: 100%;
 }
-
 body div.app-container div.iframe-container iframe {
   width: 100%;
   height: 100%;
   border: 0;
   background-color: white;
-}
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

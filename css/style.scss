@@ -35,12 +35,14 @@ body{
             padding: 2em;
         }
 
-        div.top-padding{
+        div.padding{
             width: 1px;
             height: 20vh;
 
-            @include for_breakpoint(mobile){
-                display: none;
+            &.top{
+                @include for_breakpoint(mobile){
+                    display: none;
+                }
             }
         }
 
