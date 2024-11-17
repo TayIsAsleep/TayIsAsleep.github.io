@@ -3,77 +3,134 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: "JetBrains Mono", monospace;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'JetBrains Mono', monospace;
 }
 
 div.main-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   width: 100vw;
   height: 100vh;
 }
+
 div.main-container .piece-image {
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+/Edge */
-  user-select: none; /* Standard */
+  -webkit-user-select: none;
+  /* Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+/Edge */
+  user-select: none;
+  /* Standard */
   z-index: 0;
 }
+
 div.main-container .piece-image.holding {
   position: relative;
   z-index: 1;
 }
-div.main-container .piece-image[color=white] {
-  filter: none;
+
+div.main-container .piece-image[color="white"] {
+  -webkit-filter: none;
+          filter: none;
 }
-div.main-container .piece-image[color=black] {
-  filter: invert(1);
+
+div.main-container .piece-image[color="black"] {
+  -webkit-filter: invert(1);
+          filter: invert(1);
 }
+
 div.main-container div.pieces-out-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-direction: row;
+      flex-direction: row;
   height: inherit;
 }
+
 div.main-container div.chess-board {
   width: 500px;
   height: 500px;
+  display: -ms-grid;
   display: grid;
-  grid-template-columns: repeat(10, 10%);
-  grid-template-rows: repeat(10, 10%);
+  -ms-grid-columns: (calc(100% / 10))[10];
+      grid-template-columns: repeat(10, calc(100% / 10));
+  -ms-grid-rows: (calc(100% / 10))[10];
+      grid-template-rows: repeat(10, calc(100% / 10));
 }
+
 div.main-container div.chess-board > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
+
 div.main-container div.chess-board div.chess-square.white {
   background-color: white;
 }
+
 div.main-container div.chess-board div.chess-square.black {
   background-color: black;
 }
+
 div.main-container div.chess-board div.chess-square[y="0"] {
   border-top: 3px solid black;
 }
+
 div.main-container div.chess-board div.chess-square[y="7"] {
   border-bottom: 3px solid black;
 }
+
 div.main-container div.chess-board div.chess-square[x="0"] {
   border-left: 3px solid black;
 }
+
 div.main-container div.chess-board div.chess-square[x="7"] {
   border-right: 3px solid black;
 }
+
 div.main-container div.chess-board div.coordinate-container p {
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+/Edge */
-  user-select: none; /* Standard */
-}/*# sourceMappingURL=style.css.map */
+  -webkit-user-select: none;
+  /* Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+/Edge */
+  user-select: none;
+  /* Standard */
+}
+/*# sourceMappingURL=style.css.map */

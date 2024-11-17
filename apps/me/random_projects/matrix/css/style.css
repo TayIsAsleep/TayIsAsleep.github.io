@@ -1,10 +1,11 @@
 /* Code from https://stackoverflow.com/a/49421832/13921835 */
-/* Media Queries */
+/* Modified from this comment https://stackoverflow.com/questions/36957904/media-queries-in-sass#comment94871206_49421832 */
 /* Code from https://stackoverflow.com/a/2310809 */
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 html body {
@@ -14,18 +15,30 @@ html body {
   font-size: 100%;
   overflow: hidden;
 }
+
 html body div.main-container {
   width: 100%;
   height: 100%;
   position: relative;
   top: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column-reverse;
-  justify-content: flex-end;
-  flex-wrap: nowrap;
-  transform: scale(-1, -1);
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-transform: scale(-1, -1);
+          transform: scale(-1, -1);
 }
+
 html body div.main-container p {
   width: 100%;
   color: green;
-}/*# sourceMappingURL=style.css.map */
+}
+/*# sourceMappingURL=style.css.map */

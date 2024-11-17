@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap%27");
 /* Code from https://stackoverflow.com/a/2310809 */
 /* Code from https://stackoverflow.com/a/49421832/13921835 */
-/* Media Queries */
+/* Modified from this comment https://stackoverflow.com/questions/36957904/media-queries-in-sass#comment94871206_49421832 */
 @font-face {
   font-family: "roblox";
   src: url("Roblox Font Regular.ttf");

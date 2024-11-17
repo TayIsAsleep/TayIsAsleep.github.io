@@ -1,13 +1,23 @@
 .image-carousel {
   overflow: hidden;
 }
+
 .image-carousel .image-list {
   width: inherit;
   height: inherit;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-transition: -webkit-transform 1s ease-in-out;
+  transition: -webkit-transform 1s ease-in-out;
   transition: transform 1s ease-in-out;
+  transition: transform 1s ease-in-out, -webkit-transform 1s ease-in-out;
 }
+
 .image-carousel .image-list img {
   -o-object-fit: cover;
      object-fit: cover;
@@ -15,4 +25,5 @@
 
 #main-image-carousel {
   width: 50%;
-}/*# sourceMappingURL=style.css.map */
+}
+/*# sourceMappingURL=style.css.map */
