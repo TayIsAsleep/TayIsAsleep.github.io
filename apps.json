@@ -34,6 +34,14 @@
     },
 
 
+    "lion_bar": {
+        "include": true,
+        "url": "apps/me/games/lion_bar/index.html",
+        "title":"Lion Bar",
+        "description":"Vi drar till Lion Bar! 🍻"
+    },
+
+
 
 
     "ttt": {

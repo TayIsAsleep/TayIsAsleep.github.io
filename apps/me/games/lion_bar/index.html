@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>VI DRAR TILL LION BAR</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div class="main-container">
+            <div class="players">
+                <div class="player">
+                    <p>ISAK</p>
+                    <div class="hits">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <img class="gun" src="gun.png" onclick="fire(0)">
+                </div>
+                <div class="player">
+                    <p>ALEX</p>
+                    <div class="hits">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <img class="gun" src="gun.png" onclick="fire(1)">
+                </div>
+                <div class="player">
+                    <p>SANNA</p>
+                    <div class="hits">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <img class="gun" src="gun.png" onclick="fire(2)">
+                </div>
+                <div class="player">
+                    <p>EWELINA</p>
+                    <div class="hits">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <img class="gun" src="gun.png" onclick="fire(3)">
+                </div>
+            </div>
+
+            <div class="current-card">
+                <img class="card" src="king.png" alt="">
+
+                <p class="new_game button" onclick="new_game()">NEW GAME</p>
+                <p class="next_round button" onclick="next_round()">NEXT ROUND</p>
+            </div>
+        </div>
+        <script>
+            function getRndInteger(min, max) {
+                return Math.floor(Math.random() * (max - min) ) + min;
+            }
+
+            var shot_counter = [],
+                current_card = "king",
+                last_shooter = -1;
+
+            function reset_card(){
+                current_card = ["king", "queen", "ace"][getRndInteger(0,3)];
+                $(".card").attr("src",current_card+".png"); // Reset current card
+            }
+
+            function new_game(){
+                shot_counter = [
+                    {"bullent_location": getRndInteger(0,6), "shots_fired": 0},
+                    {"bullent_location": getRndInteger(0,6), "shots_fired": 0},
+                    {"bullent_location": getRndInteger(0,6), "shots_fired": 0},
+                    {"bullent_location": getRndInteger(0,6), "shots_fired": 0}
+                ]
+                
+                reset_card();
+                $(".hits > div").attr("class","unknown");   // Reset all hits
+            }
+
+            function fire(player){
+                last_shooter = player;
+                $(`.player:nth-child(${player+1}) .hits div:nth-child(${shot_counter[player].shots_fired+1})`)
+                .attr("class", (shot_counter[player].bullent_location == shot_counter[player].shots_fired) ? "hit" : "safe");
+                shot_counter[player].shots_fired += 1;
+            }
+
+            function next_round(){
+                reset_card();
+                $(`.player > p`).css("color", "black");
+                $(`.player:nth-child(${last_shooter+1}) > p`).css("color", "red")
+            }
+
+            new_game();
+        </script>
+    </body>
+</html>
